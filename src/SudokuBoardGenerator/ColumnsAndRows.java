@@ -177,14 +177,14 @@ public class ColumnsAndRows
     public String toString()
     {
         return "" +
-                Arrays.toString(this.board[0]) + System.lineSeparator() +
-                Arrays.toString(this.board[1]) + System.lineSeparator() +
-                Arrays.toString(this.board[2]) + System.lineSeparator() +
-                Arrays.toString(this.board[3]) + System.lineSeparator() +
-                Arrays.toString(this.board[4]) + System.lineSeparator() +
-                Arrays.toString(this.board[5]) + System.lineSeparator() +
-                Arrays.toString(this.board[6]) + System.lineSeparator() +
-                Arrays.toString(this.board[7]) + System.lineSeparator() +
-                Arrays.toString(this.board[8]) + System.lineSeparator();
+                Arrays.toString(this.board[0]) + "\r\n" +
+                Arrays.toString(this.board[1]) + "\r\n" +
+                Arrays.toString(this.board[2]) + "\r\n" +
+                Arrays.toString(this.board[3]) + "\r\n" +
+                Arrays.toString(this.board[4]) + "\r\n" +
+                Arrays.toString(this.board[5]) + "\r\n" +
+                Arrays.toString(this.board[6]) + "\r\n" +
+                Arrays.toString(this.board[7]) + "\r\n" +
+                Arrays.toString(this.board[8]);
     }
 }

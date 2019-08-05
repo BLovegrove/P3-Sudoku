@@ -1,8 +1,26 @@
 package SudokuBoardGenerator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SudokuGen
 {
     private int[][] board = new int[9][9];
+    private ArrayList<List<Integer>> cellValues = new ArrayList<>();
+    private boolean boardFinished = false;
+
+    /***
+     * Iterates 81 times to produce a full list of size 81 {@link List<Integer>} elements with randomised order using
+     * {@link SudokuTools#shuffledNine()}.
+     */
+    private void populateCellValues()
+    {
+        for (int i = 0; i < 81; i++)
+        {
+            cellValues.add(SudokuTools.shuffledNine());
+        }
+    }
 
     /***
      * Part of the Sudoku solving algorithm to generate a complete board before reducing it to a game-ready board.<br>
@@ -113,13 +131,144 @@ public class SudokuGen
      */
     private boolean cellValid(int row, int col, int value)
     {
-        if (rowValid(row, value) && columnValid(col, value) && subsectionValid(row, col, value))
+        return rowValid(row, value) && columnValid(col, value) && subsectionValid(row, col, value);
+    }
+
+    private List<Integer> getCellValues(int row, int col)
+    {
+        return this.cellValues.get((row * 9) + col);
+    }
+
+    private void setCellValues(int row, int col, List<Integer> list)
+    {
+        int index = (row * 9) + col;
+        this.cellValues.set(index, list);
+    }
+
+    private void backtrack(int row, int col)
+    {
+        if (row == 0)
         {
-            return true;
+            if (col == 0)
+            {
+                solveCell(0,0, false);
+            }
+            else
+            {
+                solveCell(row, col - 1, false);
+            }
         }
         else
         {
-            return false;
+            if (col == 0)
+            {
+                solveCell(row - 1, 8, false);
+            }
+            else
+            {
+                solveCell(row, col - 1, false);
+            }
         }
+    }
+
+    private void nextCell(int row, int col)
+    {
+        if (row == 8)
+        {
+            if (col != 8)
+            {
+                solveCell(row, col + 1, true);
+            }
+            else
+            {
+                solveCell(8, 8, true);
+            }
+        }
+        else
+        {
+            if (col == 8)
+            {
+                solveCell(row + 1, 0, true);
+            }
+            else
+            {
+                solveCell(row, col + 1, true);
+            }
+        }
+    }
+
+    private boolean finalCell(int row, int col)
+    {
+        return ((row * 9) + col) == 81;
+    }
+
+    private void solveCell(int row, int col, boolean firstTry)
+    {
+        if (!firstTry)
+        {
+            this.board[row][col] = 0;
+        }
+        if (this.board[row][col] == 0 && !finalCell(row, col) && !this.boardFinished)
+        {
+
+            List<Integer> cellNumbers = getCellValues(row, col);
+            boolean cellSet = false;
+
+            while (!cellNumbers.isEmpty())
+            {
+
+                int cellValue = cellNumbers.get(cellNumbers.size() - 1);
+                boolean legal = cellValid(row, col, cellValue);
+
+                if (legal)
+                {
+                    this.board[row][col] = cellValue;
+                    cellNumbers.remove(cellNumbers.size() - 1);
+//                    System.out.println("Next cell!");
+                    cellSet = true;
+                    nextCell(row, col);
+                    break;
+                }
+                else
+                {
+                    cellNumbers.remove(cellNumbers.size() - 1);
+                }
+            }
+
+
+            if (!cellSet)
+            {
+                setCellValues(row, col, SudokuTools.shuffledNine());
+//            System.out.println("Backtracked!");
+                this.board[row][col] = 0;
+                backtrack(row, col);
+            }
+        }
+        else
+        {
+            this.boardFinished = true;
+        }
+    }
+
+    public void generate()
+    {
+        populateCellValues();
+        solveCell(0,0, true);
+        System.out.println(this);
+    }
+
+    @Override
+    public String toString()
+    {
+        return "" +
+                Arrays.toString(this.board[0]) + "\r\n" +
+                Arrays.toString(this.board[1]) + "\r\n" +
+                Arrays.toString(this.board[2]) + "\r\n" +
+                Arrays.toString(this.board[3]) + "\r\n" +
+                Arrays.toString(this.board[4]) + "\r\n" +
+                Arrays.toString(this.board[5]) + "\r\n" +
+                Arrays.toString(this.board[6]) + "\r\n" +
+                Arrays.toString(this.board[7]) + "\r\n" +
+                Arrays.toString(this.board[8]);
     }
 }
