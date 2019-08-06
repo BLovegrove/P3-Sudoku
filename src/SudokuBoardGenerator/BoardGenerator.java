@@ -10,10 +10,7 @@ public class BoardGenerator
 
         SudokuGen generator = new SudokuGen();
         generator.generate();
-
-//        System.out.println("Unique columns/rows: ");
-//        ColumnsAndRows board = new ColumnsAndRows();
-//        System.out.println(board);
+        System.out.println(generator);
 
         System.out.println("finished");
     }

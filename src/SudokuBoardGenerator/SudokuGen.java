@@ -3,15 +3,38 @@ package SudokuBoardGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
+/***
+ * Contains all methods required to generate a completed and valid Sudoku board in the form of a 2D array
+ */
 public class SudokuGen
 {
-    private int[][] board = new int[9][9];
-    private ArrayList<List<Integer>> cellValues = new ArrayList<>();
+    /***
+     * The uninitialised 2D array that represents the Sudoku board
+     */
+    private int[][] board;
+    /***
+     * The uninitialised {@code ArrayList<Integer>} that contains each cells potential values for testing
+     */
+    private ArrayList<List<Integer>> cellValues;
+    /***
+     * The boolean to keep track of whether or not a valid board has been produced by {@link #generate()}
+     */
     private boolean boardFinished = false;
 
     /***
-     * Iterates 81 times to produce a full list of size 81 {@link List<Integer>} elements with randomised order using
+     * Standard default constructor to automatically generate and populate a Sudoku board into a 2D array when called
+     */
+    public SudokuGen()
+    {
+        this.board = new int[9][9];
+        this.cellValues =  new ArrayList<>();
+        this.generate();
+    }
+
+    /***
+     * Iterates 81 times to produce a full list of size 81 {@code List<Integer>} elements with randomised order using
      * {@link SudokuTools#shuffledNine()}.
      */
     private void populateCellValues()
@@ -122,29 +145,49 @@ public class SudokuGen
     }
 
     /***
-     * Method to combine the boolean outputs of three validation methods that define the rules of a Sudoku board.
+     * Method to combine the boolean outputs of the three validation methods ({@link #rowValid(int, int)},
+     * {@link #columnValid(int, int)}, {@link #subsectionValid(int, int, int)}) that define the rules of a Sudoku board.
      * @param row The row in the Sudoku board that contains the cell in question
      * @param col The column in the Sudoku board that contains the cell in question
      * @param value The integer value (from 1 to 9 inclusive) of the cell in question
-     * @return A true/false depending on the combined outcome of the three methods {@link #rowValid(int, int)},
-     * {@link #columnValid(int, int)}, and {@link #subsectionValid(int, int, int)}.
+     * @return A true/false depending on the combined outcome of the three methods mentioned in the description.
      */
     private boolean cellValid(int row, int col, int value)
     {
         return rowValid(row, value) && columnValid(col, value) && subsectionValid(row, col, value);
     }
 
+    /***
+     * Gets the available values yet to be tested for a specified cell
+     * @param row The current row that the cell is part of
+     * @param col The current column that the cell is part of
+     * @return The List that contains the specified cell's remaining possible values
+     */
     private List<Integer> getCellValues(int row, int col)
     {
         return this.cellValues.get((row * 9) + col);
     }
 
+    /***
+     * Updates the available values yet to be tested for a specified cell
+     * @param row The current row that the cell is part of
+     * @param col The current column that the cell is part of
+     * @param list The {@code List<Integer>} that is to replace the old one
+     */
     private void setCellValues(int row, int col, List<Integer> list)
     {
         int index = (row * 9) + col;
         this.cellValues.set(index, list);
     }
 
+    /***
+     * Triggered when all values possible in a cell have been used - calls the {@link #solveCell(int, int, boolean)}
+     * method on the previous cell and passes the firstTry bool as false to indicate the cell is being visited
+     * at least once more.
+     * The opposite to {@link #nextCell(int row, int col)}.
+     * @param row The current row that the cell is part of
+     * @param col The current column that the cell is part of
+     */
     private void backtrack(int row, int col)
     {
         if (row == 0)
@@ -171,6 +214,14 @@ public class SudokuGen
         }
     }
 
+    /***
+     * Triggered when a legal value is found for a cell on the board. Calls the {@link #solveCell(int, int, boolean)}
+     * method on the next cell and passes the firstTry boolean as true to indicate the cell is being altered for the
+     * first time.
+     * The opposite to {@link #backtrack(int row, int col)}.
+     * @param row The current row that the cell is part of
+     * @param col The current column that the cell is part of
+     */
     private void nextCell(int row, int col)
     {
         if (row == 8)
@@ -197,11 +248,30 @@ public class SudokuGen
         }
     }
 
+    /***
+     * A simple check to indicate if the cell currently being altered is the last cell on the board or not
+     * @param row The current row that that cell is part of
+     * @param col The current column that the cell is part of
+     * @return true / false depending on whether the cell being altered is at position 81 (final cell)
+     */
     private boolean finalCell(int row, int col)
     {
         return ((row * 9) + col) == 81;
     }
 
+    /***
+     * The primary method of the SudokuGen class. This method recursively checks all numbers 1-9 inclusive
+     * (stored in a LinkedList and randomised with {@link java.util.Collections#shuffle(List, Random)} until it
+     * finds a valid number based on sudoku's row/column/3x3 subsection rules. If a valid number is found, it places
+     * it in the current cell and continues with {@link #nextCell(int, int)} - if not, it recreates the cells number
+     * list (newly randomised) and tries the same process on the previous cell. During this, any time a number is
+     * tested for the cell (valid or invalid) it is removed from that cells number list until triggering a
+     * {@link #backtrack(int, int)} when empty.
+     *
+     * @param row The row containing the cell to be tested
+     * @param col The column containing the cell to be tested
+     * @param firstTry Whether or not the cell to be tested is being tested for the first time (tru) or not (false)
+     */
     private void solveCell(int row, int col, boolean firstTry)
     {
         if (!firstTry)
@@ -224,7 +294,6 @@ public class SudokuGen
                 {
                     this.board[row][col] = cellValue;
                     cellNumbers.remove(cellNumbers.size() - 1);
-//                    System.out.println("Next cell!");
                     cellSet = true;
                     nextCell(row, col);
                     break;
@@ -239,7 +308,6 @@ public class SudokuGen
             if (!cellSet)
             {
                 setCellValues(row, col, SudokuTools.shuffledNine());
-//            System.out.println("Backtracked!");
                 this.board[row][col] = 0;
                 backtrack(row, col);
             }
@@ -250,25 +318,42 @@ public class SudokuGen
         }
     }
 
-    public void generate()
+    /***
+     * Method used to begin the sudoku board generation process at board position {@code row = 0} {@code column = 0}.
+     */
+    private void generate()
     {
-        populateCellValues();
-        solveCell(0,0, true);
-        System.out.println(this);
+        this.populateCellValues();
+        this.solveCell(0,0, true);
     }
 
+    /***
+     * Getter for the 2D array that represents the sudoku board
+     * @return int[r][c] representing the sudoku board where r = the row (y value) and c = column (x value) from
+     * top to bottom and left to right respectively
+     */
+    public int[][] getBoard()
+    {
+        return this.board;
+    }
+
+    /***
+     * Improved look to the standard toString method to work with a 2D array
+     * @return A multi-line string that displays the Sudoku board in 2d space, each row printed consecutively and
+     * formatted to look like so: [n1, n2, n3, ..., n9]
+     */
     @Override
     public String toString()
     {
         return "" +
-                Arrays.toString(this.board[0]) + "\r\n" +
-                Arrays.toString(this.board[1]) + "\r\n" +
-                Arrays.toString(this.board[2]) + "\r\n" +
-                Arrays.toString(this.board[3]) + "\r\n" +
-                Arrays.toString(this.board[4]) + "\r\n" +
-                Arrays.toString(this.board[5]) + "\r\n" +
-                Arrays.toString(this.board[6]) + "\r\n" +
-                Arrays.toString(this.board[7]) + "\r\n" +
+                Arrays.toString(this.board[0]) + System.lineSeparator() +
+                Arrays.toString(this.board[1]) + System.lineSeparator() +
+                Arrays.toString(this.board[2]) + System.lineSeparator() +
+                Arrays.toString(this.board[3]) + System.lineSeparator() +
+                Arrays.toString(this.board[4]) + System.lineSeparator() +
+                Arrays.toString(this.board[5]) + System.lineSeparator() +
+                Arrays.toString(this.board[6]) + System.lineSeparator() +
+                Arrays.toString(this.board[7]) + System.lineSeparator() +
                 Arrays.toString(this.board[8]);
     }
 }
