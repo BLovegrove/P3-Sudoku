@@ -1,6 +1,6 @@
-package SudokuBoardGenerator;
+package SudokuGen;
 
-public class BoardGenerator
+public class Testing
 {
     public static void main(String[] args)
     {
@@ -8,8 +8,7 @@ public class BoardGenerator
         NineWideRow row = new NineWideRow();
         System.out.println(row);
 
-        SudokuGen generator = new SudokuGen();
-        generator.generate();
+        Generator generator = new Generator();
         System.out.println(generator);
 
         System.out.println("finished");

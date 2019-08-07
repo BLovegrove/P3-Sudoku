@@ -1,4 +1,4 @@
-package SudokuBoardGenerator;
+package SudokuGen;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,7 +13,7 @@ import java.util.Random;
 /***
  * Contains all methods required to generate a completed and valid Sudoku board in the form of a 2D array
  */
-public class SudokuGen
+public class Generator
 {
     /***
      * The uninitialised 2D array that represents the Sudoku board
@@ -31,7 +31,7 @@ public class SudokuGen
     /***
      * Standard default constructor to automatically generate and populate a Sudoku board into a 2D array when called
      */
-    public SudokuGen()
+    public Generator()
     {
         this.board = new int[9][9];
         this.cellValues =  new ArrayList<>();

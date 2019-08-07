@@ -1,4 +1,4 @@
-package SudokuBoardGenerator;
+package SudokuGen;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package SudokuBoardGenerator;
+package SudokuGen;
 
 public class NineWideRow
 {
