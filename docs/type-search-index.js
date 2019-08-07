@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"SudokuBoardGenerator","l":"BoardGenerator"},{"p":"SudokuBoardGenerator","l":"ColumnsAndRows"},{"p":"SudokuBoardGenerator","l":"NineWideRow"},{"p":"SudokuBoardGenerator","l":"SudokuGen"},{"p":"SudokuBoardGenerator","l":"SudokuTools"}]
