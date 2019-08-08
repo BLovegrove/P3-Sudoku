@@ -1,6 +1,6 @@
 package SudokuGen;
 
-public class Testing
+public class GeneratorTest
 {
     public static void main(String[] args)
     {
