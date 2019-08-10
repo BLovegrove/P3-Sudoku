@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a949ccf-1c02-4632-8114-dc076b7bba98" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SudokuRenderer/Renderer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuGen/Testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/GeneratorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Renderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/Renderer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +155,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/SudokuRenderer/Renderer.java</url>
-          <line>34</line>
+          <line>41</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

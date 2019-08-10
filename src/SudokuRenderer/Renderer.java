@@ -23,7 +23,14 @@ public class Renderer
         {
             for (int j = 0; j < 9; j++)
             {
-                this.longBoardNumbers[(i * 9) + j] = this.boardNumbers[i][j] + "";
+                if (this.boardNumbers[i][j] == 0)
+                {
+                    this.longBoardNumbers[(i * 9) + j] = " ";
+                }
+                else
+                {
+                    this.longBoardNumbers[(i * 9) + j] = this.boardNumbers[i][j] + "";
+                }
             }
         }
     }
