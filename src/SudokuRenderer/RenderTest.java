@@ -8,7 +8,9 @@ public class RenderTest
     {
         Generator SudokuGenerator = new Generator();
         int[][] board = SudokuGenerator.getBoard();
-        Renderer SudokuRenderer = new Renderer(new int[9][9]);
-        System.out.println(SudokuRenderer.drawBoard());
+        BoardGraphic sudokuRenderer = new BoardGraphic(board);
+        MenuGraphic sudokuMenu = new MenuGraphic();
+        ViewRenderer view = new ViewRenderer(sudokuRenderer.draw(), sudokuMenu.draw("Test Message"));
+        view.draw();
     }
 }
