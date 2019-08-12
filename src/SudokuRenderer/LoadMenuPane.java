@@ -78,7 +78,7 @@ public class LoadMenuPane
         }
         else
         {
-            this.menuLines[absIndex] = String.format("  ║%-35s║", " "+(absIndex+1)+") "+fileName+".txt");
+            this.menuLines[absIndex] = String.format("  ║%-35s║", " "+(itemIndex+1)+") "+fileName+".txt");
         }
     }
 
