@@ -1,75 +1,24 @@
 package SudokuRenderer;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 public class MenuGraphic
 {
-    private String[] menuLines;
+    private String[] menuLines = new String[20];
 
-    private void renderMenu(String statusMessage)
+    private void prepMenuTop()
     {
-
-        int statusPadStart;
-        int statusPadEnd;
-
-        if (statusMessage.length() > 36)
-        {
-            statusMessage = "ERROR: STATUS MESSAGE TOO LONG";
-        }
-
-        if (statusMessage.length() % 2 == 0)
-        {
-            statusPadStart = statusPadEnd = ((36 - statusMessage.length()) / 2) - 1;
-        }
-        else
-        {
-            statusPadStart = ((35 - statusMessage.length()) / 2) - 1;
-            statusPadEnd = ((37 - statusMessage.length()) / 2) - 1;
-        }
-
-        if (statusPadStart > 0 && statusPadEnd > 0)
-        {
-            statusMessage = String.format("%" + statusPadStart + "s " + statusMessage + " %" + statusPadEnd + "s", "", "");
-        }
-        else
-        {
-            if (statusMessage.length() != 36)
-            {
-                statusMessage = String.format(statusMessage + "%" + (36 - statusMessage.length()) + "s", "");
-            }
-        }
-
-        // board size: 42x20 characters
-        this.menuLines = String.format(
-
-             "  ╔════════════════════════════════════════╗," +
-                "  ║       Commands Menu & Status Bar       ║," +
-                "  ╠════════════════════════════════════════╣," +
-                "  ║ Fill (A-I)(1-9) : e.g. Fill A1         ║," +
-                "  ║  ↳ Fills a cell                        ║," +
-                "  ║ Clear (A-I)(1-9) : e.g. Clear D8       ║," +
-                "  ║  ↳ Clears the value of a cell          ║," +
-                "  ║ Restart                                ║," +
-                "  ║  ↳ Restarts the game with a new board  ║," +
-                "  ║ Games (page) : e.g. Games or Games 1   ║," +
-                "  ║  ↳ Lists all saved games in pages      ║," +
-                "  ║ Save ('name') : e.g. Save 'test 1'     ║," +
-                "  ║  ↳ Saves your board to play later      ║," +
-                "  ║ Load ('name') : e.g. Load 'test 1'     ║," +
-                "  ║  ↳ Loads a previous board to play      ║," +
-                "  ║ Delete ('name') : e.g. Delete 'test 1' ║," +
-                "  ║  ↳ Deletes a save game by name         ║," +
-                "  ╠════════════════════════════════════════╣," +
-                "  ║> %s <║," +
-                "  ╚════════════════════════════════════════╝",
-                statusMessage
-
-        ).split(",");
+        this.menuLines[0] = "    ╔═════════════════════════════════╗";
     }
 
-    public String[] draw(String statusMessage)
+    private void prepMenuCore()
     {
-        renderMenu(statusMessage);
-        return this.menuLines;
+        // FILE IO CLASS : RETURN ARRAY OF FILE NAMES AS String[]
+        String[] fileNames = {"I am a file one", "filename.test", "filenameyayyyyy", "filesASDASDASD"};
+
+        // 9 lines of text
+    }
+
+    private void prepMenuEnd()
+    {
+        this.menuLines[19] = "    ╚═════════════════════════════════╝";
     }
 }

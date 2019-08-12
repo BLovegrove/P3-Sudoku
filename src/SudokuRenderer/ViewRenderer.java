@@ -5,14 +5,9 @@ import java.util.ArrayList;
 public class ViewRenderer
 {
     private ArrayList<String> view = new ArrayList<>();
-    private String[] menuPane;
-    private String[] boardPane;
-
-    public ViewRenderer(String[] boardString, String[] menuString)
-    {
-        this.menuPane = menuString;
-        this.boardPane = boardString;
-    }
+//    private String[] currentBoardPane;
+//    private String[] currentCommandPane;
+//    private String[] currentMenuPane;
 
     private void addToView(String[] pane)
     {
@@ -29,15 +24,25 @@ public class ViewRenderer
         }
     }
 
+    public void updateBrd(String[] boardGraphic, String[] commandsGraphic)
+    {
+        view = new ArrayList<>();
+        addToView(boardGraphic);
+        addToView(commandsGraphic);
+    }
+
+    public void updateMnu(String[] menuGraphic, String[] commandsGraphic)
+    {
+        view = new ArrayList<>();
+        addToView(menuGraphic);
+        addToView(commandsGraphic);
+    }
+
     public void draw()
     {
-        addToView(boardPane);
-        addToView(menuPane);
-
         for (String row : view)
         {
             System.out.println(row);
         }
     }
-
 }
