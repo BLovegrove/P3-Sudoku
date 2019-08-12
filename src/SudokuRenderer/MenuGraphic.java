@@ -12,6 +12,11 @@ public class MenuGraphic
         int statusPadStart;
         int statusPadEnd;
 
+        if (statusMessage.length() > 36)
+        {
+            statusMessage = "ERROR: STATUS MESSAGE TOO LONG";
+        }
+
         if (statusMessage.length() % 2 == 0)
         {
             statusPadStart = statusPadEnd = ((36 - statusMessage.length()) / 2) - 1;
@@ -22,12 +27,22 @@ public class MenuGraphic
             statusPadEnd = ((37 - statusMessage.length()) / 2) - 1;
         }
 
-        statusMessage = String.format("%" + statusPadStart + "s " + statusMessage + " %" + statusPadEnd + "s", "", "");
+        if (statusPadStart > 0 && statusPadEnd > 0)
+        {
+            statusMessage = String.format("%" + statusPadStart + "s " + statusMessage + " %" + statusPadEnd + "s", "", "");
+        }
+        else
+        {
+            if (statusMessage.length() != 36)
+            {
+                statusMessage = String.format(statusMessage + "%" + (36 - statusMessage.length()) + "s", "");
+            }
+        }
 
         // board size: 42x20 characters
         this.menuLines = String.format(
 
-                "  ╔════════════════════════════════════════╗," +
+             "  ╔════════════════════════════════════════╗," +
                 "  ║       Commands Menu & Status Bar       ║," +
                 "  ╠════════════════════════════════════════╣," +
                 "  ║ Fill (A-I)(1-9) : e.g. Fill A1         ║," +

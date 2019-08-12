@@ -10,7 +10,7 @@ public class RenderTest
         int[][] board = SudokuGenerator.getBoard();
         BoardGraphic sudokuRenderer = new BoardGraphic(board);
         MenuGraphic sudokuMenu = new MenuGraphic();
-        ViewRenderer view = new ViewRenderer(sudokuRenderer.draw(), sudokuMenu.draw("Test Message"));
+        ViewRenderer view = new ViewRenderer(sudokuRenderer.draw(), sudokuMenu.draw(""));
         view.draw();
     }
 }
