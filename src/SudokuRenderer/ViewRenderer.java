@@ -4,40 +4,52 @@ import java.util.ArrayList;
 
 public class ViewRenderer
 {
-    private ArrayList<String> view = new ArrayList<>();
-    private String[] menuPane;
-    private String[] boardPane;
+    private String[] view = new String[20];
+    private String[] primaryPane = new String[20];
+    private String[] secondaryPane = new String[20];
 
-    public ViewRenderer(String[] boardString, String[] menuString)
+    private void update()
     {
-        this.menuPane = menuString;
-        this.boardPane = boardString;
-    }
-
-    private void addToView(String[] pane)
-    {
-        for (int i = 0; i < pane.length; i++)
+        for (int i = 0; i < 20; i++)
         {
-            try
-            {
-                this.view.set(i, this.view.get(i) + pane[i]);
-            }
-            catch (IndexOutOfBoundsException e)
-            {
-                this.view.add(pane[i]);
-            }
+            this.view[i] = this.primaryPane[i] + this.secondaryPane[i];
         }
     }
 
-    public void draw()
+    public void setPrimaryPane(String[] pane)
     {
-        addToView(boardPane);
-        addToView(menuPane);
-
-        for (String row : view)
-        {
-            System.out.println(row);
-        }
+        this.primaryPane = pane;
+        update();
     }
 
+    public void setSecondaryPane(String[] pane)
+    {
+        this.secondaryPane = pane;
+        update();
+    }
+
+    public void setPanes(String[] primaryPane, String[] secondaryPane)
+    {
+        this.primaryPane = primaryPane;
+        this.secondaryPane = secondaryPane;
+        update();
+    }
+
+    public void setView(String[] fullScreenPane)
+    {
+        this.view = fullScreenPane;
+    }
+
+    public String[] draw()
+    {
+        return this.view;
+    }
+
+    public void render()
+    {
+        for (String line : this.view)
+        {
+            System.out.println(line);
+        }
+    }
 }

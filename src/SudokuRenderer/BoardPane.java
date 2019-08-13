@@ -1,12 +1,12 @@
 package SudokuRenderer;
 
-public class BoardGraphic
+public class BoardPane
 {
     private int[][] boardNumbers;
     private String[] longBoardNumbers = new String[81];
     private String[] boardLines;
 
-    public BoardGraphic(int[][] boardNumbers)
+    public BoardPane(int[][] boardNumbers)
     {
         this.boardNumbers = boardNumbers;
         this.boardLines = new String[81];

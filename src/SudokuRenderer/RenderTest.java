@@ -1,16 +1,62 @@
 package SudokuRenderer;
 
 import SudokuGen.Generator;
+import SudokuRenderer.InfoPanes.Board;
+import SudokuRenderer.InfoPanes.LoadBoards;
+import SudokuRenderer.Startup.MainMenu;
+import SudokuRenderer.Startup.ViewCalibrator;
 
 public class RenderTest
 {
     public static void main(String[] args)
     {
+        //show calibrate board box
+        ViewCalibrator.renderGuide(20);
+
+        //new board numbers
         Generator SudokuGenerator = new Generator();
         int[][] board = SudokuGenerator.getBoard();
-        BoardGraphic sudokuRenderer = new BoardGraphic(board);
-        MenuGraphic sudokuMenu = new MenuGraphic();
-        ViewRenderer view = new ViewRenderer(sudokuRenderer.draw(), sudokuMenu.draw("Test Message"));
-        view.draw();
+
+        //new board graphic
+        BoardPane BP = new BoardPane(board);
+
+        //new info panels
+        Board IPP = new Board();
+        LoadBoards IPL = new LoadBoards();
+
+        //new load menu
+        LoadMenuPane LMP = new LoadMenuPane();
+
+        //new view window
+        ViewRenderer view = new ViewRenderer();
+
+        //render main menu
+        MainMenu MM = new MainMenu();
+        view.setView(MM.draw());
+        view.render();
+
+        //draw basic board
+        IPP.setStatus("Test Status Message!");
+        view.setPanes(BP.draw(), IPP.draw());
+        view.render();
+
+        //draw 'load games' page 1
+        IPL.setStatus("BOOP 1");
+        view.setPanes(LMP.draw(), IPL.draw());
+        view.render();
+
+        //draw board again! but keep new secondary pane
+        view.setPrimaryPane(BP.draw());
+        view.render();
+
+        //draw 'load games' page 3
+        LMP.setPage(3);
+        view.setPrimaryPane(LMP.draw());
+        view.render();
+
+        //draw 'load games' page 3 again w/ changed status
+        IPL.setStatus("BOOP 1 changed!");
+        view.setSecondaryPane(IPL.draw());
+        view.render();
     }
 }
