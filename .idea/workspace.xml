@@ -2,8 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a949ccf-1c02-4632-8114-dc076b7bba98" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SudokuRenderer/Startup/ViewCalibrator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/LoadMenuPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/LoadMenuPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/BoardInfoPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/LoadInfoPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/LoadBoards.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -86,7 +91,7 @@
       <module name="P3-Sudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="SudokuRenderer.*" />
+          <option name="PATTERN" value="SudokuRenderer.InfoPanes.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

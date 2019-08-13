@@ -1,10 +1,10 @@
-package SudokuRenderer;
+package SudokuRenderer.InfoPanes;
 
-public class LoadInfoPane
+public class Board
 {
     private String[] menuLines = new String[20];
 
-    public LoadInfoPane()
+    public Board()
     {
         prepMenu();
     }
@@ -16,20 +16,20 @@ public class LoadInfoPane
                 "  ╔════════════════════════════════════════╗," +
                 "  ║       Commands Menu & Status Bar       ║," +
                 "  ╠════════════════════════════════════════╣," +
-                "  ║ Page (1-9) : e.g. Page 9               ║," +
-                "  ║  ↳ Changes the current saves page      ║," +
-                "  ║ Load (1-9) : e.g. Load 6               ║," +
-                "  ║  ↳ Loads a selected save game          ║," +
-                "  ║ Rename (A-R)(1-9) 'new name' :         ║," +
-                "  ║  ↳ e.g. Rename A2 'test 5'             ║," +
-                "  ║  ↳ Renames an existing save game       ║," +
-                "  ║ Delete (A-R)(1-9) : e.g. Delete H3     ║," +
-                "  ║  ↳ Deletes a selected save game        ║," +
-                "  ║ Back                                   ║," +
-                "  ║  ↳ Returns you to the game screen      ║," +
-                "  ║                                        ║," +
-                "  ║                                        ║," +
-                "  ║                                        ║," +
+                "  ║ Fill (A-I)(1-9) : e.g. Fill A1         ║," +
+                "  ║  ↳ Fills a cell                        ║," +
+                "  ║ Clear (A-I)(1-9) : e.g. Clear D8       ║," +
+                "  ║  ↳ Clears the value of a cell          ║," +
+                "  ║ Undo / Redo                            ║," +
+                "  ║  ↳ Undoes / Re-does your last move     ║," +
+                "  ║ Restart                                ║," +
+                "  ║  ↳ Restarts the game with a new board  ║," +
+                "  ║ Save                                   ║," +
+                "  ║  ↳ Saves your board to play later      ║," +
+                "  ║ Load                                   ║," +
+                "  ║  ↳ Opens the 'load board' menu         ║," +
+                "  ║ Exit                                   ║," +
+                "  ║  ↳ Exits the game to the main menu     ║," +
                 "  ╠════════════════════════════════════════╣,"
 
         ).split(",");

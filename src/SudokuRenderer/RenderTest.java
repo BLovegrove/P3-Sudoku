@@ -1,11 +1,18 @@
 package SudokuRenderer;
 
 import SudokuGen.Generator;
+import SudokuRenderer.InfoPanes.Board;
+import SudokuRenderer.InfoPanes.LoadBoards;
+import SudokuRenderer.Startup.MainMenu;
+import SudokuRenderer.Startup.ViewCalibrator;
 
 public class RenderTest
 {
     public static void main(String[] args)
     {
+        //show calibrate board box
+        ViewCalibrator.renderGuide(20);
+
         //new board numbers
         Generator SudokuGenerator = new Generator();
         int[][] board = SudokuGenerator.getBoard();
@@ -14,14 +21,19 @@ public class RenderTest
         BoardPane BP = new BoardPane(board);
 
         //new info panels
-        BoardInfoPane IPP = new BoardInfoPane();
-        LoadInfoPane IPL = new LoadInfoPane();
+        Board IPP = new Board();
+        LoadBoards IPL = new LoadBoards();
 
         //new load menu
         LoadMenuPane LMP = new LoadMenuPane();
 
         //new view window
         ViewRenderer view = new ViewRenderer();
+
+        //render main menu
+        MainMenu MM = new MainMenu();
+        view.setView(MM.draw());
+        view.render();
 
         //draw basic board
         IPP.setStatus("Test Status Message!");

@@ -35,6 +35,11 @@ public class ViewRenderer
         update();
     }
 
+    public void setView(String[] fullScreenPane)
+    {
+        this.view = fullScreenPane;
+    }
+
     public String[] draw()
     {
         return this.view;
