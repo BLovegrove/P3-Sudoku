@@ -6,11 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 /***
- * todo:
- *  - Do the 3 subgrid pre-fill version of the algorithm
- */
-
-/***
  * Contains all methods required to generate a completed and valid Sudoku board in the form of a 2D array
  */
 public class Generator

@@ -1,8 +1,14 @@
 package SudokuRenderer.Startup;
 
+/***
+ * Draws the static main menu element for users to use to start a game. The menu is 73 characters long, with 5 <br>
+ * characters spacing either side for a total width of 87 characters
+ */
 public class MainMenu
 {
-    //83 characters allowed
+    /***
+     * The string defining the layout for the main menu
+     */
     private String[] menu = (
             "     ╔═══════════╦═══════════════════════════════════════════════╦═══════════╗     ," +
             "     ╠═══╤═══╤═══╣   Sudoku-CLI: The Command Line Puzzle Game!   ╠═══╤═══╤═══╣     ," +
@@ -26,6 +32,10 @@ public class MainMenu
             "     ╚═══╧═══╧═══╩═══════════════════════════════════════════════╩═══╧═══╧═══╝     "
     ).split(",");
 
+    /***
+     * Returns the sudoku game's main menu graphic
+     * @return String[] representing the main menu's pane for use in a {@link SudokuRenderer.ViewRenderer}
+     */
     public String[] draw()
     {
         return this.menu;
