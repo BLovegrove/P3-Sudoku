@@ -1,9 +1,11 @@
-package SudokuRenderer;
+package SudokuRenderer.UtilityPanes;
+
+import SudokuRenderer.ViewRenderer;
 
 /***
  * Makes a paginated ASCII-graphic menu to load previously saved sudoku boards from - all automatically generated
  */
-public class LoadMenuPane
+public class LoadMenu
 {
     /***
      * An array of all the file names excluding extensions in the saves folder
@@ -22,46 +24,21 @@ public class LoadMenuPane
      */
     private String[] menuLines = new String[20];
 
-    //TODO : remove this when file IO complete
-    private final String[] TEST_FILES = new String[]{
-            "THis is a test 1",
-            "THis is a test 2",
-            "THis is a test 3",
-            "THis is a test 4",
-            "THis is a test 5",
-            "THis is a test 6",
-            "THis is a test 7",
-            "THis is a test 8",
-            "THis is a test 9",
-            "THis is a test 10",
-            "THis is a test 11",
-            "THis is a test 12",
-            "THis is a test 13",
-            "THis is a test 14",
-            "THis is a test 15",
-            "THis is a test 16",
-            "THis is a test 17",
-            "THis is a test 18",
-            "THis is a test 19",
-            "THis is a test 20",
-            "THis is a test 21",
-            "THis is a test 22"
-    };
 
     /***
      * standard constructor to initialise the menu page to 1 and get file list / prep default menu state
      */
-    public LoadMenuPane()
+    public LoadMenu(String[] fileNames)
     {
         this.pageNumber = 1;
-        updateFiles();
-        prepMenu();
+        updateFiles(fileNames);
+        assemble();
     }
 
     /***
      * Construct and empty list as a starting point for the menu
      */
-    private void prepMenu()
+    private void assemble()
     {
         drawPageIndicator();
         this.menuLines[1] = "  ╔═══════════════════════════════════╗";
@@ -90,11 +67,10 @@ public class LoadMenuPane
     /***
      * Used to call the (__FILE IO CLASS#METHOD LINK__) method, fetching a list of filenames to be displayed in the list
      */
-    private void updateFiles()
+    private void updateFiles(String[] fileNames)
     {
-        // names can be at max 26 characters exc. file extension
-        // TODO : FILE IO CLASS : RETURN ARRAY OF FILE NAMES AS String[]
-        this.fileNames = TEST_FILES; // delete this line when IO class built
+        // names can be at max 30 characters
+        this.fileNames = fileNames;
         this.maxPages = Math.round((this.fileNames.length / 9) + 1);
     }
 
@@ -112,7 +88,7 @@ public class LoadMenuPane
         }
         else
         {
-            this.menuLines[absIndex] = String.format("  ║%-35s║", " "+(itemIndex+1)+") "+fileName+".txt");
+            this.menuLines[absIndex] = String.format("  ║%-35s║", " "+(itemIndex+1)+") "+fileName);
         }
     }
 
@@ -123,6 +99,15 @@ public class LoadMenuPane
     public int getMaxPages()
     {
         return this.maxPages;
+    }
+
+    /***
+     * Get the current selected page number
+     * @return Integer value as current set of 9 files being viewed
+     */
+    public int getPage()
+    {
+        return this.pageNumber;
     }
 
     /***
@@ -142,7 +127,6 @@ public class LoadMenuPane
      */
     public String[] draw()
     {
-        updateFiles();
         for (int i = 0; i < 9; i++)
         {
             int absIndex = (9 * (this.pageNumber - 1)) + i;

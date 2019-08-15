@@ -4,12 +4,12 @@ package SudokuRenderer.InfoPanes;
  * The information panel to provide the user with commands to use when playing the sudoku game, as well as response<br>
  * from the system via the status message
  */
-public class Board extends InfoPane
+public class GameInfo extends InfoPane
 {
     /***
      * Standard constructor to instantiate Board's version of the InfoPanel layout
      */
-    public Board()
+    public GameInfo()
     {
         super(
             "  ╔════════════════════════════════════════╗," +
@@ -25,8 +25,8 @@ public class Board extends InfoPane
             "  ║  ↳ Restarts the game with a new board  ║," +
             "  ║ Save                                   ║," +
             "  ║  ↳ Saves your board to play later      ║," +
-            "  ║ Load                                   ║," +
-            "  ║  ↳ Opens the 'load board' menu         ║," +
+            "  ║                                        ║," +
+            "  ║                                        ║," +
             "  ║ Exit                                   ║," +
             "  ║  ↳ Exits the game to the main menu     ║," +
             "  ╠════════════════════════════════════════╣,"
