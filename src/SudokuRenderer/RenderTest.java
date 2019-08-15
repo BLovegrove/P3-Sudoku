@@ -1,31 +1,58 @@
 package SudokuRenderer;
 
 import SudokuGen.Generator;
-import SudokuRenderer.InfoPanes.Board;
-import SudokuRenderer.InfoPanes.LoadBoards;
+import SudokuRenderer.InfoPanes.GameInfo;
+import SudokuRenderer.InfoPanes.LoadInfo;
 import SudokuRenderer.Startup.MainMenu;
 import SudokuRenderer.Startup.ViewCalibrator;
+import SudokuRenderer.UtilityPanes.GameBoard;
+import SudokuRenderer.UtilityPanes.LoadMenu;
 
 public class RenderTest
 {
     public static void main(String[] args)
     {
+        String[] TEST_FILES = new String[]{
+                "THis is a test 1",
+                "THis is a test 2",
+                "THis is a test 3",
+                "THis is a test 4",
+                "THis is a test 5",
+                "THis is a test 6",
+                "THis is a test 7",
+                "THis is a test 8",
+                "THis is a test 9",
+                "THis is a test 10",
+                "THis is a test 11",
+                "THis is a test 12",
+                "THis is a test 13",
+                "THis is a test 14",
+                "THis is a test 15",
+                "THis is a test 16",
+                "THis is a test 17",
+                "THis is a test 18",
+                "THis is a test 19",
+                "THis is a test 20",
+                "THis is a test 21",
+                "THis is a test 22"
+        };
+
         //show calibrate board box
-        ViewCalibrator.renderGuide(20);
+        ViewCalibrator.calibrate(20);
 
         //new board numbers
         Generator SudokuGenerator = new Generator();
         int[][] board = SudokuGenerator.getBoard();
 
         //new board graphic
-        BoardPane BP = new BoardPane(board);
+        GameBoard BP = new GameBoard(board);
 
         //new info panels
-        Board IPP = new Board();
-        LoadBoards IPL = new LoadBoards();
+        GameInfo IPP = new GameInfo();
+        LoadInfo IPL = new LoadInfo();
 
         //new load menu
-        LoadMenuPane LMP = new LoadMenuPane();
+        LoadMenu LMP = new LoadMenu(TEST_FILES);
 
         //new view window
         ViewRenderer view = new ViewRenderer();
