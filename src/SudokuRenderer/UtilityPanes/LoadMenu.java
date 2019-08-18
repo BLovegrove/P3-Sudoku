@@ -69,11 +69,11 @@ public class LoadMenu
     /***
      * Used to call the (__FILE IO CLASS#METHOD LINK__) method, fetching a list of filenames to be displayed in the list
      */
-    private void updateFiles(ArrayList<String> fileNames)
+    public void updateFiles(ArrayList<String> fileNames)
     {
         // names can be at max 30 characters
         this.fileNames = fileNames;
-        this.maxPages = Math.round((this.fileNames.size() / 9) + 1);
+        this.maxPages = (int) Math.ceil((1.0 * this.fileNames.size()) / 9.0);
     }
 
     /***
