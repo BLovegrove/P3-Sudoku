@@ -21,13 +21,16 @@ public class Main
         // CALIBRATE WINDOW : HEIGHT 20 LINES (-2 for status message)
         ViewCalibrator.calibrate(18);
 
-        ViewRenderer view = new ViewRenderer();
+        // CREATE MAIN MENU
         MenuManager mainMenu = new MenuManager();
 
+        // CREATE RENDERER
+        ViewRenderer view = new ViewRenderer();
+
+        // SET DEFAULT MENU ERROR TO 'NONE'
         String menuError = "";
 
         boolean running = true;
-
         while (running)
         {
             // WIPE SCREEN HERE
@@ -84,6 +87,7 @@ public class Main
             }
             catch (NumberFormatException e)
             {
+                // SET NEW MENU ERROR FOR NEXT LOOP
                 menuError = menuResponse;
             }
         }

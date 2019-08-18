@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d97189f2-d71e-4acb-8116-8fa425f9e898" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Managers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Managers/LoadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/LoadMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/LoadMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
