@@ -4,12 +4,14 @@ import SudokuRenderer.InfoPanes.LoadInfo;
 import SudokuRenderer.UtilityPanes.LoadMenu;
 import SudokuRenderer.ViewRenderer;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class LoadManager
 {
-    public String loadGame(ViewRenderer view, String[] fileNames)
+    public String loadGame(ViewRenderer view, ArrayList<String> fileNames)
     {
         // SETUP PANES
         LoadMenu loadMenu = new LoadMenu(fileNames);
@@ -86,18 +88,18 @@ public class LoadManager
                             try
                             {
                                 int saveID = Integer.parseInt(response[1]);
-                                int fileID = (9 * (loadMenu.getPage() - 1)) + saveID;
+                                int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
                                 if (fileID < 0)
                                 {
                                     loadInfo.setStatus("Sorry - File number "+ saveID +" is too low!");
                                 }
-                                else if (fileID >= fileNames.length)
+                                else if (fileID >= fileNames.size())
                                 {
                                     loadInfo.setStatus("Sorry - File number "+ saveID +" is too high!");
                                 }
                                 else
                                 {
-                                    selectedFile = fileNames[fileID];
+                                    selectedFile = fileNames.get(fileID);
                                     running = false;
                                 }
                                 break;
@@ -121,18 +123,19 @@ public class LoadManager
                             try
                             {
                                 int saveID = Integer.parseInt(response[1]);
-                                int fileID = (9 * (loadMenu.getPage() - 1)) + saveID;
+                                int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
                                 if (fileID < 0)
                                 {
                                     loadInfo.setStatus("Sorry - File number "+ saveID +" is too low!");
                                 }
-                                else if (fileID >= fileNames.length)
+                                else if (fileID >= fileNames.size())
                                 {
                                     loadInfo.setStatus("Sorry - File number "+ saveID +" is too high!");
                                 }
                                 else
                                 {
-                                    String fileName = fileNames[fileID];
+                                    String fileName = fileNames.get(fileID);
+                                    fileNames.remove(fileID);
                                     // FILE IO CLASS : DELETE SAVE FILE WITH SPECIFIED NAME
                                     loadInfo.setStatus(" -! File moved to trash !- ");
                                 }
@@ -171,7 +174,7 @@ public class LoadManager
                         {
                             loadInfo.setStatus("Sorry - File number "+ saveID +" is too low!");
                         }
-                        else if (fileID >= fileNames.length)
+                        else if (fileID >= fileNames.size())
                         {
                             loadInfo.setStatus("Sorry - File number "+ saveID +" is too high!");
                         }
@@ -183,8 +186,7 @@ public class LoadManager
                                 {
                                     // FILE IO CLASS : RENAME METHOD
                                     String newFileName = repairedResponse[2].substring(1, repairedResponse[2].length()-1);
-                                    fileNames[fileID]= newFileName;
-                                    loadInfo.setStatus("File "+ saveID +" renamed!");
+                                    File newFile = new File();
                                 }
                                 else
                                 {

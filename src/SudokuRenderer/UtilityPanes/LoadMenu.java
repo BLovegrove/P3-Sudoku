@@ -2,6 +2,8 @@ package SudokuRenderer.UtilityPanes;
 
 import SudokuRenderer.ViewRenderer;
 
+import java.util.ArrayList;
+
 /***
  * Makes a paginated ASCII-graphic menu to load previously saved sudoku boards from - all automatically generated
  */
@@ -10,7 +12,7 @@ public class LoadMenu
     /***
      * An array of all the file names excluding extensions in the saves folder
      */
-    private String[] fileNames;
+    private ArrayList<String> fileNames;
     /***
      * Holds the current page position to display every time the menu redraws
      */
@@ -28,7 +30,7 @@ public class LoadMenu
     /***
      * standard constructor to initialise the menu page to 1 and get file list / prep default menu state
      */
-    public LoadMenu(String[] fileNames)
+    public LoadMenu(ArrayList<String> fileNames)
     {
         this.pageNumber = 1;
         updateFiles(fileNames);
@@ -67,11 +69,11 @@ public class LoadMenu
     /***
      * Used to call the (__FILE IO CLASS#METHOD LINK__) method, fetching a list of filenames to be displayed in the list
      */
-    private void updateFiles(String[] fileNames)
+    private void updateFiles(ArrayList<String> fileNames)
     {
         // names can be at max 30 characters
         this.fileNames = fileNames;
-        this.maxPages = Math.round((this.fileNames.length / 9) + 1);
+        this.maxPages = Math.round((this.fileNames.size() / 9) + 1);
     }
 
     /***
@@ -130,9 +132,9 @@ public class LoadMenu
         for (int i = 0; i < 9; i++)
         {
             int absIndex = (9 * (this.pageNumber - 1)) + i;
-            if (absIndex < this.fileNames.length)
+            if (absIndex < this.fileNames.size())
             {
-                updateListItem(i, this.fileNames[absIndex]);
+                updateListItem(i, this.fileNames.get(absIndex));
             }
             else
             {

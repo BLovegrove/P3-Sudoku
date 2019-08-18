@@ -8,34 +8,19 @@ import SudokuRenderer.Startup.ViewCalibrator;
 import SudokuRenderer.UtilityPanes.GameBoard;
 import SudokuRenderer.UtilityPanes.LoadMenu;
 
+import java.util.ArrayList;
+
 public class RenderTest
 {
     public static void main(String[] args)
     {
-        String[] TEST_FILES = new String[]{
-                "THis is a test 1",
-                "THis is a test 2",
-                "THis is a test 3",
-                "THis is a test 4",
-                "THis is a test 5",
-                "THis is a test 6",
-                "THis is a test 7",
-                "THis is a test 8",
-                "THis is a test 9",
-                "THis is a test 10",
-                "THis is a test 11",
-                "THis is a test 12",
-                "THis is a test 13",
-                "THis is a test 14",
-                "THis is a test 15",
-                "THis is a test 16",
-                "THis is a test 17",
-                "THis is a test 18",
-                "THis is a test 19",
-                "THis is a test 20",
-                "THis is a test 21",
-                "THis is a test 22"
-        };
+
+        ArrayList<String> TEST_FILES = new ArrayList<>();
+
+        for (int i = 0; i < 25; i++)
+        {
+            TEST_FILES.set(i, String.format("Test File %1s", i));
+        }
 
         //show calibrate board box
         ViewCalibrator.calibrate(20);
