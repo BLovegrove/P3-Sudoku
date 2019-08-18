@@ -1,5 +1,9 @@
-package SudokuGen;
+package SudokuCLI;
 
+import SudokuGen.Generator;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /***
@@ -71,5 +75,21 @@ public class SudokuTools
         Collections.shuffle(numbers, new Random(SudokuTools.randInt()));
 
         return numbers;
+    }
+
+    public static boolean isNameValid(String fileName)
+    {
+        File file = new File(fileName);
+
+        try
+        {
+            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
+            file.delete();
+            return isValid;
+        }
+        catch (IOException e)
+        {
+            return false;
+        }
     }
 }
