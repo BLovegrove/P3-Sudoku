@@ -19,57 +19,73 @@ public class Main
             TEST_FILES.add(String.format("Test File %1s", i));
         }
 
-        // CALIBRATE WINDOW : HEIGHT 20 LINES
-        ViewCalibrator.calibrate(20);
+        // CALIBRATE WINDOW : HEIGHT 20 LINES (-2 for status message)
+        ViewCalibrator.calibrate(18);
 
         ViewRenderer view = new ViewRenderer();
         MenuManager mainMenu = new MenuManager();
+
+        String menuError = "";
 
         boolean running = true;
 
         while (running)
         {
-            int menuSelected = mainMenu.pickMenuItem(view);
+            // WIPE SCREEN HERE
 
-            switch (menuSelected)
+            // ASK FOR RESPONSE
+            String menuResponse = mainMenu.pickMenuItem(view, menuError);
+
+            // EXECUTE RESPONSE
+            try
             {
-                case 0:
-                {
-                    running = false;
-                    break;
-                }
-                case 1:
-                {
-                    // START NEW EASY GAME
-                    break;
-                }
-                case 2:
-                {
-                    // START NEW NORMAL GAME
-                    break;
-                }
-                case 3:
-                {
-                    // START NEW HARD GAME WITH LUDICROUS = FALSE
-                    break;
-                }
-                case 4:
-                {
-                    // START NEW HARD GAME WITH LUDICROUS = TRUE
-                    break;
-                }
-                case 5:
-                {
-                    LoadManager loadManager = new LoadManager();
-                    String gameID = loadManager.loadGame(view, TEST_FILES);
+                int menuSelected = Integer.parseInt(menuResponse);
+                menuError = "";
 
-                    if (!gameID.isEmpty())
+                switch (menuSelected)
+                {
+                    case 0:
                     {
-                        // LOAD GAME BASED ON SAVE DATA IN ./saves/gameID.txt
+                        running = false;
+                        break;
                     }
+                    case 1:
+                    {
+                        // START NEW EASY GAME
+                        break;
+                    }
+                    case 2:
+                    {
+                        // START NEW NORMAL GAME
+                        break;
+                    }
+                    case 3:
+                    {
+                        // START NEW HARD GAME WITH LUDICROUS = FALSE
+                        break;
+                    }
+                    case 4:
+                    {
+                        // START NEW HARD GAME WITH LUDICROUS = TRUE
+                        break;
+                    }
+                    case 5:
+                    {
+                        LoadManager loadManager = new LoadManager();
+                        String gameID = loadManager.loadGame(view, TEST_FILES);
 
-                    break;
+                        if (!gameID.isEmpty())
+                        {
+                            // LOAD GAME BASED ON SAVE DATA IN ./saves/gameID.txt
+                        }
+
+                        break;
+                    }
                 }
+            }
+            catch (NumberFormatException e)
+            {
+                menuError = menuResponse;
             }
         }
     }

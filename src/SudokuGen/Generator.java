@@ -1,5 +1,7 @@
 package SudokuGen;
 
+import SudokuCLI.SudokuTools;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

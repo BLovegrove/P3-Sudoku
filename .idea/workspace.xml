@@ -5,8 +5,15 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Managers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Managers/LoadManager.java" afterDir="false" />
+<<<<<<< Updated upstream
       <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/LoadMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/LoadMenu.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Managers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Managers/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuGen/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuGen/SudokuTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />

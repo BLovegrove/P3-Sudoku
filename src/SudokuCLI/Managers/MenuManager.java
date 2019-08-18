@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class MenuManager
 {
-    public int pickMenuItem(ViewRenderer view)
+    public String pickMenuItem(ViewRenderer view, String menuErrorMessage)
     {
         // GENERATE MENU GRAPHIC
         MainMenu menuGraphic = new MainMenu();
@@ -19,39 +19,41 @@ public class MenuManager
         // SET UP SCANNER
         Scanner scanner = new Scanner(System.in);
 
+        // (RE)DRAW THE VIEW WINDOW
+        view.render();
 
-        while (true)
+        // PRINT ERROR IF ONE EXISTS
+        if (!menuErrorMessage.equals(""))
         {
-            // (RE)DRAW THE VIEW WINDOW
-            view.render();
+            System.out.println(menuErrorMessage+ ". Try again ↴");
+        }
 
-            // GET USER INPUT
-            String response = scanner.nextLine();
+        // GET USER INPUT
+        String response = scanner.nextLine();
 
-            // PROCESS USER INPUT
-            if (response.length() == 1 && Pattern.compile("(?<!\\S)\\d(?!\\S)").matcher(response).matches())
-            {
-                try {
-                    int menuItem = Integer.parseInt(response);
+        // PROCESS USER INPUT
+        if (response.length() == 1 && Pattern.compile("(?<!\\S)\\d(?!\\S)").matcher(response).matches())
+        {
+            try {
+                int menuItem = Integer.parseInt(response);
 
-                    if (menuItem >= 0 && menuItem <= 5)
-                    {
-                        return menuItem;
-                    }
-                    else
-                    {
-                        System.out.println("IMPLEMENT STATUS WINDOW ASAP - MENU ITEM OUT OF BOUNDS");
-                    }
-                }
-                catch (NumberFormatException e)
+                if (menuItem >= 0 && menuItem <= 5)
                 {
-                    System.out.println("IMPLEMENT STATUS WINDOW ASAP - NON-NUMBER GOT PAST YOUR REGEX");
+                    return ""+ menuItem;
+                }
+                else
+                {
+                    return "Sorry - Menu item "+ menuItem +" not found";
                 }
             }
-            else
+            catch (NumberFormatException e)
             {
-                System.out.println("IMPLEMENT STATUS WINDOW ASAP - SOMETHING WENT WRONG");
+                return "FATAL ERROR: NON-NUMBER GOT PAST REGEX";
             }
+        }
+        else
+        {
+            return "Sorry - Command not recognised";
         }
     }
 }
