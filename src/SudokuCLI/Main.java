@@ -9,12 +9,11 @@ import java.util.ArrayList;
 
 public class Main
 {
-
     public static void main(String[] args)
     {
         ArrayList<String> TEST_FILES = new ArrayList<>();
 
-        for (int i = 0; i < 25; i++)
+        for (int i = 1; i <= 19; i++)
         {
             TEST_FILES.add(String.format("Test File %1s", i));
         }
