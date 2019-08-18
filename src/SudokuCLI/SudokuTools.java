@@ -76,20 +76,4 @@ public class SudokuTools
 
         return numbers;
     }
-
-    public static boolean isNameValid(String fileName)
-    {
-        File file = new File(fileName);
-
-        try
-        {
-            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
-            file.delete();
-            return isValid;
-        }
-        catch (IOException e)
-        {
-            return false;
-        }
-    }
 }
