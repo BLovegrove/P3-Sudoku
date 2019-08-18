@@ -28,7 +28,7 @@ public class LoadManager
         String selectedFile = "";
 
         // START LOOP RUNNING BOOLEAN
-        boolean running  = true;
+        boolean running = true;
 
 
         while (running)
@@ -57,6 +57,7 @@ public class LoadManager
                             try
                             {
                                 int pageNumber = Integer.parseInt(response[1]);
+
                                 if (pageNumber <= 0)
                                 {
                                     loadInfo.setStatus("Sorry - Page number "+ pageNumber +" too low!");
@@ -84,36 +85,30 @@ public class LoadManager
                     }
                     case "load":
                     {
-                        if (Pattern.compile("(?<!\\S)\\d(?!\\S)").matcher(response[1]).matches())
+                        try
                         {
-                            try
+                            int saveID = Integer.parseInt(response[1]);
+                            int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
+                            if (fileID < 0 || saveID < 1)
                             {
-                                int saveID = Integer.parseInt(response[1]);
-                                int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
-                                if (fileID < 0)
-                                {
-                                    loadInfo.setStatus("Sorry - File number "+ saveID +" is too low!");
-                                }
-                                else if (fileID >= fileNames.size())
-                                {
-                                    loadInfo.setStatus("Sorry - File number "+ saveID +" is too high!");
-                                }
-                                else
-                                {
-                                    selectedFile = fileNames.get(fileID);
-                                    running = false;
-                                }
-                                break;
+                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too low!");
                             }
-                            catch (NumberFormatException e)
+                            else if (fileID >= fileNames.size() || saveID > 9)
                             {
-                                loadInfo.setStatus("Sorry - That's not a number");
-                                break;
+                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too high!");
                             }
+                            else
+                            {
+                                selectedFile = fileNames.get(fileID);
+                                running = false;
+                            }
+
+                            break;
                         }
-                        else
+                        catch (NumberFormatException e)
                         {
-                            loadInfo.setStatus("Sorry - No such save number");
+                            loadInfo.setStatus("Sorry - That's not a number");
+
                             break;
                         }
                     }
@@ -122,45 +117,35 @@ public class LoadManager
                         try
                         {
                             int saveID = Integer.parseInt(response[1]);
-                            int fileID = (9 * (loadMenu.getPage() - 1)) + saveID;
+                            int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
                             if (fileID < 0 || saveID < 1)
                             {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +" is too low!");
-                                int saveID = Integer.parseInt(response[1]);
-                                int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
-                                if (fileID < 0)
-                                {
-                                    loadInfo.setStatus("Sorry - File number "+ saveID +" is too low!");
-                                }
-                                else if (fileID >= fileNames.size())
-                                {
-                                    loadInfo.setStatus("Sorry - File number "+ saveID +" is too high!");
-                                }
-                                else
-                                {
-                                    String fileName = fileNames.get(fileID);
-                                    fileNames.remove(fileID);
-                                    // FILE IO CLASS : DELETE SAVE FILE WITH SPECIFIED NAME
-                                    loadInfo.setStatus(" -! File moved to trash !- ");
-                                }
+                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too low!");
                             }
-                            else if (fileID >= fileNames.length || saveID > 9)
+                            else if (fileID >= fileNames.size() || saveID > 9)
                             {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +" is too high!");
+                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too high!");
                             }
                             else
                             {
-                                String newFileName = fileNames[fileID];
+                                String fileName = fileNames.get(fileID);
+                                fileNames.remove(fileID);
                                 // FILE IO CLASS : DELETE SAVE FILE WITH SPECIFIED NAME
+                                loadMenu.updateFiles(fileNames);
                                 loadInfo.setStatus(" -! File moved to trash !- ");
+                                if (loadMenu.getPage() > loadMenu.getMaxPages())
+                                {
+                                    loadMenu.setPage(loadMenu.getPage() - 1);
+                                }
+                                break;
                             }
                         }
                         catch (NumberFormatException e)
                         {
                             loadInfo.setStatus("Sorry - That's not a number");
-                        }
 
-                        break;
+                            break;
+                        }
                     }
                     default:
                     {
@@ -171,9 +156,10 @@ public class LoadManager
             else if (response[0].toLowerCase().equals("rename"))
             {
                 String[] repairedResponse = new String[]{response[0], response[1], ""};
+
                 for (int i = 2; i < response.length; i++)
                 {
-                    repairedResponse[2] += (i != (response.length-1) ? response[i]+" " : response[i]);
+                    repairedResponse[2] += (i != (response.length - 1) ? response[i] +" " : response[i]);
                 }
 
                 try
@@ -184,46 +170,35 @@ public class LoadManager
                     {
                         loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too low!");
                     }
-                    else if (fileID >= fileNames.length || saveID > 9)
+                    else if (fileID >= fileNames.size() || saveID > 9)
                     {
-                        loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +" is too high!");
+                        loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too high!");
                     }
-                    else
+                    else if (response[2].length() <= 32)
                     {
-                        if (response[2].length() <= 32)
+                        if (repairedResponse[2].chars().filter(num -> num == '\'').count() == 2)
                         {
-                            loadInfo.setStatus("Sorry - File number "+ saveID +" is too low!");
-                        }
-                        else if (fileID >= fileNames.size())
-                        {
-                            loadInfo.setStatus("Sorry - File number "+ saveID +" is too high!");
-                        }
-                        else
-                        {
-                            if (response[2].length() <= 32)
-                            {
-                                String newFileName = repairedResponse[2].substring(1, repairedResponse[2].length()-1);
 
-                                if (!newFileName.toLowerCase().equals(fileNames[fileID].toLowerCase()))
-                                {
-                                    // FILE IO CLASS : RENAME METHOD
-                                    String newFileName = repairedResponse[2].substring(1, repairedResponse[2].length()-1);
-                                    File newFile = new File();
-                                }
-                                else
-                                {
-                                    loadInfo.setStatus("File name already exists. Try again");
-                                }
+                            String newFileName = repairedResponse[2].substring(1, repairedResponse[2].length() - 1);
+
+                            if (!newFileName.toLowerCase().equals(fileNames.get(fileID).toLowerCase()))
+                            {
+                                // FILE IO CLASS : RENAME METHOD
+                                fileNames.set(fileID, newFileName);
                             }
                             else
                             {
-                                loadInfo.setStatus("Please surround filename with ''");
+                                loadInfo.setStatus("File name already exists. Try again");
                             }
                         }
                         else
                         {
-                            loadInfo.setStatus("Sorry - New file name too long");
+                            loadInfo.setStatus("Please surround filename with ''");
                         }
+                    }
+                    else
+                    {
+                        loadInfo.setStatus("Sorry - New file name too long");
                     }
                 }
                 catch (NumberFormatException e)
