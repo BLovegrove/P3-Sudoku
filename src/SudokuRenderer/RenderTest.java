@@ -19,7 +19,7 @@ public class RenderTest
 
         for (int i = 0; i < 25; i++)
         {
-            TEST_FILES.set(i, String.format("Test File %1s", i));
+            TEST_FILES.add(i, String.format("Test File %1s", i));
         }
 
         //show calibrate board box
