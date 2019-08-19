@@ -206,6 +206,11 @@ public class IOTools
         }
     }
 
+    /***
+     * Renames a file if it exists and if the new name is a valid file name for the current system
+     * @param oldFileName The name of the file to target for renaming
+     * @param newFileName The new file name to overwrite current file name
+     */
     public static void renameFile(String oldFileName, String newFileName)
     {
 
@@ -219,12 +224,14 @@ public class IOTools
     {
         try
         {
-            // INIT WRITER FOR GIVEN FILE
+            // INIT WRITER FOR GIVEN FILE WITH 'APPEND' FLAG AS FALSE
             PrintWriter writer = new PrintWriter(new FileWriter(SAVE_DIR +"/"+ saveData.boardName +".txt", false));
 
+            // WRITE REFERENCE FLAG
             writer.write("@reference"+ System.lineSeparator());
             int[][] reference = saveData.getReference();
 
+            // WRITE NEXT 9 LINES AS CORRESPONDING REFERENCE BOARD LINES
             for (int i = 0; i < 9; i++)
             {
                 StringBuilder line = new StringBuilder();
@@ -235,9 +242,11 @@ public class IOTools
                 writer.write(line + System.lineSeparator());
             }
 
+            // WRITE BOARD FLAG
             writer.write("@board"+ System.lineSeparator());
             int[][] board = saveData.getBoard();
 
+            // WRITE NEXT 9 LINES AS CORRESPONDING BOARD LINES
             for (int i = 0; i < 9; i++)
             {
                 StringBuilder line = new StringBuilder();
@@ -248,6 +257,7 @@ public class IOTools
                 writer.write(line + System.lineSeparator());
             }
 
+            // WRITE ATTEMPTS FLAG AND CORRESPONDING VALUE IN NEXT 2 LINES
             writer.write("@attempts"+ System.lineSeparator());
             writer.write(saveData.getAttempts() +"");
 
