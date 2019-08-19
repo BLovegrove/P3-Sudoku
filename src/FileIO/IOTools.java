@@ -1,12 +1,16 @@
 package FileIO;
 
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class IOTools
 {
-    /***\
+    /***
      * The directory that stores save text
      */
     public final static File SAVE_DIR = new File("./saves");
@@ -45,28 +49,23 @@ public class IOTools
         return count;
     }
 
-    /***
-     * Attempts to create a temporary file using given name to validate said name as a 'legal' file name
-     * @param fileName The new file name that needs to be validated
-     * @return True/False based on whether the name is valid or invalid (incorrect name / name already exists)
-     */
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static boolean isNameValid(String fileName)
-    {
-        File file = new File(fileName);
-
-        try
-        {
-            // CHECKS IF ACTUAL SAVED FILE NAME MATCHES ORIGINAL GIVEN ONE
-            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
-            file.delete();
-            return isValid;
-        }
-        catch (IOException e)
-        {
-            return false;
-        }
-    }
+//    @SuppressWarnings("ResultOfMethodCallIgnored")
+//    public static boolean isNameValid(String fileName)
+//    {
+//        File file = new File(fileName);
+//
+//        try
+//        {
+//            // CHECKS IF ACTUAL SAVED FILE NAME MATCHES ORIGINAL GIVEN ONE
+//            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
+//            file.delete();
+//            return isValid;
+//        }
+//        catch (IOException e)
+//        {
+//            return false;
+//        }
+//    }
 
     /***
      * Retrieves all the data from a given save file name and creates a saveData instance from it
@@ -213,9 +212,22 @@ public class IOTools
      * @param oldFileName The name of the file to target for renaming
      * @param newFileName The new file name to overwrite current file name
      */
-    public static void renameFile(String oldFileName, String newFileName)
+    public static String renameFile(String oldFileName, String newFileName)
     {
-
+        try
+        {
+            Path target = Paths.get(SAVE_DIR +"/"+ oldFileName +".txt");
+            Files.move(target, target.resolveSibling(newFileName));
+            return "";
+        }
+        catch (FileAlreadyExistsException e)
+        {
+            return "Sorry - That name is taken";
+        }
+        catch (IOException e)
+        {
+            return "ERROR: IO EXCEPTION";
+        }
     }
 
     /***
