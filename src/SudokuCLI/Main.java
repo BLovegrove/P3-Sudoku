@@ -1,5 +1,6 @@
 package SudokuCLI;
 
+import FileIO.IOTools;
 import SudokuCLI.Managers.LoadManager;
 import SudokuCLI.Managers.MenuManager;
 import SudokuRenderer.Startup.ViewCalibrator;
@@ -11,12 +12,14 @@ public class Main
 {
     public static void main(String[] args)
     {
-        ArrayList<String> TEST_FILES = new ArrayList<>();
+//        ArrayList<String> TEST_FILES = new ArrayList<>();
+//
+//        for (int i = 1; i <= 19; i++)
+//        {
+//            TEST_FILES.add(String.format("Test File %1s", i));
+//        }
 
-        for (int i = 1; i <= 19; i++)
-        {
-            TEST_FILES.add(String.format("Test File %1s", i));
-        }
+        ArrayList<String> fileNames = IOTools.getSaveNames();
 
         // CALIBRATE WINDOW : HEIGHT 20 LINES (-2 for status message)
         ViewCalibrator.calibrate(18);
@@ -74,7 +77,7 @@ public class Main
                     case 5:
                     {
                         LoadManager loadManager = new LoadManager();
-                        String gameID = loadManager.loadGame(view, TEST_FILES);
+                        String gameID = loadManager.loadGame(view, fileNames);
 
                         if (!gameID.isEmpty())
                         {
