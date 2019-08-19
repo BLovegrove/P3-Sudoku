@@ -1,11 +1,10 @@
 package SudokuCLI.Managers;
+import FileIO.*;
 
-import SudokuCLI.SudokuTools;
 import SudokuRenderer.InfoPanes.LoadInfo;
 import SudokuRenderer.UtilityPanes.LoadMenu;
 import SudokuRenderer.ViewRenderer;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
@@ -138,14 +137,23 @@ public class LoadManager
                             else
                             {
                                 String fileName = fileNames.get(fileID);
-                                fileNames.remove(fileID);
-                                // FILE IO CLASS : DELETE SAVE FILE WITH SPECIFIED NAME
-                                loadMenu.updateFiles(fileNames);
-                                loadInfo.setStatus(" -! File moved to trash !- ");
-                                if (loadMenu.getPage() > loadMenu.getMaxPages())
+                                String deleteResponse = IOTools.deleteFile(fileName);
+
+                                if (deleteResponse.equals(""))
                                 {
-                                    loadMenu.setPage(loadMenu.getPage() - 1);
+                                    fileNames.remove(fileID);
+                                    loadMenu.updateFiles(fileNames);
+                                    loadInfo.setStatus(" -! File successfully deleted !- ");
+                                    if (loadMenu.getPage() > loadMenu.getMaxPages())
+                                    {
+                                        loadMenu.setPage(loadMenu.getPage() - 1);
+                                    }
                                 }
+                                else
+                                {
+                                    loadInfo.setStatus(deleteResponse);
+                                }
+
                                 break;
                             }
                         }
@@ -185,15 +193,24 @@ public class LoadManager
                     }
                     else if (response[2].length() <= 32)
                     {
-                        if (repairedResponse[2].chars().filter(num -> num == '\'').count() == 2)
+                        if (
+                                repairedResponse[2].startsWith("'") &&
+                                repairedResponse[2].substring(repairedResponse[2].length() - 1).equals("'")
+                        )
                         {
-
-                            String newFileName = repairedResponse[2].substring(1, repairedResponse[2].length() - 1);
+                            String newFileName = repairedResponse[2].substring(1, repairedResponse[2].length() - 1).toLowerCase();
 
                             if (!newFileName.toLowerCase().equals(fileNames.get(fileID).toLowerCase()))
                             {
-                                // FILE IO CLASS : RENAME METHOD
-                                fileNames.set(fileID, newFileName);
+                                String renameResponse = IOTools.renameFile(fileNames.get(fileID), newFileName);
+                                if (renameResponse.equals(""))
+                                {
+                                    fileNames.set(fileID, newFileName);
+                                }
+                                else
+                                {
+                                    loadInfo.setStatus(renameResponse);
+                                }
                             }
                             else
                             {
