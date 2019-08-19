@@ -9,12 +9,7 @@ public class IOTools
     /***\
      * The directory that stores save text
      */
-    public final static File SAVE_DIR;
-
-    static
-    {
-        SAVE_DIR = new File("./saves");
-    }
+    public final static File SAVE_DIR = new File("./saves");
 
     /***
      * Retrieves names of all save files in the save folder so the app can keep track of what it can/can't touch
@@ -36,7 +31,7 @@ public class IOTools
 
     /***
      * Gets the number of files available in the saves folder defined in {@link #SAVE_DIR}.
-     * @return An integer representing how many saved boards there are.
+     * @return An integer representing how many saved boards there are
      */
     public static int fileCount()
     {
@@ -50,6 +45,11 @@ public class IOTools
         return count;
     }
 
+    /***
+     * Attempts to create a temporary file using given name to validate said name as a 'legal' file name
+     * @param fileName The new file name that needs to be validated
+     * @return True/False based on whether the name is valid or invalid (incorrect name / name already exists)
+     */
     @SuppressWarnings("ResultOfMethodCallIgnored")
     public static boolean isNameValid(String fileName)
     {
@@ -57,6 +57,7 @@ public class IOTools
 
         try
         {
+            // CHECKS IF ACTUAL SAVED FILE NAME MATCHES ORIGINAL GIVEN ONE
             boolean isValid = file.getCanonicalFile().getName().equals(fileName);
             file.delete();
             return isValid;
@@ -67,6 +68,11 @@ public class IOTools
         }
     }
 
+    /***
+     * Retrieves all the data from a given save file name and creates a saveData instance from it
+     * @param fileName The name of the file that needs to be loaded
+     * @return A SaveData instance with all the data scanned in from the file
+     */
     public static SaveData loadSave(String fileName)
     {
         // INIT SAVE VARIABLES
@@ -80,14 +86,18 @@ public class IOTools
         // INIT FILE READER
         BufferedReader reader;
 
+        // START SCANNING DATA FROM FILE
         try
         {
+            // GET FILE
             reader = new BufferedReader(new FileReader(SAVE_DIR + "/" + fileName + ".txt"));
 
+            // GET FIRST LINE
             String line = reader.readLine();
 
             if (line != null)
             {
+                // CHECK FOR REFERENCE BOARD FLAG AND TAKE NEXT 9 LINES AS REFERENCE BOARD OBJECT
                 if (line.equals("@reference"))
                 {
                     for (int i = 0; i < 9; i++)
@@ -118,6 +128,7 @@ public class IOTools
 
             if (line != null)
             {
+                // CHECK FOR ACTIVE BOARD FLAG AND TAKE NEXT 9 LINES AS BOARD OBJECT
                 if (line.equals("@board"))
                 {
                     for (int i = 0; i < 9; i++)
@@ -145,6 +156,7 @@ public class IOTools
             line = reader.readLine();
             if (line != null)
             {
+                // CHECK FOR ATTEMPTS FLAG AND TAKE NEXT LINE AS NUMBER OF ATTEMPTS
                 if (line.equals("@attempts"))
                 {
                     try
@@ -177,6 +189,11 @@ public class IOTools
         return saveData;
     }
 
+    /***
+     * Deletes a given file based on its name if the file is found in the saves folder
+     * @param fileName The file name to target for deletion
+     * @return Empty string if all went well, otherwise and error message depending on what went wrong
+     */
     public static String deleteFile(String fileName)
     {
         if (new File(SAVE_DIR +"/"+ fileName +".txt").delete())
@@ -194,10 +211,15 @@ public class IOTools
 
     }
 
+    /***
+     * Overrides the given save file with the data in the given {@link SaveData} instance
+     * @param saveData The save file who's data you want to copy into the save file
+     */
     public static void saveFile(SaveData saveData)
     {
         try
         {
+            // INIT WRITER FOR GIVEN FILE
             PrintWriter writer = new PrintWriter(new FileWriter(SAVE_DIR +"/"+ saveData.boardName +".txt", false));
 
             writer.write("@reference"+ System.lineSeparator());
@@ -205,10 +227,10 @@ public class IOTools
 
             for (int i = 0; i < 9; i++)
             {
-                String line = "";
+                StringBuilder line = new StringBuilder();
                 for (int j = 0; j < 9; j++)
                 {
-                    line += reference[i][j] + (j == 8 ? "" : ",");
+                    line.append(reference[i][j]).append(j == 8 ? "" : ",");
                 }
                 writer.write(line + System.lineSeparator());
             }
@@ -218,10 +240,10 @@ public class IOTools
 
             for (int i = 0; i < 9; i++)
             {
-                String line = "";
+                StringBuilder line = new StringBuilder();
                 for (int j = 0; j < 9; j++)
                 {
-                    line += board[i][j] + (j == 8 ? "" : ",");
+                    line.append(board[i][j]).append(j == 8 ? "" : ",");
                 }
                 writer.write(line + System.lineSeparator());
             }
