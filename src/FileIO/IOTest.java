@@ -1,13 +1,31 @@
 package FileIO;
 
+import SudokuGen.Generator;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 
 public class IOTest
 {
     public static void main(String[] args)
     {
-        SaveFile save;
-        save = IOTools.loadSave("hardcode_save_01");
+        SaveFile saveData;
+        saveData = IOTools.loadSave("hardcode_save_01");
+
+        try
+        {
+            File test = new File(IOTools.SAVE_DIR +"/test.txt");
+            boolean fileSaved = test.createNewFile();
+            if (!fileSaved)
+            {
+                System.out.println("Test file creation error: "+ System.lineSeparator() +"File already exists");
+            }
+        }
+        catch (IOException e)
+        {
+            System.out.println("ERROR: TEST FILE PATH NOT FOUND");
+        }
 
         System.out.println("Number of saves: ");
         System.out.println(IOTools.fileCount());
@@ -16,25 +34,37 @@ public class IOTest
         System.out.println("hardcore_save_01");
 
         System.out.println("Save data board: ");
-        System.out.println(Arrays.deepToString(save.getBoard()));
+        System.out.println(Arrays.deepToString(saveData.getBoard()));
 
         System.out.println("Save attempts: ");
-        System.out.println(save.getAttempts());
+        System.out.println(saveData.getAttempts());
 
-        if (!save.getErrorMessage().equals(""))
+        if (!saveData.getErrorMessage().equals(""))
         {
             System.out.println("Save error message: ");
-            System.out.println(save.getErrorMessage());
+            System.out.println(saveData.getErrorMessage());
         }
 
-        String deleteStatus = IOTools.deleteFile("hardcode_save_01");
+        String deleteStatus = IOTools.deleteFile("test");
         if (!deleteStatus.equals(""))
         {
             System.out.println("Deletion error: ");
             System.out.println(deleteStatus);
         }
 
-        System.out.println("File count post-delete: ");
+        System.out.println("File count after deleting test file: ");
         System.out.println(IOTools.fileCount());
+
+        Generator gen = new Generator();
+        int[][] newBoard = gen.getBoard();
+
+        saveData.setBoard(newBoard);
+
+        IOTools.saveFile(saveData);
+
+        saveData = IOTools.loadSave("hardcode_save_01");
+
+        System.out.println("New board after save");
+        System.out.println(Arrays.deepToString(saveData.getBoard()));
     }
 }
