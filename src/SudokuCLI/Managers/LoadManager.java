@@ -10,8 +10,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
+/***
+ * Manages the user input for the {@link LoadMenu} stage of the SudokuCLI game
+ */
 public class LoadManager
 {
+    /***
+     * Process commands given based on definitions in the {@link LoadInfo} class
+     * @param view The {@link ViewRenderer} being used to draw all the screen graphics
+     * @param fileNames An ArrayList of all the file names in the saves folder at the time of instantiation
+     * @return The file name that was selected by the method to load from the {@link SudokuRenderer.Startup.MainMenu}
+     */
     public String loadGame(ViewRenderer view, ArrayList<String> fileNames)
     {
         // SETUP PANES

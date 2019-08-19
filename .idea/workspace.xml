@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="d97189f2-d71e-4acb-8116-8fa425f9e898" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/hardcode_save_01.txt" beforeDir="false" afterPath="$PROJECT_DIR$/saves/hardcode_save_01.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FileIO/IOTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/GameBoard.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -21,6 +21,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1PcSPOHIIt7XPhQuWqhORy5AbkZ" />
@@ -48,7 +53,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.RenderTest">
+  <component name="RunManager" selected="Application.IOTest">
     <configuration name="GeneratorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SudokuGen.GeneratorTest" />
       <module name="P3-Sudoku" />
@@ -103,10 +108,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.IOTest" />
         <item itemvalue="Application.RenderTest" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.IOTest" />
         <item itemvalue="Application.GeneratorTest" />
+        <item itemvalue="Application.RenderTest" />
       </list>
     </recent_temporary>
   </component>
