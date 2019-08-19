@@ -27,7 +27,8 @@ public class IOTools
         // ITERATE TO FILL LIST WITH FILE NAMES
         // requireNonNull added by IDE to stave off warnings
         for (File file : Objects.requireNonNull(SAVE_DIR.listFiles())) {
-            files.add(file.getName());
+            String fileName = file.getName();
+            files.add(fileName.substring(0, fileName.length() - 4));
         }
 
         return files;
@@ -217,7 +218,7 @@ public class IOTools
         try
         {
             Path target = Paths.get(SAVE_DIR +"/"+ oldFileName +".txt");
-            Files.move(target, target.resolveSibling(newFileName));
+            Files.move(target, target.resolveSibling(newFileName +".txt"));
             return "";
         }
         catch (FileAlreadyExistsException e)
@@ -226,7 +227,7 @@ public class IOTools
         }
         catch (IOException e)
         {
-            return "ERROR: IO EXCEPTION";
+            return "Sorry - Name not valid";
         }
     }
 
