@@ -34,7 +34,11 @@ public class IOTest
         System.out.println("hardcore_save_01");
 
         System.out.println("Save data board: ");
-        System.out.println(Arrays.deepToString(saveData.getBoard()));
+        int[][] board = saveData.getBoard();
+        int[][] reference = saveData.getReference();
+        System.out.println(Arrays.toString(board[0]));
+        System.out.println("Save data reference: ");
+        System.out.println(Arrays.toString(reference[0]));
 
         System.out.println("Save attempts: ");
         System.out.println(saveData.getAttempts());
@@ -59,12 +63,15 @@ public class IOTest
         int[][] newBoard = gen.getBoard();
 
         saveData.setBoard(newBoard);
+        saveData.setReference(newBoard);
 
         IOTools.saveFile(saveData);
 
         saveData = IOTools.loadSave("hardcode_save_01");
 
-        System.out.println("New board after save");
-        System.out.println(Arrays.deepToString(saveData.getBoard()));
+        System.out.println("New board after save: ");
+        System.out.println(Arrays.toString(saveData.getBoard()[0]));
+        System.out.println("New board reference after save: ");
+        System.out.println(Arrays.toString(saveData.getReference()[0]));
     }
 }

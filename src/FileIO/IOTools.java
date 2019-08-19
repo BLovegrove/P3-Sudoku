@@ -126,6 +126,8 @@ public class IOTools
                 System.out.println("No data found in file!");
             }
 
+            line = reader.readLine();
+
             if (line != null)
             {
                 // CHECK FOR ACTIVE BOARD FLAG AND TAKE NEXT 9 LINES AS BOARD OBJECT
