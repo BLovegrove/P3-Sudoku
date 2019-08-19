@@ -1,6 +1,6 @@
 package FileIO;
 
-public class SaveFile
+public class SaveData
 {
     public String boardName;
     private int[][] reference;
@@ -8,7 +8,7 @@ public class SaveFile
     private int attempts;
     private String errorMessage = "";
 
-    public SaveFile(String boardName,int[][] reference, int[][] board, int attempts)
+    public SaveData(String boardName, int[][] reference, int[][] board, int attempts)
     {
         this.boardName = boardName;
         this.reference = reference;

@@ -10,7 +10,7 @@ public class IOTest
 {
     public static void main(String[] args)
     {
-        SaveFile saveData;
+        SaveData saveData;
         saveData = IOTools.loadSave("hardcode_save_01");
 
         try

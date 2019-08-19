@@ -1,13 +1,8 @@
 package FileIO;
 
 import java.io.*;
-import java.nio.file.DirectoryNotEmptyException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Scanner;
 
 public class IOTools
 {
@@ -72,7 +67,7 @@ public class IOTools
         }
     }
 
-    public static SaveFile loadSave(String fileName)
+    public static SaveData loadSave(String fileName)
     {
         // INIT SAVE VARIABLES
         int[][] reference = new int[9][9];
@@ -80,7 +75,7 @@ public class IOTools
         int attempts = 0;
 
         // INIT EMPTY SAVE
-        SaveFile saveData = new SaveFile(fileName, reference, board, attempts);
+        SaveData saveData = new SaveData(fileName, reference, board, attempts);
 
         // INIT FILE READER
         BufferedReader reader;
@@ -199,7 +194,7 @@ public class IOTools
 
     }
 
-    public static void saveFile(SaveFile saveData)
+    public static void saveFile(SaveData saveData)
     {
         try
         {
