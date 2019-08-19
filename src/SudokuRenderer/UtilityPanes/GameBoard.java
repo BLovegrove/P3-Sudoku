@@ -94,6 +94,7 @@ public class GameBoard
      */
     public String[] draw()
     {
+        assemble();
         return this.boardLines;
     }
 }
