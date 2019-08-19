@@ -2,16 +2,28 @@ package FileIO;
 
 public class SaveFile
 {
-    private String boardName = "";
-    private int[][] board = new int[9][9];
-    private int attempts = 0;
+    public String boardName;
+    private int[][] reference;
+    private int[][] board;
+    private int attempts;
     private String errorMessage = "";
 
-    public SaveFile(String boardName, int[][] board, int attempts)
+    public SaveFile(String boardName,int[][] reference, int[][] board, int attempts)
     {
         this.boardName = boardName;
+        this.reference = reference;
         this.board = board;
         this.attempts = attempts;
+    }
+
+    public int[][] getReference()
+    {
+        return reference;
+    }
+
+    public void setReference(int[][] reference)
+    {
+        this.reference = reference;
     }
 
     public int[][] getBoard()

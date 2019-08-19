@@ -2,11 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d97189f2-d71e-4acb-8116-8fa425f9e898" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/saves/hardcode_save_01.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/saves/hardcode_save_02.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FileIO/IOTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/hardcode_save_01.txt" beforeDir="false" afterPath="$PROJECT_DIR$/saves/hardcode_save_01.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/hardcode_save_02.txt" beforeDir="false" afterPath="$PROJECT_DIR$/saves/hardcode_save_02.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FileIO/IOTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/SaveFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/SaveFile.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,7 +50,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.IOTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="GeneratorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SudokuGen.GeneratorTest" />
       <module name="P3-Sudoku" />
@@ -91,9 +92,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.IOTest" />
         <item itemvalue="Application.GeneratorTest" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
