@@ -363,7 +363,7 @@ public class Generator
 
     public int[][] unSolver(int[][] board){
         int[][] completeBoard = board.clone();
-        int chances = 5;
+        int chances = 40; // THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS changes with difficulty
         counter = 1;
         Random rand = new Random();
         while(chances > 0){
@@ -375,13 +375,14 @@ public class Generator
             }
             int[][] boardBackup = board.clone();
             int valBackup = board[row][col];
+            board[row][col] = 0;
             solveBoard(boardBackup);
             if(counter != 1){
                 board[row][col] = valBackup;
+                chances--;
             }
-
-
         }
+        return board;
     }
 
     public boolean solveBoard(int [][] board){
@@ -407,6 +408,7 @@ public class Generator
                 }
             }
         }
+        return false;
     }
 
     public boolean boardCheck(int[][] board){
