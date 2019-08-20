@@ -374,7 +374,7 @@ public class Generator
                 col = rand.nextInt(9);
             }
             int[][] boardBackup = board.clone();
-
+//AAAAAAAAAAAAAAAAAAA NNNNNNNNNNNNNNNNNNNNNNNN UUUUUUUUUUUUUUUUUUUUUUUUUU SSSSSSSSSSSSSSSSSSSSSSSSSSSS
             counter = 0;
 
         }
@@ -387,10 +387,24 @@ public class Generator
             for(int j = 0; i<9; j++){
                 if(board[i][j] == 0){
                     for(int value = 1; value < 10; value++){
+                        if(cellValid(i, j, value, board)){
+                            board[i][j] = value;
 
+                        }
                     }
                 }
             }
         }
+    }
+
+    public boolean boardCheck(int[][] board){
+        for(int row = 1; row<10; row++){
+            for(int col = 1; col<10; col++){
+                if(board[row][col]==0){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
