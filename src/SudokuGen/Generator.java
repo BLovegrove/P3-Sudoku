@@ -54,9 +54,9 @@ public class Generator
      * @param value The value that has to be searched for in the row for duplicity
      * @return A true/false for whether or not the value exists in the given row
      */
-    private boolean rowValid(int row, int value)
+    private boolean rowValid(int row, int value, int[][] board)
     {
-        for (int i = 0; i < this.board[row].length; i++)
+        for (int i = 0; i < board[row].length; i++)
         {
             if (this.board[row][i] == value)
             {
@@ -128,7 +128,7 @@ public class Generator
      * @return A true/false for whether or not the value exists in its subsection
      * (determined by {@link #findSubSection(int, int)}).
      */
-    private boolean subsectionValid(int row, int col, int value)
+    private boolean subsectionValid(int row, int col, int value, int[][] board)
     {
         int[] subSection = findSubSection(row, col);
 
@@ -136,7 +136,7 @@ public class Generator
         {
             for (int j = (subSection[1] * 3); j < ((subSection[1] * 3) + 3); j++)
             {
-                if (value == this.board[i][j])
+                if (value == board[i][j])
                 {
                     return false;
                 }
@@ -147,16 +147,16 @@ public class Generator
     }
 
     /***
-     * Method to combine the boolean outputs of the three validation methods ({@link #rowValid(int, int)},
-     * {@link #columnValid(int, int)}, {@link #subsectionValid(int, int, int)}) that define the rules of a Sudoku board.
+     * Method to combine the boolean outputs of the three validation methods ({@link #rowValid(int, int, int[][])},
+     * {@link #columnValid(int, int)}, {@link #subsectionValid(int, int, int, int[][])}) that define the rules of a Sudoku board.
      * @param row The row in the Sudoku board that contains the cell in question
      * @param col The column in the Sudoku board that contains the cell in question
      * @param value The integer value (from 1 to 9 inclusive) of the cell in question
      * @return A true/false depending on the combined outcome of the three methods mentioned in the description.
      */
-    private boolean cellValid(int row, int col, int value)
+    private boolean cellValid(int row, int col, int value, int[][] board)
     {
-        return rowValid(row, value) && columnValid(col, value) && subsectionValid(row, col, value);
+        return rowValid(row, value, board) && columnValid(col, value) && subsectionValid(row, col, value, board);
     }
 
     /***
@@ -290,7 +290,7 @@ public class Generator
             {
 
                 int cellValue = cellNumbers.get(cellNumbers.size() - 1);
-                boolean legal = cellValid(row, col, cellValue);
+                boolean legal = cellValid(row, col, cellValue, this.board);
 
                 if (legal)
                 {
@@ -365,12 +365,13 @@ public class Generator
         int[][] completeBoard = board.clone();
         int chances = 5;
         counter = 1;
+        Random rand = new Random();
         while(chances > 0){
-            int row = Random.nextInt(9);
-            int col = Random.nextInt(9);
+            int row = rand.nextInt(9);
+            int col = rand.nextInt(9);
             while(board[row][col] == 0){
-                row = Random.nextInt(9);
-                col = Random.nextInt(9);
+                row = rand.nextInt(9);
+                col = rand.nextInt(9);
             }
             int[][] boardBackup = board.clone();
 
@@ -378,4 +379,6 @@ public class Generator
 
         }
     }
+
+    
 }
