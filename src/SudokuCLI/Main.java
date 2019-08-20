@@ -1,8 +1,8 @@
 package SudokuCLI;
 
 import FileIO.IOTools;
-import SudokuCLI.Managers.LoadManager;
-import SudokuCLI.Managers.MenuManager;
+import SudokuCLI.MenuHandlers.LoadManager;
+import SudokuCLI.MenuHandlers.MenuManager;
 import SudokuRenderer.Startup.ViewCalibrator;
 import SudokuRenderer.ViewRenderer;
 
@@ -66,12 +66,12 @@ public class Main
                     }
                     case 3:
                     {
-                        // START NEW HARD GAME WITH LUDICROUS = FALSE
+                        // START NEW HARD GAME
                         break;
                     }
                     case 4:
                     {
-                        // START NEW HARD GAME WITH LUDICROUS = TRUE
+                        // START NEW LUDICROUS MODE GAME
                         break;
                     }
                     case 5:
