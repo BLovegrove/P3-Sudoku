@@ -9,9 +9,10 @@ public class GameInfo extends InfoPane
     /***
      * Standard constructor to instantiate Board's version of the InfoPanel layout
      */
-    public GameInfo()
+    public GameInfo(String gameName)
     {
         super(
+            String.format("  Save : %34s ,", gameName) +
             "  ╔════════════════════════════════════════╗," +
             "  ║       Commands Menu & Status Bar       ║," +
             "  ╠════════════════════════════════════════╣," +
@@ -25,7 +26,6 @@ public class GameInfo extends InfoPane
             "  ║  ↳ Restarts the game with a new board  ║," +
             "  ║ Save                                   ║," +
             "  ║  ↳ Saves your board to play later      ║," +
-            "  ║                                        ║," +
             "  ║                                        ║," +
             "  ║ Exit                                   ║," +
             "  ║  ↳ Exits the game to the main menu     ║," +
