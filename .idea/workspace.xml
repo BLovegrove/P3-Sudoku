@@ -2,12 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d97189f2-d71e-4acb-8116-8fa425f9e898" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/SudokuCLI/GameplayHandler/DifficultyLevel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/SudokuCLI/GameplayHandler/GameManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SudokuRenderer/Startup/NewGame.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Managers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Managers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/GameplayHandler/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/GameplayHandler/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/GameInfo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
