@@ -1,4 +1,4 @@
-package SudokuCLI.Managers;
+package SudokuCLI.MenuHandlers;
 import FileIO.*;
 
 import SudokuRenderer.InfoPanes.LoadInfo;

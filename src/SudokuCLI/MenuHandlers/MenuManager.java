@@ -1,4 +1,4 @@
-package SudokuCLI.Managers;
+package SudokuCLI.MenuHandlers;
 
 import SudokuRenderer.Startup.MainMenu;
 import SudokuRenderer.ViewRenderer;
