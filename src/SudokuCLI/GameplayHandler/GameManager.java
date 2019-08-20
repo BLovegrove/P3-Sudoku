@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class GameManager
@@ -43,8 +44,7 @@ public class GameManager
                     if (newSaveFile.createNewFile())
                     {
                         // GENERATE NEW BOARD
-                        Generator generator = new Generator();
-                        int[][] reference = generator.getBoard();
+                        int[][] reference = Generator.generate();
                         int[][] board = new int[9][9]; // RUN UNSOLVER HERE
 
                         // SAVE BOARD DATA
@@ -89,6 +89,10 @@ public class GameManager
         // INIT USER INPUT
         Scanner scanner = new Scanner(System.in);
 
+        // INIT LAST MOVE DATA
+        // Data will be : [0] = cell row, [1] = cell column, [2] = cells last value
+        ArrayList<int[]> moveHistory = new ArrayList<>();
+
         // INIT LOOP BOOLEAN
         boolean running = true;
 
@@ -109,11 +113,26 @@ public class GameManager
                 {
                     case "undo":
                     {
+                        if (moveHistory.size() > 0)
+                        {
+                            int[] move = moveHistory.get(moveHistory.size() - 1);
+                            moveHistory.remove(moveHistory.size() - 1);
 
-                    }
-                    case "redo":
-                    {
+                            saveData.setCellValue(move[0], move[1], move[2]);
+                            gameInfo.setStatus("Move undone!");
 
+                            /*
+                            * IMPLEMENT METHOD TO:
+                            * >CHECK IF CELL VALUE IS VALID
+                            * >REDRAW BOARD WITH VALUE IF TRUE
+                            * >REDRAW BOARD WITH X AND WAIT FOR USER TO HIT ANY KEY IF NOT
+                            * >REDRAW BOARD WITH UNCHANGED VALUE
+                            * */
+                        }
+                        else
+                        {
+                            gameInfo.setStatus("No moves left to undo!");
+                        }
                     }
                     case "restart":
                     {
@@ -128,18 +147,24 @@ public class GameManager
 
                         if (restartGame.toLowerCase().equals("y"))
                         {
-                            
+                            int[][] newBoard = Generator.generate();
+                            saveData.setReference(newBoard);
+                            saveData.setBoard(new int[9][9]); // RUN UNSOLVER ON NEWBOARD AND PUT IT IN HERE
+                            gameInfo.setStatus("Game reset! Good luck");
                         }
                         else
                         {
                             gameInfo.setStatus("Restart aborted");
-                            break;
                         }
+
+                        break;
                     }
                     case "save":
                     {
                         saveData.save();
                         gameInfo.setStatus("Game saved!");
+
+                        break;
                     }
                     case "exit":
                     {
