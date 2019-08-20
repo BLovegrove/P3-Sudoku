@@ -309,7 +309,7 @@ public class Generator
      * Method used to begin the sudoku board generation process at board position {@code row = 0} {@code column = 0}.
      * @return The generated 2D array representing the board
      */
-    private int[][] generate()
+    public int[][] generate()
     {
         int[][] board = new int[9][9];
         this.populateCellValues();
