@@ -14,21 +14,21 @@ public class Generator
     /***
      * The uninitialised {@code ArrayList<Integer>} that contains each cells potential values for testing
      */
-    private ArrayList<List<Integer>> cellValues;
+    private static ArrayList<List<Integer>> CELL_VALUES;
     /***
      * The boolean to keep track of whether or not a valid board has been produced by {@link #generate()}
      */
-    private boolean boardFinished = false;
+    private static boolean BOARD_FINISHED = false;
 
     /***
      * Iterates 81 times to produce a full list of size 81 {@code List<Integer>} elements with randomised order using
      * {@link SudokuTools#shuffledNine()}.
      */
-    private void populateCellValues()
+    private static void populateCellValues()
     {
         for (int i = 0; i < 81; i++)
         {
-            cellValues.add(SudokuTools.shuffledNine());
+            CELL_VALUES.add(SudokuTools.shuffledNine());
         }
     }
 
@@ -39,7 +39,7 @@ public class Generator
      * @param value The value that has to be searched for in the row for duplicity
      * @return A true/false for whether or not the value exists in the given row
      */
-    private boolean rowValid(int row, int value, int[][] board)
+    private static boolean rowValid(int row, int value, int[][] board)
     {
         for (int i = 0; i < board[row].length; i++)
         {
@@ -59,7 +59,7 @@ public class Generator
      * @param value The value that has to be searched for in the column (col) for duplicity
      * @return A true/false for whether or not the value exists in the given column (col)
      */
-    private boolean columnValid(int col, int value, int[][] board)
+    private static boolean columnValid(int col, int value, int[][] board)
     {
         for (int i = 0; i < board.length; i++)
         {
@@ -79,7 +79,7 @@ public class Generator
      * @param col The column of the individual cell inside one of 9 sub-grid.
      * @return An int[] containing sub-row ([0]) and sub-column ([1]) position of the individual cell being searched for.
      */
-    private int[] findSubSection(int row, int col)
+    private static int[] findSubSection(int row, int col)
     {
         int[] subSection = new int[2];
 
@@ -113,7 +113,7 @@ public class Generator
      * @return A true/false for whether or not the value exists in its subsection
      * (determined by {@link #findSubSection(int, int)}).
      */
-    private boolean subsectionValid(int row, int col, int value, int[][] board)
+    private static boolean subsectionValid(int row, int col, int value, int[][] board)
     {
         int[] subSection = findSubSection(row, col);
 
@@ -139,7 +139,7 @@ public class Generator
      * @param value The integer value (from 1 to 9 inclusive) of the cell in question
      * @return A true/false depending on the combined outcome of the three methods mentioned in the description.
      */
-    private boolean cellValid(int row, int col, int value, int[][] board)
+    private static boolean cellValid(int row, int col, int value, int[][] board)
     {
         return rowValid(row, value, board) && columnValid(col, value, board) && subsectionValid(row, col, value, board);
     }
@@ -150,9 +150,9 @@ public class Generator
      * @param col The current column that the cell is part of
      * @return The List that contains the specified cell's remaining possible values
      */
-    private List<Integer> getCellValues(int row, int col)
+    private static List<Integer> getCellValues(int row, int col)
     {
-        return this.cellValues.get((row * 9) + col);
+        return CELL_VALUES.get((row * 9) + col);
     }
 
     /***
@@ -161,10 +161,10 @@ public class Generator
      * @param col The current column that the cell is part of
      * @param list The {@code List<Integer>} that is to replace the old one
      */
-    private void setCellValues(int row, int col, List<Integer> list)
+    private static void setCellValues(int row, int col, List<Integer> list)
     {
         int index = (row * 9) + col;
-        this.cellValues.set(index, list);
+        CELL_VALUES.set(index, list);
     }
 
     /***
@@ -175,7 +175,7 @@ public class Generator
      * @param row The current row that the cell is part of
      * @param col The current column that the cell is part of
      */
-    private void backtrack(int row, int col, int[][] board)
+    private static void backtrack(int row, int col, int[][] board)
     {
         if (row == 0)
         {
@@ -209,7 +209,7 @@ public class Generator
      * @param row The current row that the cell is part of
      * @param col The current column that the cell is part of
      */
-    private void nextCell(int row, int col, int[][] board)
+    private static void nextCell(int row, int col, int[][] board)
     {
         if (row == 8)
         {
@@ -241,7 +241,7 @@ public class Generator
      * @param col The current column that the cell is part of
      * @return true / false depending on whether the cell being altered is at position 81 (final cell)
      */
-    private boolean finalCell(int row, int col)
+    private static boolean finalCell(int row, int col)
     {
         return ((row * 9) + col) == 81;
     }
@@ -259,13 +259,13 @@ public class Generator
      * @param col The column containing the cell to be tested
      * @param firstTry Whether or not the cell to be tested is being tested for the first time (tru) or not (false)
      */
-    private void solveCell(int[][] board, int row, int col, boolean firstTry)
+    private static void solveCell(int[][] board, int row, int col, boolean firstTry)
     {
         if (!firstTry)
         {
             board[row][col] = 0;
         }
-        if (board[row][col] == 0 && !finalCell(row, col) && !this.boardFinished)
+        if (board[row][col] == 0 && !finalCell(row, col) && !BOARD_FINISHED)
         {
 
             List<Integer> cellNumbers = getCellValues(row, col);
@@ -301,7 +301,7 @@ public class Generator
         }
         else
         {
-            this.boardFinished = true;
+            BOARD_FINISHED = true;
         }
     }
 
@@ -309,11 +309,11 @@ public class Generator
      * Method used to begin the sudoku board generation process at board position {@code row = 0} {@code column = 0}.
      * @return The generated 2D array representing the board
      */
-    public int[][] generate()
+    public static int[][] generate()
     {
         int[][] board = new int[9][9];
-        this.populateCellValues();
-        this.solveCell(board, 0,0, true);
+        populateCellValues();
+        solveCell(board, 0,0, true);
         return board;
     }
 
@@ -343,7 +343,7 @@ public class Generator
         return board;
     }
 
-    public boolean solveBoard(int[][] board){
+    private boolean solveBoard(int[][] board){
         COUNTER = 0;
         Random rand = new Random();
         for(int i = 0; i < 9; i++){
@@ -369,7 +369,7 @@ public class Generator
         return false;
     }
 
-    public boolean boardCheck(int[][] board){
+    private boolean boardCheck(int[][] board){
         for(int row = 1; row<10; row++){
             for(int col = 1; col<10; col++){
                 if(board[row][col]==0){
