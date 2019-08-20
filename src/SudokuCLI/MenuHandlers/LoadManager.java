@@ -22,9 +22,10 @@ public class LoadManager
      */
     public String loadGame(ViewRenderer view, ArrayList<String> fileNames)
     {
-        // SETUP PANES
+        // SETUP PANES / DEFAULT VIEW WINDOW
         LoadMenu loadMenu = new LoadMenu(fileNames);
         LoadInfo loadInfo = new LoadInfo();
+        view.setPanes(loadMenu.draw(), loadInfo.draw());
 
         // SET DEFAULT STATUS MESSAGE
         loadInfo.setStatus("Ready to load a game!");
@@ -35,14 +36,14 @@ public class LoadManager
         // SET UP DEFAULT RETURN FILE
         String selectedFile = "";
 
-        // START LOOP RUNNING BOOLEAN
+        // INIT LOOP BOOLEAN
         boolean running = true;
-
 
         while (running)
         {
-            // DRAW VIEW WINDOW
-            view.setPanes(loadMenu.draw(), loadInfo.draw());
+            // WIPE SCREEN HERE
+
+            // RENDER VIEW WINDOW
             view.render();
 
             // GET USER INPUT
@@ -60,35 +61,30 @@ public class LoadManager
                 {
                     case "page":
                     {
-                        if (Pattern.compile("(?<!\\S)\\d(?!\\S)").matcher(response[1]).matches())
+                        try
                         {
-                            try
-                            {
-                                int pageNumber = Integer.parseInt(response[1]);
+                            int pageNumber = Integer.parseInt(response[1]);
 
-                                if (pageNumber <= 0)
-                                {
-                                    loadInfo.setStatus("Sorry - Page number "+ pageNumber +" too low!");
-                                }
-                                else if (pageNumber > loadMenu.getMaxPages())
-                                {
-                                    loadInfo.setStatus("Sorry - Page number "+ pageNumber +" too high!");
-                                }
-                                else
-                                {
-                                    loadInfo.setStatus("Page "+ pageNumber +" loaded!");
-                                    loadMenu.setPage(pageNumber);
-                                }
-                            }
-                            catch (NumberFormatException e)
+                            if (pageNumber <= 0)
                             {
-                                loadInfo.setStatus("Sorry - That's not a number");
+                                loadInfo.setStatus("Sorry - Page number "+ pageNumber +" too low!");
+                            }
+                            else if (pageNumber > loadMenu.getMaxPages())
+                            {
+                                loadInfo.setStatus("Sorry - Page number "+ pageNumber +" too high!");
+                            }
+                            else
+                            {
+                                loadInfo.setStatus("Page "+ pageNumber +" loaded!");
+                                loadMenu.setPage(pageNumber);
+                                view.setPrimaryPane(loadMenu.draw());
                             }
                         }
-                        else
+                        catch (NumberFormatException e)
                         {
-                            loadInfo.setStatus("Sorry - no such page number");
+                            loadInfo.setStatus("Sorry - That's not a number");
                         }
+
                         break;
                     }
                     case "load":
@@ -148,6 +144,7 @@ public class LoadManager
                                     {
                                         loadMenu.setPage(loadMenu.getPage() - 1);
                                     }
+                                    view.setPrimaryPane(loadMenu.draw());
                                 }
                                 else
                                 {
@@ -166,7 +163,7 @@ public class LoadManager
                     }
                     default:
                     {
-                        loadInfo.setStatus("Sorry - unrecognized command");
+                        loadInfo.setStatus("Sorry - Unrecognized command");
                     }
                 }
             }
@@ -206,6 +203,7 @@ public class LoadManager
                                 if (renameResponse.equals(""))
                                 {
                                     fileNames.set(fileID, newFileName);
+                                    view.setPrimaryPane(loadMenu.draw());
                                 }
                                 else
                                 {
