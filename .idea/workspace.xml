@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd39cb6b-66c1-4832-955f-502ce0cb4071" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/SudokuGen/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -59,7 +61,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="Application.GeneratorTest">
     <configuration name="GeneratorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SudokuGen.GeneratorTest" />
       <module name="P3-Sudoku" />
@@ -120,10 +122,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.GeneratorTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.IOTest" />
         <item itemvalue="Application.RenderTest" />
-        <item itemvalue="Application.GeneratorTest" />
         <item itemvalue="Application.RenderTest" />
       </list>
     </recent_temporary>
@@ -140,6 +142,8 @@
       <updated>1566171867909</updated>
       <workItem from="1566280954714" duration="2354000" />
       <workItem from="1566284336639" duration="612000" />
+      <workItem from="1566286450369" duration="472000" />
+      <workItem from="1566286953828" duration="533000" />
     </task>
     <servers />
   </component>

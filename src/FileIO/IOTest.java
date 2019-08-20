@@ -59,8 +59,8 @@ public class IOTest
         System.out.println("File count after deleting test file: ");
         System.out.println(IOTools.fileCount());
 
-        Generator gen = new Generator();
-        int[][] newBoard = gen.getBoard();
+
+        int[][] newBoard = Generator.generate();
 
         saveData.setBoard(newBoard);
         saveData.setReference(newBoard);

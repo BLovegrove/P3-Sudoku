@@ -26,8 +26,8 @@ public class RenderTest
         ViewCalibrator.calibrate(20);
 
         //new board numbers
-        Generator SudokuGenerator = new Generator();
-        int[][] board = SudokuGenerator.getBoard();
+
+        int[][] board = Generator.generate();
 
         //new board graphic
         GameBoard BP = new GameBoard(board);
