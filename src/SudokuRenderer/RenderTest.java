@@ -28,6 +28,8 @@ public class RenderTest
         //new board numbers
         int[][] board = new Generator().generate();
 
+        int[][] board = Generator.generate();
+
         //new board graphic
         GameBoard BP = new GameBoard(board);
 

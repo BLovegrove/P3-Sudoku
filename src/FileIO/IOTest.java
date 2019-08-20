@@ -61,6 +61,8 @@ public class IOTest
 
         int[][] newBoard = new Generator().generate();
 
+        int[][] newBoard = Generator.generate();
+
         saveData.setBoard(newBoard);
         saveData.setReference(newBoard);
 
