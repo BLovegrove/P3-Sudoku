@@ -20,8 +20,8 @@ public class GameInfo extends InfoPane
             "  ║  ↳ Fills a cell                        ║," +
             "  ║ Clear (A-I)(1-9) : e.g. Clear D8       ║," +
             "  ║  ↳ Clears the value of a cell          ║," +
-            "  ║ Undo / Redo                            ║," +
-            "  ║  ↳ Undoes / Re-does your last move     ║," +
+            "  ║ Undo                                   ║," +
+            "  ║  ↳ Undoes your last board move         ║," +
             "  ║ Restart                                ║," +
             "  ║  ↳ Restarts the game with a new board  ║," +
             "  ║ Save                                   ║," +
