@@ -14,36 +14,31 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IgnoredFileRootStore">
-    <option name="generatedRoots">
-      <set>
-        <option value="$PROJECT_DIR$/.idea" />
-      </set>
-    </option>
-  </component>
-  <component name="ProjectId" id="1OysF9ykrrGvzKnpxWz1HmQyOsB" />
+  <component name="ProjectId" id="1PcSPOHIIt7XPhQuWqhORy5AbkZ" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Artifacts" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="editing.templates" />
-  </component>
-  <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="SudokuGen" />
-    </key>
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Java" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -57,15 +52,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.RenderTest">
-    <configuration name="BoardGenerator" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="ALTERNATIVE_JRE_PATH" value="/usr/lib/jvm/java-11-openjdk-amd64" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
-      <option name="MAIN_CLASS_NAME" value="SudokuBoardGenerator.BoardGenerator" />
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="GeneratorTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SudokuGen.GeneratorTest" />
       <module name="P3-Sudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="SudokuBoardGenerator.*" />
+          <option name="PATTERN" value="SudokuGen.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -73,12 +66,25 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CollectionShuffle" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Experimental.CollectionShuffle" />
+    <configuration name="IOTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FileIO.IOTest" />
       <module name="P3-Sudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="Experimental.*" />
+          <option name="PATTERN" value="FileIO.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SudokuCLI.Main" />
+      <module name="P3-Sudoku" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SudokuCLI.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -91,7 +97,7 @@
       <module name="P3-Sudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="SudokuRenderer.InfoPanes.*" />
+          <option name="PATTERN" value="SudokuRenderer.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -99,29 +105,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SudokuSolver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="sudoku.SudokuSolver" />
-      <module name="P3-Sudoku" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="Experimental.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <list>
-      <item itemvalue="Application.BoardGenerator" />
-      <item itemvalue="Application.CollectionShuffle" />
-      <item itemvalue="Application.SudokuSolver" />
-      <item itemvalue="Application.RenderTest" />
-    </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.IOTest" />
         <item itemvalue="Application.RenderTest" />
-        <item itemvalue="Application.SudokuSolver" />
+        <item itemvalue="Application.GeneratorTest" />
+        <item itemvalue="Application.RenderTest" />
       </list>
     </recent_temporary>
   </component>
@@ -130,11 +120,11 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2a949ccf-1c02-4632-8114-dc076b7bba98" name="Default Changelist" comment="" />
-      <created>1564529946792</created>
+      <changelist id="d97189f2-d71e-4acb-8116-8fa425f9e898" name="Default Changelist" comment="" />
+      <created>1566171867909</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1564529946792</updated>
+      <updated>1566171867909</updated>
     </task>
     <servers />
   </component>
@@ -153,12 +143,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <watches-manager>
-      <configuration name="Application">
-        <watch expression="this.board[0]" />
-      </configuration>
-    </watches-manager>
   </component>
 </project>

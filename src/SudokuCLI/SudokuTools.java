@@ -1,5 +1,9 @@
-package SudokuGen;
+package SudokuCLI;
 
+import SudokuGen.Generator;
+
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 
 /***

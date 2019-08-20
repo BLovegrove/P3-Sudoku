@@ -1,31 +1,43 @@
 package SudokuRenderer;
 
 import SudokuGen.Generator;
-import SudokuRenderer.InfoPanes.Board;
-import SudokuRenderer.InfoPanes.LoadBoards;
+import SudokuRenderer.InfoPanes.GameInfo;
+import SudokuRenderer.InfoPanes.LoadInfo;
 import SudokuRenderer.Startup.MainMenu;
 import SudokuRenderer.Startup.ViewCalibrator;
+import SudokuRenderer.UtilityPanes.GameBoard;
+import SudokuRenderer.UtilityPanes.LoadMenu;
+
+import java.util.ArrayList;
 
 public class RenderTest
 {
     public static void main(String[] args)
     {
+
+        ArrayList<String> TEST_FILES = new ArrayList<>();
+
+        for (int i = 0; i < 25; i++)
+        {
+            TEST_FILES.add(i, String.format("Test File %1s", i));
+        }
+
         //show calibrate board box
-        ViewCalibrator.renderGuide(20);
+        ViewCalibrator.calibrate(20);
 
         //new board numbers
         Generator SudokuGenerator = new Generator();
         int[][] board = SudokuGenerator.getBoard();
 
         //new board graphic
-        BoardPane BP = new BoardPane(board);
+        GameBoard BP = new GameBoard(board);
 
         //new info panels
-        Board IPP = new Board();
-        LoadBoards IPL = new LoadBoards();
+        GameInfo IPP = new GameInfo();
+        LoadInfo IPL = new LoadInfo();
 
         //new load menu
-        LoadMenuPane LMP = new LoadMenuPane();
+        LoadMenu LMP = new LoadMenu(TEST_FILES);
 
         //new view window
         ViewRenderer view = new ViewRenderer();
