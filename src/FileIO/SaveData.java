@@ -114,6 +114,11 @@ public class SaveData
         this.errorMessage = errorMessage;
     }
 
+    public void setCellValue(int row, int col, int value)
+    {
+        this.board[row][col] = value;
+    }
+
     /***
      * Allows easy saving of the current SaveData instance
      */
