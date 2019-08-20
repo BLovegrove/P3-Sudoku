@@ -1,5 +1,6 @@
 package SudokuCLI;
 
+import FileIO.SaveData;
 import SudokuGen.Generator;
 
 import java.io.File;
@@ -45,26 +46,6 @@ public class SudokuTools
     }
 
     /***
-     * Consistency checking algorithm to check there are no duplicates of a selected number in its row on a sudoku board
-     * @param row The row containing the number to check against
-     * @param scanValue The value to be checked for in the given row
-     * @return A true/false to determine if the value was in the row/ not in the row respectively
-     */
-    public static boolean isValueInRow(int[] row, int scanValue)
-    {
-        boolean isValueInArray = false;
-        for (int currentValue : row)
-        {
-            if (currentValue == scanValue)
-            {
-                isValueInArray = true;
-                break;
-            }
-        }
-        return isValueInArray;
-    }
-
-    /***
      * Used for generating a cells number List in {@link Generator}
      * @return List of scrambled integer values form 1->9 inclusive
      */
@@ -75,5 +56,17 @@ public class SudokuTools
         Collections.shuffle(numbers, new Random(SudokuTools.randInt()));
 
         return numbers;
+    }
+
+    public static boolean gameComplete(SaveData save)
+    {
+        if (save.getBoard() == save.getReference())
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
