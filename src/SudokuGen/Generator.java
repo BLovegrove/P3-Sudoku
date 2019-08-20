@@ -358,4 +358,24 @@ public class Generator
                 Arrays.toString(this.board[7]) + System.lineSeparator() +
                 Arrays.toString(this.board[8]);
     }
+
+    private static int counter;
+
+    public int[][] unSolver(int[][] board){
+        int[][] completeBoard = board.clone();
+        int chances = 5;
+        counter = 1;
+        while(chances > 0){
+            int row = Random.nextInt(9);
+            int col = Random.nextInt(9);
+            while(board[row][col] == 0){
+                row = Random.nextInt(9);
+                col = Random.nextInt(9);
+            }
+            int[][] boardBackup = board.clone();
+
+            counter = 0;
+
+        }
+    }
 }
