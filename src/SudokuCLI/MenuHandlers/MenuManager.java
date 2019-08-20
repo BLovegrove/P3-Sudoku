@@ -19,6 +19,8 @@ public class MenuManager
      */
     public String pickMenuItem(ViewRenderer view, String menuErrorMessage)
     {
+        // WIPE SCREEN HERE
+
         // GENERATE MENU GRAPHIC
         MainMenu menuGraphic = new MainMenu();
 
@@ -41,7 +43,7 @@ public class MenuManager
         String response = scanner.nextLine();
 
         // PROCESS USER INPUT
-        if (response.length() == 1 && Pattern.compile("(?<!\\S)\\d(?!\\S)").matcher(response).matches())
+        if (response.length() == 1)
         {
             try {
                 int menuItem = Integer.parseInt(response);
@@ -57,7 +59,7 @@ public class MenuManager
             }
             catch (NumberFormatException e)
             {
-                return "FATAL ERROR: NON-NUMBER GOT PAST REGEX";
+                return "Sorry - Command not recognised";
             }
         }
         else
