@@ -380,5 +380,17 @@ public class Generator
         }
     }
 
-    
+    public boolean solveBoard(int [][] board){
+        counter = 0;
+        Random rand = new Random();
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; i<9; j++){
+                if(board[i][j] == 0){
+                    for(int value = 1; value < 10; value++){
+
+                    }
+                }
+            }
+        }
+    }
 }
