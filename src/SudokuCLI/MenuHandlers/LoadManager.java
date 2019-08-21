@@ -50,10 +50,26 @@ public class LoadManager
             String[] response = scanner.nextLine().split(" ");
 
             // PROCESS USER INPUT
-            if (response.length == 1 && response[0].toLowerCase().equals("back"))
+            if (response.length == 1)
             {
-                selectedFile = "";
-                running = false;
+                switch (response[0].toLowerCase())
+                {
+                    case "back":
+                    {
+                        selectedFile = "";
+                        running = false;
+                        break;
+                    }
+                    case "sort":
+                    {
+                        loadMenu.updateFiles(IOTools.getSaveNames());
+                    }
+                    default:
+                    {
+                        loadInfo.setStatus("Sorry - Unrecognized command");
+                        break;
+                    }
+                }
             }
             else if (response.length == 2)
             {
