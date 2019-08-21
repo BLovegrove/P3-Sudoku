@@ -4,7 +4,6 @@ import SudokuRenderer.Startup.MainMenu;
 import SudokuRenderer.ViewRenderer;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /***
  * Manages the user input processing and error reporting for the {@link MainMenu} stage of the SudokuCLI game
@@ -12,15 +11,13 @@ import java.util.regex.Pattern;
 public class MenuManager
 {
     /***
-     * Select an item from the games {@link MainMenu} to execute in the {@link SudokuCLI.Main} handler
+     * Select an item from the games {@link MainMenu} to execute in the {@link Main} handler
      * @param view The {@link ViewRenderer} being used to draw all the screen graphics
      * @param menuErrorMessage The error message (if any) set during the last execution of this method
      * @return Any error encountered during the execution of this method. Otherwise blank string
      */
     public String pickMenuItem(ViewRenderer view, String menuErrorMessage)
     {
-        // WIPE SCREEN HERE
-
         // GENERATE MENU GRAPHIC
         MainMenu menuGraphic = new MainMenu();
 
@@ -29,6 +26,8 @@ public class MenuManager
 
         // SET UP SCANNER
         Scanner scanner = new Scanner(System.in);
+
+        // WIPE SCREEN HERE
 
         // (RE)DRAW THE VIEW WINDOW
         view.render();
