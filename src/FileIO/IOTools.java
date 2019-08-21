@@ -1,5 +1,7 @@
 package FileIO;
 
+import SudokuCLI.Gameplay.DifficultyLevel;
+
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
@@ -78,10 +80,10 @@ public class IOTools
         // INIT SAVE VARIABLES
         int[][] reference = new int[9][9];
         int[][] board = new int[9][9];
-        int attempts = 0;
+        int moves = 0;
 
         // INIT EMPTY SAVE
-        SaveData saveData = new SaveData(fileName, reference, board, attempts);
+        SaveData saveData = new SaveData(fileName, reference, board, moves, DifficultyLevel.NONE);
 
         // INIT FILE READER
         BufferedReader reader;
@@ -158,16 +160,37 @@ public class IOTools
             line = reader.readLine();
             if (line != null)
             {
-                // CHECK FOR ATTEMPTS FLAG AND TAKE NEXT LINE AS NUMBER OF ATTEMPTS
-                if (line.equals("@attempts"))
+                // CHECK FOR MOVES FLAG AND TAKE NEXT LINE AS NUMBER OF MOVES
+                if (line.equals("@moves"))
                 {
                     try
                     {
-                        saveData.setAttempts(Integer.parseInt(reader.readLine()));
+                        saveData.setMoves(Integer.parseInt(reader.readLine()));
                     }
                     catch (NumberFormatException e)
                     {
-                        saveData.setErrorMessage("Save corrupt! attempts was ! number");
+                        saveData.setErrorMessage("Save corrupt! moves was ! number");
+                    }
+                }
+                else
+                {
+                    saveData.setErrorMessage("No attempt count found in file!");
+                }
+            }
+
+            line = reader.readLine();
+            if (line != null)
+            {
+                // CHECK FOR DIFFICULTY FLAG AND TAKE NEXT LINE AS DIFFICULTY
+                if (line.equals("@difficulty"))
+                {
+                    try
+                    {
+                        saveData.setDifficulty(DifficultyLevel.valueOf(reader.readLine()));
+                    }
+                    catch (NumberFormatException e)
+                    {
+                        saveData.setErrorMessage("Save corrupt! no valid difficulty!");
                     }
                 }
                 else
@@ -272,9 +295,9 @@ public class IOTools
                 writer.write(line + System.lineSeparator());
             }
 
-            // WRITE ATTEMPTS FLAG AND CORRESPONDING VALUE IN NEXT 2 LINES
-            writer.write("@attempts"+ System.lineSeparator());
-            writer.write(saveData.getAttempts() +"");
+            // WRITE moves FLAG AND CORRESPONDING VALUE IN NEXT 2 LINES
+            writer.write("@moves"+ System.lineSeparator());
+            writer.write(saveData.getMoves() +"");
 
             writer.close();
         }
