@@ -1,3 +1,5 @@
+package SudokuCLI;
+
 import FileIO.SaveData;
 import SudokuGen.Generator;
 
