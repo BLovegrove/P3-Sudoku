@@ -88,6 +88,11 @@ public class GameBoard
         ).split(",");
     }
 
+    public void update(int[][] newBoard)
+    {
+        this.board = newBoard;
+    }
+
     /***
      * triggers the (re)creation of the sudoku board
      * @return The resulting sudoku ASCII graphic in String[] format for use in a {@link ViewRenderer}
