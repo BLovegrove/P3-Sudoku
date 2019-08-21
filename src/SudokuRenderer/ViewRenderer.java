@@ -74,13 +74,14 @@ public class ViewRenderer
      */
     public void render()
     {
+        clearScreen();
         for (String line : this.view)
         {
             System.out.println(line);
         }
     }
 
-    public static void clearScreen() {
+    private static void clearScreen() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
