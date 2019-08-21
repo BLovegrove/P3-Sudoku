@@ -26,14 +26,13 @@ public class RenderTest
         ViewCalibrator.calibrate(20);
 
         //new board numbers
-        Generator SudokuGenerator = new Generator();
-        int[][] board = SudokuGenerator.getBoard();
+        int[][] board = new Generator().generate();
 
         //new board graphic
         GameBoard BP = new GameBoard(board);
 
         //new info panels
-        GameInfo IPP = new GameInfo();
+        GameInfo IPP = new GameInfo("Test Game!");
         LoadInfo IPL = new LoadInfo();
 
         //new load menu
