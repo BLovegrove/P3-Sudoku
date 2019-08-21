@@ -2,7 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7344a5b5-56d3-44f2-b337-22b757eabd66" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/saves/ludicrous.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/saves/TEST 2.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/SaveData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/SaveData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/GameInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/LoadInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/LoadInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/GameBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,7 +54,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.RenderTest">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="SudokuCLI.Main" />
       <module name="P3-Sudoku" />
@@ -71,8 +83,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.RenderTest" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.RenderTest" />
       </list>
     </recent_temporary>
   </component>

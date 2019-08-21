@@ -40,7 +40,7 @@ public class SaveData
      */
     public SaveData(String boardName, int[][] reference, int[][] board, int moves, DifficultyLevel difficulty)
     {
-        this.boardName = boardName;
+        this.boardName = boardName.toLowerCase();
         this.reference = reference;
         this.board = board;
         this.moves = moves;

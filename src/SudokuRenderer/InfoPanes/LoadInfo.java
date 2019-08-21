@@ -19,7 +19,7 @@ public class LoadInfo extends InfoPane
             "  ║  ↳ Changes the current saves page      ║," +
             "  ║ Load (1-9) : e.g. Load 6               ║," +
             "  ║  ↳ Loads a selected save game          ║," +
-            "  ║ Rename (1-9) 'new name' :              ║," +
+            "  ║ Rename (1-9) : e.g. Rename 5           ║," +
             "  ║  ↳ e.g. Rename 2 'test 5'              ║," +
             "  ║  ↳ Renames an existing save game       ║," +
             "  ║ Delete (1-9) : e.g. Delete 3           ║," +

@@ -295,9 +295,13 @@ public class IOTools
                 writer.write(line + System.lineSeparator());
             }
 
-            // WRITE moves FLAG AND CORRESPONDING VALUE IN NEXT 2 LINES
+            // WRITE moves FLAG AND CORRESPONDING VALUE IN NEXT LINE
             writer.write("@moves"+ System.lineSeparator());
             writer.write(saveData.getMoves() +"");
+
+            //WRITE DIFFICULTY FLAG AND CORRESPONDING DIFFICULTY IN NEXT LINE
+            writer.write("@difficulty"+ System.lineSeparator());
+            writer.write(saveData.getDifficulty().toString());
 
             writer.close();
         }

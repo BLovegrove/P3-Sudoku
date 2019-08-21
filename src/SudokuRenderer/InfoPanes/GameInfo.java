@@ -12,12 +12,12 @@ public class GameInfo extends InfoPane
     public GameInfo(String gameName)
     {
         super(
-            String.format("  Save : %34s ,", gameName) +
+            String.format("  Save : %-35s,", gameName) +
             "  ╔════════════════════════════════════════╗," +
             "  ║       Commands Menu & Status Bar       ║," +
             "  ╠════════════════════════════════════════╣," +
             "  ║ Fill (A-I)(1-9) : e.g. Fill A1         ║," +
-            "  ║  ↳ Fills a cell                        ║," +
+            "  ║  ↳ Fills a cell. 'C' to cancel fill    ║," +
             "  ║ Clear (A-I)(1-9) : e.g. Clear D8       ║," +
             "  ║  ↳ Clears the value of a cell          ║," +
             "  ║ Undo                                   ║," +

@@ -36,7 +36,7 @@ public class GameManager
                 try
                 {
                     // ATTEMPT TO CREATE NEW FILE
-                    File newSaveFile = new File(IOTools.SAVE_DIR, response +".txt");
+                    File newSaveFile = new File(IOTools.SAVE_DIR, response.toLowerCase() +".txt");
                     if (newSaveFile.createNewFile())
                     {
                         // GENERATE NEW BOARD
@@ -44,7 +44,7 @@ public class GameManager
                         int[][] board = new int[9][9]; // RUN UNSOLVER HERE
 
                         // SAVE BOARD DATA
-                        newSave = response;
+                        newSave = response.toLowerCase();
                         SaveData newSaveData = new SaveData(response, reference, board , 0, difficulty);
                         newSaveData.save();
 
@@ -213,51 +213,67 @@ public class GameManager
                                     int row = coordinate[0] - 1;
                                     int col = coordinate[1] - 1;
 
+                                    int cellValueBackup = gameData.getBoard()[row][col];
+                                    gameData.setCellValue(row, col, -1);
+                                    view.setPrimaryPane(gameBoard.draw());
+
                                     while (true)
                                     {
                                         // WIPE SCREEN HERE
                                         view.render();
 
                                         String fillResponse = scanner.nextLine();
-                                        try
-                                        {
-                                            int cellValue = Integer.parseInt(fillResponse);
-                                            if (cellValue > 0 && cellValue < 10)
-                                            {
-                                                boolean cellValid = SudokuTools.cellValid(
-                                                        row,
-                                                        col,
-                                                        cellValue,
-                                                        gameData.getBoard()
-                                                );
-                                                if (cellValid)
-                                                {
-                                                    moveHistory.add(
-                                                            new int[]{ row, col, gameData.getBoard()[row][col] }
-                                                    );
-                                                    gameData.setCellValue(row, col, cellValue);
-                                                    gameData.addMove();
-                                                    gameInfo.setStatus("Value "+ cellValue +" Added to cell "+ response[1].toUpperCase());
 
-                                                    break;
+                                        if (fillResponse.toLowerCase().equals("c"))
+                                        {
+                                            gameData.setCellValue(row, col, cellValueBackup);
+                                            gameInfo.setStatus("Fill aborted");
+
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            try
+                                            {
+                                                int cellValue = Integer.parseInt(fillResponse);
+                                                if (cellValue > 0 && cellValue < 10)
+                                                {
+                                                    boolean cellValid = SudokuTools.cellValid(
+                                                            row,
+                                                            col,
+                                                            cellValue,
+                                                            gameData.getBoard()
+                                                    );
+                                                    if (cellValid)
+                                                    {
+                                                        moveHistory.add(
+                                                                new int[]{ row, col, gameData.getBoard()[row][col] }
+                                                        );
+                                                        gameData.setCellValue(row, col, cellValue);
+                                                        gameData.addMove();
+                                                        gameInfo.setStatus("Value "+ cellValue +" Added to cell "+ response[1].toUpperCase());
+
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        if (gameData.getDifficulty() != DifficultyLevel.LUDICROUS)
+                                                        {
+                                                            gameInfo.setStatus("Value "+ cellValue +" can't go there! Try again");
+                                                            gameData.setCellValue(row, col, cellValueBackup);
+                                                            break;
+                                                        }
+                                                    }
                                                 }
                                                 else
                                                 {
-                                                    if (gameData.getDifficulty() != DifficultyLevel.LUDICROUS)
-                                                    {
-                                                        gameInfo.setStatus("Value "+ cellValue +" can't go there! Try again");
-                                                        break;
-                                                    }
+                                                    gameInfo.setStatus("Value must from 1 to 9 - Try again");
                                                 }
                                             }
-                                            else
+                                            catch (NumberFormatException e)
                                             {
-                                                gameInfo.setStatus("Sorry - Value must from 1 to 9");
+                                                gameInfo.setStatus("Cell value not a number - Try again");
                                             }
-                                        }
-                                        catch (NumberFormatException e)
-                                        {
-                                            gameInfo.setStatus("Sorry - Cell value not a number");
                                         }
 
                                         view.setSecondaryPane(gameInfo.draw());
@@ -316,7 +332,7 @@ public class GameManager
             }
             else
             {
-                infoPane.setStatus("Sorry - Row number not 1->9");
+                infoPane.setStatus("Sorry - Row number not 1 to 9");
             }
         }
         catch (IllegalArgumentException e)
@@ -335,7 +351,7 @@ public class GameManager
             }
             else
             {
-                infoPane.setStatus("Sorry - Column number not 1->9");
+                infoPane.setStatus("Sorry - Column number not 1 to 9");
             }
         }
         catch (NumberFormatException e)
