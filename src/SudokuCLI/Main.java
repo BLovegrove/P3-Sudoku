@@ -1,5 +1,3 @@
-package SudokuCLI;
-
 import FileIO.IOTools;
 import SudokuCLI.MenuHandlers.LoadManager;
 import SudokuCLI.MenuHandlers.MenuManager;
@@ -36,8 +34,6 @@ public class Main
         boolean running = true;
         while (running)
         {
-            // WIPE SCREEN HERE
-
             // ASK FOR RESPONSE
             String menuResponse = mainMenu.pickMenuItem(view, menuError);
 
