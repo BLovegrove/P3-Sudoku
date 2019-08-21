@@ -24,8 +24,8 @@ public class LoadInfo extends InfoPane
             "  ║  ↳ Renames an existing save game       ║," +
             "  ║ Delete (1-9) : e.g. Delete 3           ║," +
             "  ║  ↳ Deletes a selected save game        ║," +
-            "  ║                                        ║," +
-            "  ║                                        ║," +
+            "  ║ Sort                                   ║," +
+            "  ║  ↳ Sorts list in alphabetical order    ║," +
             "  ║                                        ║," +
             "  ║ Back                                   ║," +
             "  ║  ↳ Returns you to the game screen      ║," +
