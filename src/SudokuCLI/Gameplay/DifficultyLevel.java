@@ -1,7 +1,8 @@
-package SudokuCLI.GameplayHandler;
+package SudokuCLI.Gameplay;
 
 public enum DifficultyLevel
 {
+    NONE,
     EASY,
     MEDIUM,
     HARD,
