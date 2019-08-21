@@ -120,14 +120,6 @@ public class GameManager
 
                             saveData.setCellValue(move[0], move[1], move[2]);
                             gameInfo.setStatus("Move undone!");
-
-                            /*
-                            * IMPLEMENT METHOD TO:
-                            * >CHECK IF CELL VALUE IS VALID
-                            * >REDRAW BOARD WITH VALUE IF TRUE
-                            * >REDRAW BOARD WITH X AND WAIT FOR USER TO HIT ANY KEY IF NOT
-                            * >REDRAW BOARD WITH UNCHANGED VALUE
-                            * */
                         }
                         else
                         {
