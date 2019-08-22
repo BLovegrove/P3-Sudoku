@@ -22,12 +22,19 @@ public class LoadManager
      */
     public String loadGame(ViewRenderer view, ArrayList<String> fileNames)
     {
-        // SETUP PANES
         LoadMenu loadMenu = new LoadMenu(fileNames);
         LoadInfo loadInfo = new LoadInfo();
 
         // SET DEFAULT STATUS MESSAGE
-        loadInfo.setStatus("Ready to load a game!");
+        //CHECK NUMBER OF SAVES ISN'T LUDICROUSLY HIGH
+        if (fileNames.size() > 100)
+        {
+            loadInfo.setStatus("100+ Saves! Check saves folder ASAP");
+        }
+        else
+        {
+            loadInfo.setStatus("Ready to load a game!");
+        }
 
         // INIT VIEW WINDOW
         view.setPanes(loadMenu.draw(), loadInfo.draw());
@@ -38,57 +45,88 @@ public class LoadManager
         // SET UP DEFAULT RETURN FILE
         String selectedFile = "";
 
-        // INIT LOOP BOOLEAN
-        boolean running = true;
-
-        while (running)
+        while (true)
         {
-            // WIPE SCREEN HERE
 
             // RENDER VIEW WINDOW
             view.render();
 
             // GET USER INPUT
-            String[] response = scanner.nextLine().split(" ");
+            String[] response = scanner.nextLine().toLowerCase().split(" ");
 
             // PROCESS USER INPUT
-            if (response.length == 1)
+            switch (response.length)
             {
-                switch (response[0].toLowerCase())
+                case 1:
                 {
-                    case "back":
+                    switch (response[0])
                     {
-                        selectedFile = "";
-                        running = false;
-
-                        break;
-                    }
-                    case "sort":
-                    {
-                        loadMenu.updateFiles(IOTools.getSaveNames());
-                        loadInfo.setStatus("List sorted!");
-
-                        break;
-                    }
-                    default:
-                    {
-                        loadInfo.setStatus("Sorry - Unrecognized command");
-
-                        break;
-                    }
-                }
-            }
-            else if (response.length == 2)
-            {
-                switch (response[0].toLowerCase())
-                {
-                    case "page":
-                    {
-                        try
+                        case "back":
                         {
-                            int pageNumber = Integer.parseInt(response[1]);
+                            return "";
+                        }
+                        case "sort":
+                        {
+                            loadMenu.updateFiles(IOTools.getSaveNames());
+                            fileNames = loadMenu.getFileNames();
+                            loadInfo.setStatus("List sorted!");
 
-                            if (pageNumber <= 0)
+                            break;
+                        }
+                        case "load":
+                        {
+                            loadInfo.setStatus("Usage: Load (1-9)");
+
+                            break;
+                        }
+                        case "rename":
+                        {
+                            loadInfo.setStatus("Usage: Rename (1-9)");
+
+                            break;
+                        }
+                        case "delete":
+                        {
+                            loadInfo.setStatus("Usage: Delete (1-9)");
+
+                            break;
+                        }
+                        case "page":
+                        {
+                            loadInfo.setStatus("Usage: Page (num)");
+
+                            break;
+                        }
+                        default:
+                        {
+                            loadInfo.setStatus("Sorry - Unrecognized command");
+
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+                case 2:
+                {
+                    switch (response[0])
+                    {
+                        case "page":
+                        {
+                            int pageNumber;
+
+                            try
+                            {
+                                pageNumber = Integer.parseInt(response[1]);
+                            }
+                            catch (NumberFormatException e)
+                            {
+                                loadInfo.setStatus("Sorry - That's not a number");
+
+                                break;
+                            }
+
+                            if (pageNumber < 1)
                             {
                                 loadInfo.setStatus("Sorry - Page number "+ pageNumber +" too low!");
                             }
@@ -101,161 +139,168 @@ public class LoadManager
                                 loadInfo.setStatus("Page "+ pageNumber +" loaded!");
                                 loadMenu.setPage(pageNumber);
                             }
-                        }
-                        catch (NumberFormatException e)
-                        {
-                            loadInfo.setStatus("Sorry - That's not a number");
-                        }
-
-                        break;
-                    }
-                    case "load":
-                    {
-                        try
-                        {
-                            int saveID = Integer.parseInt(response[1]);
-                            int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
-                            if (fileID < 0 || saveID < 1)
-                            {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too low!");
-                            }
-                            else if (fileID >= fileNames.size() || saveID > 9)
-                            {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too high!");
-                            }
-                            else
-                            {
-                                selectedFile = fileNames.get(fileID);
-                                running = false;
-                            }
 
                             break;
                         }
-                        catch (NumberFormatException e)
+                        case "load":
                         {
-                            loadInfo.setStatus("Sorry - That's not a number");
+                            int[] selection = selectSave(response[1], loadMenu, loadInfo);
+                            int fileID = selection[1];
 
-                            break;
-                        }
-                    }
-                    case "delete":
-                    {
-                        try
-                        {
-                            int saveID = Integer.parseInt(response[1]);
-                            int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
-                            if (fileID < 0 || saveID < 1)
+                            if (fileID < 0)
                             {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too low!");
+                                break;
                             }
-                            else if (fileID >= fileNames.size() || saveID > 9)
+
+                            return fileNames.get(fileID);
+                        }
+                        case "delete":
+                        {
+
+                            int[] selection = selectSave(response[1], loadMenu, loadInfo);
+
+                            int saveID = selection[0];
+                            int fileID = selection[1];
+
+                            if (fileID < 0)
                             {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too high!");
+                                break;
+                            }
+
+                            String saveIDString = (saveID < 999 ? saveID +" " : "");
+
+                            String fileName = fileNames.get(fileID);
+                            String deleteResponse = IOTools.deleteFile(fileName);
+
+                            if (!deleteResponse.isEmpty())
+                            {
+                                loadInfo.setStatus(deleteResponse);
                             }
                             else
                             {
-                                String fileName = fileNames.get(fileID);
-                                String deleteResponse = IOTools.deleteFile(fileName);
+                                fileNames.remove(fileID);
+                                loadMenu.updateFiles(fileNames);
+                                loadInfo.setStatus("-! File "+ saveIDString +" successfully deleted !-");
 
-                                if (deleteResponse.equals(""))
+                                if (loadMenu.getPage() > loadMenu.getMaxPages() && loadMenu.getPage() != 1)
                                 {
-                                    fileNames.remove(fileID);
-                                    loadMenu.updateFiles(fileNames);
-                                    loadInfo.setStatus(" -! File successfully deleted !- ");
-                                    if (loadMenu.getPage() > loadMenu.getMaxPages())
-                                    {
-                                        loadMenu.setPage(loadMenu.getPage() - 1);
-                                    }
+                                    loadMenu.setPage(loadMenu.getPage() - 1);
+                                }
+                            }
+
+                            break;
+                        }
+                        case "rename":
+                        {
+                            int[] selection = selectSave(response[1], loadMenu, loadInfo);
+
+                            int saveID = selection[0];
+                            int fileID = selection[1];
+
+                            if (fileID < 0)
+                            {
+                                break;
+                            }
+
+                            loadInfo.setStatus("Choose a name for save #"+ saveID);
+                            view.setSecondaryPane(loadInfo.draw());
+
+                            while (true)
+                            {
+                                // WIPE SCREEN HERE
+                                view.render();
+
+                                String newFileName = scanner.nextLine();
+
+                                if (newFileName.length() > 32)
+                                {
+                                    loadInfo.setStatus("Sorry - Name too long. Try again");
+                                }
+                                else if (newFileName.equals(fileNames.get(fileID)))
+                                {
+                                    loadInfo.setStatus("Save name already exists. Try again");
                                 }
                                 else
                                 {
-                                    loadInfo.setStatus(deleteResponse);
-                                }
+                                    String renameResponse = IOTools.renameFile(fileNames.get(fileID), newFileName);
 
-                                break;
-                            }
-                        }
-                        catch (NumberFormatException e)
-                        {
-                            loadInfo.setStatus("Sorry - That's not a number");
-
-                            break;
-                        }
-                    }
-                    case "rename":
-                    {
-                        try
-                        {
-                            int saveID = Integer.parseInt(response[1]);
-                            int fileID = (9 * (loadMenu.getPage() - 1)) + saveID - 1;
-                            if (fileID < 0 || saveID < 1)
-                            {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too low!");
-                            }
-                            else if (fileID >= fileNames.size() || saveID > 9)
-                            {
-                                loadInfo.setStatus("Sorry - File number "+ (saveID < 999 ? saveID +" " : "") +"is too high!");
-                            }
-                            else
-                            {
-                                loadInfo.setStatus("Choose a name <= 32 characters long");
-                                view.setSecondaryPane(loadInfo.draw());
-
-                                while (true)
-                                {
-                                    // WIPE SCREEN HERE
-                                    view.render();
-
-                                    String newFileName = scanner.nextLine();
-
-                                    if (newFileName.length() <= 32)
+                                    if (!renameResponse.isEmpty())
                                     {
-                                        if (!newFileName.equals(fileNames.get(fileID)))
+                                        if (renameResponse.equals("abort"))
                                         {
-                                            String renameResponse = IOTools.renameFile(fileNames.get(fileID), newFileName);
-                                            if (renameResponse.equals(""))
-                                            {
-                                                fileNames.set(fileID, newFileName);
-
-                                                break;
-                                            }
-                                            else
-                                            {
-                                                loadInfo.setStatus(renameResponse);
-                                            }
+                                            loadInfo.setStatus("Rename aborted!");
+                                            break;
                                         }
                                         else
                                         {
-                                            loadInfo.setStatus("File name already exists. Try again");
+                                            loadInfo.setStatus(renameResponse);
                                         }
                                     }
                                     else
                                     {
-                                        loadInfo.setStatus("Sorry - File name is too long");
-                                    }
+                                        fileNames.set(fileID, newFileName);
+                                        loadInfo.setStatus("Save #"+ saveID +" renamed!");
 
-                                    view.setSecondaryPane(loadInfo.draw());
+                                        break;
+                                    }
                                 }
+
+                                view.setSecondaryPane(loadInfo.draw());
                             }
 
                             break;
                         }
-                        catch (NumberFormatException e)
+                        default:
                         {
-                            loadInfo.setStatus("Sorry - That's not a number");
-
-                            break;
+                            loadInfo.setStatus("Sorry - Unrecognized command");
                         }
                     }
-                    default:
-                    {
-                        loadInfo.setStatus("Sorry - Unrecognized command");
-                    }
+
+                    break;
+                }
+                default:
+                {
+                    loadInfo.setStatus("Sorry - Unrecognized command");
                 }
             }
 
             view.setPanes(loadMenu.draw(), loadInfo.draw());
         }
-        return selectedFile;
+    }
+
+    private int[] selectSave(String input, LoadMenu menu, LoadInfo info)
+    {
+        try
+        {
+            int saveID = Integer.parseInt(input);
+            int fileID = (9 * (menu.getPage() - 1)) + saveID - 1;
+
+            String saveIDString = (saveID < -99 ? "" : saveID+" ");
+
+            if (saveID < 1)
+            {
+                info.setStatus("Sorry - Save number "+ saveIDString +"is too low!");
+                return new int[]{-1, -1};
+            }
+            else if (saveID > menu.getFileNames().size())
+            {
+                info.setStatus("Sorry - Save number "+ saveIDString +"is too high!");
+                return new int[]{-1, -1};
+            }
+            else if (menu.getFileNames().size() == 0)
+            {
+                info.setStatus("No more saves in list!");
+                return new int[]{-1, -1};
+            }
+            else
+            {
+                return new int[]{saveID,fileID};
+            }
+        }
+        catch(NumberFormatException e)
+        {
+            info.setStatus("Sorry - That's not a number");
+            return new int[]{-1, -1};
+        }
     }
 }
