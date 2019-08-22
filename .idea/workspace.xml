@@ -2,16 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7344a5b5-56d3-44f2-b337-22b757eabd66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/saves/This is an easy game.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/saves/complete game test.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/SuccessPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/saves/ludicrous.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/SaveData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/SaveData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/LoadInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/LoadInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/LoadMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/LoadMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/GameInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/InfoPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/InfoPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanes/LoadInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/LoadInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/NewGame.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanes/LoadMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/LoadMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -23,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
   </component>
