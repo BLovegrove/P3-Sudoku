@@ -1,14 +1,18 @@
 package SudokuCLI;
 
 import FileIO.IOTools;
+import FileIO.SaveData;
 import SudokuCLI.Gameplay.DifficultyLevel;
 import SudokuCLI.Gameplay.GameManager;
 import SudokuCLI.MenuHandlers.LoadManager;
 import SudokuCLI.MenuHandlers.MenuManager;
+import SudokuRenderer.InfoPanels.SuccessPanel;
 import SudokuRenderer.Startup.ViewCalibrator;
+import SudokuRenderer.UtilityPanels.GameBoard;
 import SudokuRenderer.ViewRenderer;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main
 {
@@ -29,14 +33,32 @@ public class Main
         // SET DEFAULT MENU ERROR TO 'NONE'
         String menuError = "";
 
+        // SET GAME COMPLETE FLAG TO FALSE;
+        SaveData save = null;
+        boolean gameComplete = false;
+
         boolean running = true;
         while (running)
         {
+            // CHECK IF GAME IS COMPLETE
+            if (gameComplete)
+            {
+                SuccessPanel successPanel = new SuccessPanel(save);
+                successPanel.setStatus("Press any key to go back to the menu");
+
+                GameBoard gameBoard = new GameBoard(save.getBoard());
+
+                view.setPanels(gameBoard.draw(), successPanel.draw());
+                view.render();
+                String successResponse = new Scanner(System.in).nextLine();
+                gameComplete = false;
+            }
+
             // ASK FOR RESPONSE
             String menuResponse = mainMenu.pickMenuItem(view, menuError);
 
             // INIT EMPTY RESPONSE VAR
-            int menuSelected = 99;
+            int menuSelected = -1;
 
             // EXECUTE RESPONSE
             try
@@ -61,25 +83,29 @@ public class Main
                     }
                     case 1:
                     {
-                        game.newGame(view, DifficultyLevel.EASY);
+                        save = game.newGame(view, DifficultyLevel.EASY);
+                        gameComplete = save.boardComplete();
 
                         break;
                     }
                     case 2:
                     {
-                        game.newGame(view, DifficultyLevel.MEDIUM);
+                        save = game.newGame(view, DifficultyLevel.MEDIUM);
+                        gameComplete = save.boardComplete();
 
                         break;
                     }
                     case 3:
                     {
-                        game.newGame(view, DifficultyLevel.HARD);
+                        save = game.newGame(view, DifficultyLevel.HARD);
+                        gameComplete = save.boardComplete();
 
                         break;
                     }
                     case 4:
                     {
-                        game.newGame(view, DifficultyLevel.LUDICROUS);
+                        save = game.newGame(view, DifficultyLevel.LUDICROUS);
+                        gameComplete = save.boardComplete();
 
                         break;
                     }
@@ -91,14 +117,15 @@ public class Main
 
                         if (!gameID.isEmpty())
                         {
-                            game.loadGame(view, gameID);
+                            save = game.loadGame(view, gameID);
+                            gameComplete = save.boardComplete();
                         }
 
                         break;
                     }
                     default:
                     {
-
+                        break;
                     }
                 }
             }

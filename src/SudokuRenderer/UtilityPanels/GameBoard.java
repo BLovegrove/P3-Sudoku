@@ -1,4 +1,4 @@
-package SudokuRenderer.UtilityPanes;
+package SudokuRenderer.UtilityPanels;
 
 import SudokuRenderer.ViewRenderer;
 
@@ -18,7 +18,7 @@ public class GameBoard
      */
     private String[] boardValues = new String[81];
     /***
-     * Each individual line of the pane to be used in a {@link SudokuRenderer.ViewRenderer}
+     * Each individual line of the panel to be used in a {@link SudokuRenderer.ViewRenderer}
      */
     private String[] boardLines;
 

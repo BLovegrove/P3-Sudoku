@@ -3,70 +3,70 @@ package SudokuRenderer;
 public class ViewRenderer
 {
     /***
-     * The 20-line-deep String[] array that makes up the full game graphic (combined {@link #primaryPane} and<br>
-     * {@link #secondaryPane})
+     * The 20-line-deep String[] array that makes up the full game graphic (combined {@link #primaryPanel} and<br>
+     * {@link #secondaryPanel})
      */
     private String[] view = new String[20];
     /***
-     * The left hand side view window pane that makes up the total game {@link #view}
+     * The left hand side view window panel that makes up the total game {@link #view}
      */
-    private String[] primaryPane = new String[20];
+    private String[] primaryPanel = new String[20];
     /***
-     * The right hand side view window pane that makes up the total game {@link #view}
+     * The right hand side view window panel that makes up the total game {@link #view}
      */
-    private String[] secondaryPane = new String[20];
+    private String[] secondaryPanel = new String[20];
 
     /***
      * Simple method to iterate through each line (item) of the {@link #view} and equate it to the combined <br>
-     * {@link #primaryPane} and {@link #secondaryPane}
+     * {@link #primaryPanel} and {@link #secondaryPanel}
      */
     private void update()
     {
         for (int i = 0; i < 20; i++)
         {
-            this.view[i] = this.primaryPane[i] + this.secondaryPane[i];
+            this.view[i] = this.primaryPanel[i] + this.secondaryPanel[i];
         }
     }
 
     /***
-     * Set the left-hand-side pane for the next draw
-     * @param pane The String[] array to override the current {@link #primaryPane}
+     * Set the left-hand-side panel for the next draw
+     * @param panel The String[] array to override the current {@link #primaryPanel}
      */
-    public void setPrimaryPane(String[] pane)
+    public void setPrimaryPanel(String[] panel)
     {
-        this.primaryPane = pane;
+        this.primaryPanel = panel;
         update();
     }
 
     /***
-     * Set the right-hand-side pane for the next draw
-     * @param pane The String[] array to override the current {@link #secondaryPane}
+     * Set the right-hand-side panel for the next draw
+     * @param panel The String[] array to override the current {@link #secondaryPanel}
      */
-    public void setSecondaryPane(String[] pane)
+    public void setSecondaryPanel(String[] panel)
     {
-        this.secondaryPane = pane;
+        this.secondaryPanel = panel;
         update();
     }
 
     /***
-     * Sets both left and right window panes for the next draw
-     * @param primaryPane The String[] array to override the current {@link #primaryPane}
-     * @param secondaryPane The String[] array to override the current {@link #secondaryPane}
+     * Sets both left and right window panels for the next draw
+     * @param primaryPanel The String[] array to override the current {@link #primaryPanel}
+     * @param secondaryPanel The String[] array to override the current {@link #secondaryPanel}
      */
-    public void setPanes(String[] primaryPane, String[] secondaryPane)
+    public void setPanels(String[] primaryPanel, String[] secondaryPanel)
     {
-        this.primaryPane = primaryPane;
-        this.secondaryPane = secondaryPane;
+        this.primaryPanel = primaryPanel;
+        this.secondaryPanel = secondaryPanel;
         update();
     }
 
     /***
-     * Allows direct alteration of the entire view array on one go, instead of a single view pane
-     * @param fullScreenPane The String[] array to ovveride the current {@link #view}
+     * Allows direct alteration of the entire view array on one go, instead of a single view panel
+     * @param fullScreenPanel The String[] array to override the current {@link #view}
      */
-    public void setView(String[] fullScreenPane)
+    public void setView(String[] fullScreenPanel)
     {
-        this.view = fullScreenPane;
+        this.view = fullScreenPanel;
     }
 
     /***

@@ -34,7 +34,7 @@ public class MainMenu
 
     /***
      * Returns the sudoku game's main menu graphic
-     * @return String[] representing the main menu's pane for use in a {@link SudokuRenderer.ViewRenderer}
+     * @return String[] representing the main menu's panel for use in a {@link SudokuRenderer.ViewRenderer}
      */
     public String[] draw()
     {

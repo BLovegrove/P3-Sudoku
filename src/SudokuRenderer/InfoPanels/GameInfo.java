@@ -1,10 +1,10 @@
-package SudokuRenderer.InfoPanes;
+package SudokuRenderer.InfoPanels;
 
 /***
  * The information panel to provide the user with commands to use when playing the sudoku game, as well as response<br>
  * from the system via the status message
  */
-public class GameInfo extends InfoPane
+public class GameInfo extends InfoPanel
 {
     /***
      * Standard constructor to instantiate Board's version of the InfoPanel layout

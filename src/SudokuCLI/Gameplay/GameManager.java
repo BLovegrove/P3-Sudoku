@@ -4,8 +4,8 @@ import FileIO.IOTools;
 import FileIO.SaveData;
 import SudokuCLI.SudokuTools;
 import SudokuGen.Generator;
-import SudokuRenderer.InfoPanes.GameInfo;
-import SudokuRenderer.UtilityPanes.GameBoard;
+import SudokuRenderer.InfoPanels.GameInfo;
+import SudokuRenderer.UtilityPanels.GameBoard;
 import SudokuRenderer.ViewRenderer;
 
 import java.io.File;
@@ -15,7 +15,7 @@ import java.util.Scanner;
 
 public class GameManager
 {
-    public boolean newGame(ViewRenderer view, DifficultyLevel difficulty)
+    public SaveData newGame(ViewRenderer view, DifficultyLevel difficulty)
     {
         // SETUP USER INPUT FOR GAME NAME
         Scanner scanner = new Scanner(System.in);
@@ -62,7 +62,7 @@ public class GameManager
         }
     }
 
-    public boolean loadGame(ViewRenderer view, String saveName)
+    public SaveData loadGame(ViewRenderer view, String saveName)
     {
 
         // GET SAVE FILE FOR GAME
@@ -76,7 +76,7 @@ public class GameManager
         gameInfo.setStatus("Board loaded. Ready to play!");
 
         // INIT VIEW WINDOW
-        view.setPanes(gameBoard.draw(), gameInfo.draw());
+        view.setPanels(gameBoard.draw(), gameInfo.draw());
 
 
         // INIT USER INPUT
@@ -91,7 +91,8 @@ public class GameManager
             // CHECK IF THE GAME IS COMPLETE
             if (gameData.boardComplete())
             {
-                return true;
+                gameData.save();
+                return gameData;
             }
 
             // (RE)DRAW VIEW WINDOW
@@ -128,7 +129,7 @@ public class GameManager
                         case "restart":
                         {
                             gameInfo.setStatus("Confirm? (Press Y to restart)");
-                            view.setSecondaryPane(gameInfo.draw());
+                            view.setSecondaryPanel(gameInfo.draw());
 
                             view.render();
 
@@ -160,21 +161,17 @@ public class GameManager
                         case "exit":
                         {
                             gameInfo.setStatus("Any key to save, N to skip saving");
-                            view.setSecondaryPane(gameInfo.draw());
+                            view.setSecondaryPanel(gameInfo.draw());
 
                             view.render();
 
                             String saveGame = scanner.nextLine().toLowerCase();
 
-                            if (saveGame.equals("y"))
-                            {
-                                return gameData.boardComplete();
-                            }
-                            else
+                            if (!saveGame.startsWith("n"))
                             {
                                 gameData.save();
-                                return gameData.boardComplete();
                             }
+                            return gameData;
                         }
                         case "fill":
                         {
@@ -228,7 +225,7 @@ public class GameManager
 
                             gameData.setCellValue(row, col, -1);
 
-                            view.setPanes(gameBoard.draw(), gameInfo.draw());
+                            view.setPanels(gameBoard.draw(), gameInfo.draw());
 
                             while (true)
                             {
@@ -266,7 +263,7 @@ public class GameManager
                                         gameInfo.setStatus(cellFillResponse);
                                     }
 
-                                    view.setSecondaryPane(gameInfo.draw());
+                                    view.setSecondaryPanel(gameInfo.draw());
                                 }
                             }
                         }
@@ -296,11 +293,11 @@ public class GameManager
                 }
             }
 
-            view.setPanes(gameBoard.draw(), gameInfo.draw());
+            view.setPanels(gameBoard.draw(), gameInfo.draw());
         }
     }
 
-    private int[] AlphaNumToRowCol(String alphaNumCoordinate, GameInfo infoPane)
+    private int[] AlphaNumToRowCol(String alphaNumCoordinate, GameInfo infoPanel)
     {
         int[] coordinate = new int[]{-1, -1};
 
@@ -314,12 +311,12 @@ public class GameManager
             }
             else
             {
-                infoPane.setStatus("Sorry - Row number not 1 to 9");
+                infoPanel.setStatus("Sorry - Row number not 1 to 9");
             }
         }
         catch (IllegalArgumentException e)
         {
-            infoPane.setStatus("Sorry - Row "+ rowLabel +" not found");
+            infoPanel.setStatus("Sorry - Row "+ rowLabel +" not found");
         }
 
         String columnLabel = ""+ alphaNumCoordinate.charAt(1);
@@ -333,12 +330,12 @@ public class GameManager
             }
             else
             {
-                infoPane.setStatus("Sorry - Column number not 1 to 9");
+                infoPanel.setStatus("Sorry - Column number not 1 to 9");
             }
         }
         catch (NumberFormatException e)
         {
-            infoPane.setStatus("Sorry - Column "+ columnLabel +" not found");
+            infoPanel.setStatus("Sorry - Column "+ columnLabel +" not found");
         }
 
         return coordinate;

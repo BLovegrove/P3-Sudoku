@@ -1,4 +1,4 @@
-package SudokuRenderer.UtilityPanes;
+package SudokuRenderer.UtilityPanels;
 
 import SudokuRenderer.ViewRenderer;
 
@@ -22,7 +22,7 @@ public class LoadMenu
      */
     private int maxPages;
     /***
-     * Each individual line of the menu's pane stored as an array
+     * Each individual line of the menu's panel stored as an array
      */
     private String[] menuLines = new String[20];
 
@@ -130,7 +130,7 @@ public class LoadMenu
 
     /***
      * Draws / re-draws all the current list items and constructs it into a String[] array
-     * @return The String[] array representing the LoadMenu's pane for use in a {@link ViewRenderer}
+     * @return The String[] array representing the LoadMenu's panel for use in a {@link ViewRenderer}
      */
     public String[] draw()
     {

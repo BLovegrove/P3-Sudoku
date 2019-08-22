@@ -1,13 +1,12 @@
 package SudokuCLI.MenuHandlers;
 import FileIO.*;
 
-import SudokuRenderer.InfoPanes.LoadInfo;
-import SudokuRenderer.UtilityPanes.LoadMenu;
+import SudokuRenderer.InfoPanels.LoadInfo;
+import SudokuRenderer.UtilityPanels.LoadMenu;
 import SudokuRenderer.ViewRenderer;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /***
  * Manages the user input for the {@link LoadMenu} stage of the SudokuCLI game
@@ -37,7 +36,7 @@ public class LoadManager
         }
 
         // INIT VIEW WINDOW
-        view.setPanes(loadMenu.draw(), loadInfo.draw());
+        view.setPanels(loadMenu.draw(), loadInfo.draw());
 
         // SETUP SCANNER FOR USER INPUT
         Scanner scanner = new Scanner(System.in);
@@ -203,7 +202,7 @@ public class LoadManager
                             }
 
                             loadInfo.setStatus("Choose a name for save #"+ saveID);
-                            view.setSecondaryPane(loadInfo.draw());
+                            view.setSecondaryPanel(loadInfo.draw());
 
                             while (true)
                             {
@@ -245,7 +244,7 @@ public class LoadManager
                                     }
                                 }
 
-                                view.setSecondaryPane(loadInfo.draw());
+                                view.setSecondaryPanel(loadInfo.draw());
                             }
 
                             break;
@@ -264,7 +263,7 @@ public class LoadManager
                 }
             }
 
-            view.setPanes(loadMenu.draw(), loadInfo.draw());
+            view.setPanels(loadMenu.draw(), loadInfo.draw());
         }
     }
 
