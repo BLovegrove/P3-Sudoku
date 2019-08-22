@@ -1,8 +1,10 @@
 package FileIO;
 
+import SudokuCLI.Gameplay.DifficultyLevel;
+
 /***
  * An object based representation of all the data required to resume a saved game of SudokuCLI<br>
- * In this case (so far), Reference board @reference, Active board @board, And number of attempts so far @attempts
+ * In this case (so far), Reference board @reference, Active board @board, And number of moves so far @moves
  */
 public class SaveData
 {
@@ -19,9 +21,11 @@ public class SaveData
      */
     private int[][] board;
     /***
-     * Keeps track of hwo many times the player has tried to solve a cell (successful or not)
+     * Keeps track of how many times the player has tried to change a cell (successful or not)
      */
-    private int attempts;
+    private int moves;
+
+    private DifficultyLevel difficulty;
     /***
      * The error message (if any) returned when constructing the save file object either new or loaded form file
      */
@@ -32,14 +36,15 @@ public class SaveData
      * @param boardName File name of the board - extension
      * @param reference Reference board 2D array
      * @param board In-progress board 2D array
-     * @param attempts Number of attempts taken so far
+     * @param moves Number of moves taken so far
      */
-    public SaveData(String boardName, int[][] reference, int[][] board, int attempts)
+    public SaveData(String boardName, int[][] reference, int[][] board, int moves, DifficultyLevel difficulty)
     {
-        this.boardName = boardName;
+        this.boardName = boardName.toLowerCase();
         this.reference = reference;
         this.board = board;
-        this.attempts = attempts;
+        this.moves = moves;
+        this.difficulty = difficulty;
     }
 
     /***
@@ -79,21 +84,36 @@ public class SaveData
     }
 
     /***
-     * Standard getter for {@link #attempts}
-     * @return {@link #attempts}
+     * Standard getter for {@link #moves}
+     * @return {@link #moves}
      */
-    public int getAttempts()
+    public int getMoves()
     {
-        return attempts;
+        return moves;
     }
 
     /***
-     * Standard setter for {@link #attempts}
-     * @param attempts Integer to replace current number of user attempts
+     * Standard setter for {@link #moves}
+     * @param moves Integer to replace current number of user moves
      */
-    public void setAttempts(int attempts)
+    public void setMoves(int moves)
     {
-        this.attempts = attempts;
+        this.moves = moves;
+    }
+
+    public void addMove()
+    {
+        this.moves++;
+    }
+
+    public void setDifficulty(DifficultyLevel difficulty)
+    {
+        this.difficulty = difficulty;
+    }
+
+    public DifficultyLevel getDifficulty()
+    {
+        return difficulty;
     }
 
     /***
@@ -114,11 +134,21 @@ public class SaveData
         this.errorMessage = errorMessage;
     }
 
+    public void setCellValue(int row, int col, int value)
+    {
+        this.board[row][col] = value;
+    }
+
     /***
      * Allows easy saving of the current SaveData instance
      */
     public void save()
     {
         IOTools.saveFile(this);
+    }
+
+    public boolean boardComplete()
+    {
+        return (this.reference == this.board);
     }
 }

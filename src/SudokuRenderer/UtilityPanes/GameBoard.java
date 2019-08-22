@@ -46,6 +46,10 @@ public class GameBoard
                 {
                     this.boardValues[(i * 9) + j] = " ";
                 }
+                else if (this.board[i][j] == -1)
+                {
+                    this.boardValues[(i * 9) + j] = "╳";
+                }
                 else
                 {
                     this.boardValues[(i * 9) + j] = this.board[i][j] + "";
@@ -86,6 +90,11 @@ public class GameBoard
                 (Object[]) this.boardValues
 
         ).split(",");
+    }
+
+    public void update(int[][] newBoard)
+    {
+        this.board = newBoard;
     }
 
     /***

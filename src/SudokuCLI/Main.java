@@ -1,7 +1,10 @@
 package SudokuCLI;
 
-import SudokuCLI.Managers.LoadManager;
-import SudokuCLI.Managers.MenuManager;
+import FileIO.IOTools;
+import SudokuCLI.Gameplay.DifficultyLevel;
+import SudokuCLI.Gameplay.GameManager;
+import SudokuCLI.MenuHandlers.LoadManager;
+import SudokuCLI.MenuHandlers.MenuManager;
 import SudokuRenderer.Startup.ViewCalibrator;
 import SudokuRenderer.ViewRenderer;
 
@@ -11,18 +14,14 @@ public class Main
 {
     public static void main(String[] args)
     {
-        ArrayList<String> TEST_FILES = new ArrayList<>();
-
-        for (int i = 1; i <= 19; i++)
-        {
-            TEST_FILES.add(String.format("Test File %1s", i));
-        }
-
         // CALIBRATE WINDOW : HEIGHT 20 LINES (-2 for status message)
         ViewCalibrator.calibrate(18);
 
         // CREATE MAIN MENU
         MenuManager mainMenu = new MenuManager();
+
+        // CREATE GAME INSTANCE
+        GameManager game = new GameManager();
 
         // CREATE RENDERER
         ViewRenderer view = new ViewRenderer();
@@ -33,17 +32,26 @@ public class Main
         boolean running = true;
         while (running)
         {
-            // WIPE SCREEN HERE
-
             // ASK FOR RESPONSE
             String menuResponse = mainMenu.pickMenuItem(view, menuError);
+
+            // INIT EMPTY RESPONSE VAR
+            int menuSelected = 99;
 
             // EXECUTE RESPONSE
             try
             {
-                int menuSelected = Integer.parseInt(menuResponse);
+                menuSelected = Integer.parseInt(menuResponse);
                 menuError = "";
+            }
+            catch (NumberFormatException e)
+            {
+                // SET NEW MENU ERROR FOR NEXT LOOP
+                menuError = menuResponse;
+            }
 
+            if (menuError.isEmpty())
+            {
                 switch (menuSelected)
                 {
                     case 0:
@@ -53,42 +61,46 @@ public class Main
                     }
                     case 1:
                     {
-                        // START NEW EASY GAME
+                        game.newGame(view, DifficultyLevel.EASY);
+
                         break;
                     }
                     case 2:
                     {
-                        // START NEW NORMAL GAME
+                        game.newGame(view, DifficultyLevel.MEDIUM);
+
                         break;
                     }
                     case 3:
                     {
-                        // START NEW HARD GAME WITH LUDICROUS = FALSE
+                        game.newGame(view, DifficultyLevel.HARD);
+
                         break;
                     }
                     case 4:
                     {
-                        // START NEW HARD GAME WITH LUDICROUS = TRUE
+                        game.newGame(view, DifficultyLevel.LUDICROUS);
+
                         break;
                     }
                     case 5:
                     {
                         LoadManager loadManager = new LoadManager();
-                        String gameID = loadManager.loadGame(view, TEST_FILES);
+                        ArrayList<String> fileNames = IOTools.getSaveNames();
+                        String gameID = loadManager.loadGame(view, fileNames);
 
                         if (!gameID.isEmpty())
                         {
-                            // LOAD GAME BASED ON SAVE DATA IN ./saves/gameID.txt
+                            game.loadGame(view, gameID);
                         }
 
                         break;
                     }
+                    default:
+                    {
+
+                    }
                 }
-            }
-            catch (NumberFormatException e)
-            {
-                // SET NEW MENU ERROR FOR NEXT LOOP
-                menuError = menuResponse;
             }
         }
     }

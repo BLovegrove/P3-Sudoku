@@ -1,10 +1,9 @@
-package SudokuCLI.Managers;
+package SudokuCLI.MenuHandlers;
 
 import SudokuRenderer.Startup.MainMenu;
 import SudokuRenderer.ViewRenderer;
 
 import java.util.Scanner;
-import java.util.regex.Pattern;
 
 /***
  * Manages the user input processing and error reporting for the {@link MainMenu} stage of the SudokuCLI game
@@ -28,11 +27,13 @@ public class MenuManager
         // SET UP SCANNER
         Scanner scanner = new Scanner(System.in);
 
+        // WIPE SCREEN HERE
+
         // (RE)DRAW THE VIEW WINDOW
         view.render();
 
         // PRINT ERROR IF ONE EXISTS
-        if (!menuErrorMessage.equals(""))
+        if (!menuErrorMessage.isEmpty())
         {
             System.out.println(menuErrorMessage+ ". Try again ↴");
         }
@@ -41,7 +42,7 @@ public class MenuManager
         String response = scanner.nextLine();
 
         // PROCESS USER INPUT
-        if (response.length() == 1 && Pattern.compile("(?<!\\S)\\d(?!\\S)").matcher(response).matches())
+        if (response.length() == 1)
         {
             try {
                 int menuItem = Integer.parseInt(response);
@@ -57,7 +58,7 @@ public class MenuManager
             }
             catch (NumberFormatException e)
             {
-                return "FATAL ERROR: NON-NUMBER GOT PAST REGEX";
+                return "Sorry - Command not recognised";
             }
         }
         else

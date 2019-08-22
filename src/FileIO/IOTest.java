@@ -40,17 +40,17 @@ public class IOTest
         System.out.println("Save data reference: ");
         System.out.println(Arrays.toString(reference[0]));
 
-        System.out.println("Save attempts: ");
-        System.out.println(saveData.getAttempts());
+        System.out.println("Save moves: ");
+        System.out.println(saveData.getMoves());
 
-        if (!saveData.getErrorMessage().equals(""))
+        if (!saveData.getErrorMessage().isEmpty())
         {
             System.out.println("Save error message: ");
             System.out.println(saveData.getErrorMessage());
         }
 
         String deleteStatus = IOTools.deleteFile("test");
-        if (!deleteStatus.equals(""))
+        if (!deleteStatus.isEmpty())
         {
             System.out.println("Deletion error: ");
             System.out.println(deleteStatus);
@@ -59,8 +59,7 @@ public class IOTest
         System.out.println("File count after deleting test file: ");
         System.out.println(IOTools.fileCount());
 
-        Generator gen = new Generator();
-        int[][] newBoard = gen.getBoard();
+        int[][] newBoard = new Generator().generate();
 
         saveData.setBoard(newBoard);
         saveData.setReference(newBoard);

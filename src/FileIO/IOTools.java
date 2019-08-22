@@ -1,12 +1,19 @@
 package FileIO;
 
+import SudokuCLI.Gameplay.DifficultyLevel;
+
 import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class IOTools
 {
-    /***\
+    /***
      * The directory that stores save text
      */
     public final static File SAVE_DIR = new File("./saves");
@@ -23,8 +30,11 @@ public class IOTools
         // ITERATE TO FILL LIST WITH FILE NAMES
         // requireNonNull added by IDE to stave off warnings
         for (File file : Objects.requireNonNull(SAVE_DIR.listFiles())) {
-            files.add(file.getName());
+            String fileName = file.getName();
+            files.add(fileName.substring(0, fileName.length() - 4));
         }
+
+        Collections.sort(files);
 
         return files;
     }
@@ -45,28 +55,23 @@ public class IOTools
         return count;
     }
 
-    /***
-     * Attempts to create a temporary file using given name to validate said name as a 'legal' file name
-     * @param fileName The new file name that needs to be validated
-     * @return True/False based on whether the name is valid or invalid (incorrect name / name already exists)
-     */
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    public static boolean isNameValid(String fileName)
-    {
-        File file = new File(fileName);
-
-        try
-        {
-            // CHECKS IF ACTUAL SAVED FILE NAME MATCHES ORIGINAL GIVEN ONE
-            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
-            file.delete();
-            return isValid;
-        }
-        catch (IOException e)
-        {
-            return false;
-        }
-    }
+//    @SuppressWarnings("ResultOfMethodCallIgnored")
+//    public static boolean isNameValid(String fileName)
+//    {
+//        File file = new File(fileName);
+//
+//        try
+//        {
+//            // CHECKS IF ACTUAL SAVED FILE NAME MATCHES ORIGINAL GIVEN ONE
+//            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
+//            file.delete();
+//            return isValid;
+//        }
+//        catch (IOException e)
+//        {
+//            return false;
+//        }
+//    }
 
     /***
      * Retrieves all the data from a given save file name and creates a saveData instance from it
@@ -78,10 +83,10 @@ public class IOTools
         // INIT SAVE VARIABLES
         int[][] reference = new int[9][9];
         int[][] board = new int[9][9];
-        int attempts = 0;
+        int moves = 0;
 
         // INIT EMPTY SAVE
-        SaveData saveData = new SaveData(fileName, reference, board, attempts);
+        SaveData saveData = new SaveData(fileName, reference, board, moves, DifficultyLevel.NONE);
 
         // INIT FILE READER
         BufferedReader reader;
@@ -158,16 +163,37 @@ public class IOTools
             line = reader.readLine();
             if (line != null)
             {
-                // CHECK FOR ATTEMPTS FLAG AND TAKE NEXT LINE AS NUMBER OF ATTEMPTS
-                if (line.equals("@attempts"))
+                // CHECK FOR MOVES FLAG AND TAKE NEXT LINE AS NUMBER OF MOVES
+                if (line.equals("@moves"))
                 {
                     try
                     {
-                        saveData.setAttempts(Integer.parseInt(reader.readLine()));
+                        saveData.setMoves(Integer.parseInt(reader.readLine()));
                     }
                     catch (NumberFormatException e)
                     {
-                        saveData.setErrorMessage("Save corrupt! attempts was ! number");
+                        saveData.setErrorMessage("Save corrupt! moves was ! number");
+                    }
+                }
+                else
+                {
+                    saveData.setErrorMessage("No attempt count found in file!");
+                }
+            }
+
+            line = reader.readLine();
+            if (line != null)
+            {
+                // CHECK FOR DIFFICULTY FLAG AND TAKE NEXT LINE AS DIFFICULTY
+                if (line.equals("@difficulty"))
+                {
+                    try
+                    {
+                        saveData.setDifficulty(DifficultyLevel.valueOf(reader.readLine()));
+                    }
+                    catch (NumberFormatException e)
+                    {
+                        saveData.setErrorMessage("Save corrupt! no valid difficulty!");
                     }
                 }
                 else
@@ -213,8 +239,27 @@ public class IOTools
      * @param oldFileName The name of the file to target for renaming
      * @param newFileName The new file name to overwrite current file name
      */
-    public static void renameFile(String oldFileName, String newFileName)
+    public static String renameFile(String oldFileName, String newFileName)
     {
+        if (newFileName.isEmpty())
+        {
+            return "abort";
+        }
+
+        try
+        {
+            Path target = Paths.get(SAVE_DIR +"/"+ oldFileName +".txt");
+            Files.move(target, target.resolveSibling(newFileName +".txt"));
+            return "";
+        }
+        catch (FileAlreadyExistsException e)
+        {
+            return "Sorry - Name taken. Try again";
+        }
+        catch (IOException e)
+        {
+            return "Sorry - Name invalid. Try again";
+        }
 
     }
 
@@ -259,9 +304,13 @@ public class IOTools
                 writer.write(line + System.lineSeparator());
             }
 
-            // WRITE ATTEMPTS FLAG AND CORRESPONDING VALUE IN NEXT 2 LINES
-            writer.write("@attempts"+ System.lineSeparator());
-            writer.write(saveData.getAttempts() +"");
+            // WRITE moves FLAG AND CORRESPONDING VALUE IN NEXT LINE
+            writer.write("@moves"+ System.lineSeparator());
+            writer.write(saveData.getMoves() +""+ System.lineSeparator());
+
+            //WRITE DIFFICULTY FLAG AND CORRESPONDING DIFFICULTY IN NEXT LINE
+            writer.write("@difficulty"+ System.lineSeparator());
+            writer.write(saveData.getDifficulty().toString());
 
             writer.close();
         }

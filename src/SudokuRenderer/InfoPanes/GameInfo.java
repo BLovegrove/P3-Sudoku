@@ -9,23 +9,23 @@ public class GameInfo extends InfoPane
     /***
      * Standard constructor to instantiate Board's version of the InfoPanel layout
      */
-    public GameInfo()
+    public GameInfo(String gameName)
     {
         super(
+            String.format("  Save : %-35s,", gameName) +
             "  ╔════════════════════════════════════════╗," +
             "  ║       Commands Menu & Status Bar       ║," +
             "  ╠════════════════════════════════════════╣," +
             "  ║ Fill (A-I)(1-9) : e.g. Fill A1         ║," +
-            "  ║  ↳ Fills a cell                        ║," +
+            "  ║  ↳ Fills a cell. 'C' to cancel fill    ║," +
             "  ║ Clear (A-I)(1-9) : e.g. Clear D8       ║," +
             "  ║  ↳ Clears the value of a cell          ║," +
-            "  ║ Undo / Redo                            ║," +
-            "  ║  ↳ Undoes / Re-does your last move     ║," +
+            "  ║ Undo                                   ║," +
+            "  ║  ↳ Undoes your last board move         ║," +
             "  ║ Restart                                ║," +
             "  ║  ↳ Restarts the game with a new board  ║," +
             "  ║ Save                                   ║," +
             "  ║  ↳ Saves your board to play later      ║," +
-            "  ║                                        ║," +
             "  ║                                        ║," +
             "  ║ Exit                                   ║," +
             "  ║  ↳ Exits the game to the main menu     ║," +

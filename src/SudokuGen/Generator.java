@@ -3,7 +3,6 @@ package SudokuGen;
 import SudokuCLI.SudokuTools;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -13,150 +12,25 @@ import java.util.Random;
 public class Generator
 {
     /***
-     * The uninitialised 2D array that represents the Sudoku board
-     */
-    private int[][] board;
-    /***
-     * The uninitialised {@code ArrayList<Integer>} that contains each cells potential values for testing
-     */
-    private ArrayList<List<Integer>> cellValues;
-    /***
      * The boolean to keep track of whether or not a valid board has been produced by {@link #generate()}
      */
     private boolean boardFinished = false;
 
     /***
-     * Standard default constructor to automatically generate and populate a Sudoku board into a 2D array when called
+     * The master list that stores all current potential cell values for all cells
      */
-    public Generator()
-    {
-        this.board = new int[9][9];
-        this.cellValues =  new ArrayList<>();
-        this.generate();
-    }
+    private ArrayList<List<Integer>> cellValues = new ArrayList<>();
 
     /***
      * Iterates 81 times to produce a full list of size 81 {@code List<Integer>} elements with randomised order using
      * {@link SudokuTools#shuffledNine()}.
      */
-    private void populateCellValues()
+    private static void populateCellValues(ArrayList<List<Integer>> cellValues)
     {
         for (int i = 0; i < 81; i++)
         {
             cellValues.add(SudokuTools.shuffledNine());
         }
-    }
-
-    /***
-     * Part of the Sudoku solving algorithm to generate a complete board before reducing it to a game-ready board.<br>
-     * This part handles scanning a row in the board for a given row to determine if there is any duplicity.
-     * @param row The row in the Sudoku grid that needs to be checked for the specified value
-     * @param value The value that has to be searched for in the row for duplicity
-     * @return A true/false for whether or not the value exists in the given row
-     */
-    private boolean rowValid(int row, int value)
-    {
-        for (int i = 0; i < this.board[row].length; i++)
-        {
-            if (this.board[row][i] == value)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /***
-     * Part of the Sudoku solving algorithm to generate a complete board before reducing it to a game-ready board.<br>
-     * This part handles scanning a column (col) in the board for a given value to determine if there is any duplicity.
-     * @param col The column (col) in the Sudoku grid that needs to be checked for the specified value
-     * @param value The value that has to be searched for in the column (col) for duplicity
-     * @return A true/false for whether or not the value exists in the given column (col)
-     */
-    private boolean columnValid(int col, int value)
-    {
-        for (int i = 0; i < this.board.length; i++)
-        {
-            if (this.board[i][col] == value)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /***
-     * Used to find a sub-row and sub-column position of a 3 x 3 area of cells in a Sudoku board grid,
-     * based on the row and col position of an individual cell.
-     * @param row The row of the individual cell inside one of 9 sub-grid.
-     * @param col The column of the individual cell inside one of 9 sub-grid.
-     * @return An int[] containing sub-row ([0]) and sub-column ([1]) position of the individual cell being searched for.
-     */
-    private int[] findSubSection(int row, int col)
-    {
-        int[] subSection = new int[2];
-
-        if (row >= 3 && row < 6)
-        {
-            subSection[0] = 1;
-        }
-        else if (row >= 6 && row < 9)
-        {
-            subSection[0] = 2;
-        }
-
-        if (col >= 3 && col < 6)
-        {
-            subSection[1] = 1;
-        }
-        else if (col >= 6 && col < 9)
-        {
-            subSection[1] = 2;
-        }
-
-        return subSection;
-    }
-
-    /***
-     * Part of the Sudoku solving algorithm to generate a complete board before reducing it to a game-ready board.<br>
-     * This part handles scanning a 3 x 3 sub-section in the board for a given value to determine if there is any duplicity.
-     * @param row The row in the Sudoku board that contains the cell in question
-     * @param col The column in the Sudoku board that contains the cell in question
-     * @param value The integer value (from 1 to 9 inclusive) of the cell in question
-     * @return A true/false for whether or not the value exists in its subsection
-     * (determined by {@link #findSubSection(int, int)}).
-     */
-    private boolean subsectionValid(int row, int col, int value)
-    {
-        int[] subSection = findSubSection(row, col);
-
-        for (int i = (subSection[0] * 3); i < ((subSection[0] * 3) + 3); i++)
-        {
-            for (int j = (subSection[1] * 3); j < ((subSection[1] * 3) + 3); j++)
-            {
-                if (value == this.board[i][j])
-                {
-                    return false;
-                }
-            }
-        }
-
-        return true;
-    }
-
-    /***
-     * Method to combine the boolean outputs of the three validation methods ({@link #rowValid(int, int)},
-     * {@link #columnValid(int, int)}, {@link #subsectionValid(int, int, int)}) that define the rules of a Sudoku board.
-     * @param row The row in the Sudoku board that contains the cell in question
-     * @param col The column in the Sudoku board that contains the cell in question
-     * @param value The integer value (from 1 to 9 inclusive) of the cell in question
-     * @return A true/false depending on the combined outcome of the three methods mentioned in the description.
-     */
-    private boolean cellValid(int row, int col, int value)
-    {
-        return rowValid(row, value) && columnValid(col, value) && subsectionValid(row, col, value);
     }
 
     /***
@@ -183,69 +57,69 @@ public class Generator
     }
 
     /***
-     * Triggered when all values possible in a cell have been used - calls the {@link #solveCell(int, int, boolean)}
+     * Triggered when all values possible in a cell have been used - calls the {@link #solveCell(int[][], int, int, boolean)}
      * method on the previous cell and passes the firstTry bool as false to indicate the cell is being visited
      * at least once more.
-     * The opposite to {@link #nextCell(int row, int col)}.
+     * The opposite to {@link #nextCell(int row, int col, int[][])}.
      * @param row The current row that the cell is part of
      * @param col The current column that the cell is part of
      */
-    private void backtrack(int row, int col)
+    private void backtrack(int row, int col, int[][] board)
     {
         if (row == 0)
         {
             if (col == 0)
             {
-                solveCell(0,0, false);
+                solveCell(board, 0, 0, false);
             }
             else
             {
-                solveCell(row, col - 1, false);
+                solveCell(board, row, col - 1, false);
             }
         }
         else
         {
             if (col == 0)
             {
-                solveCell(row - 1, 8, false);
+                solveCell(board, row - 1, 8, false);
             }
             else
             {
-                solveCell(row, col - 1, false);
+                solveCell(board, row, col - 1, false);
             }
         }
     }
 
     /***
-     * Triggered when a legal value is found for a cell on the board. Calls the {@link #solveCell(int, int, boolean)}
+     * Triggered when a legal value is found for a cell on the board. Calls the {@link #solveCell(int[][], int, int, boolean)}
      * method on the next cell and passes the firstTry boolean as true to indicate the cell is being altered for the
      * first time.
-     * The opposite to {@link #backtrack(int row, int col)}.
+     * The opposite to {@link #backtrack(int row, int col, int[][] board)}.
      * @param row The current row that the cell is part of
      * @param col The current column that the cell is part of
      */
-    private void nextCell(int row, int col)
+    private void nextCell(int row, int col, int[][] board)
     {
         if (row == 8)
         {
             if (col != 8)
             {
-                solveCell(row, col + 1, true);
+                solveCell(board, row, col + 1, true);
             }
             else
             {
-                solveCell(8, 8, true);
+                solveCell(board, 8, 8, true);
             }
         }
         else
         {
             if (col == 8)
             {
-                solveCell(row + 1, 0, true);
+                solveCell(board, row + 1, 0, true);
             }
             else
             {
-                solveCell(row, col + 1, true);
+                solveCell(board, row, col + 1, true);
             }
         }
     }
@@ -265,22 +139,22 @@ public class Generator
      * The primary method of the SudokuGen class. This method recursively checks all numbers 1-9 inclusive
      * (stored in a LinkedList and randomised with {@link java.util.Collections#shuffle(List, Random)} until it
      * finds a valid number based on sudoku's row/column/3x3 subsection rules. If a valid number is found, it places
-     * it in the current cell and continues with {@link #nextCell(int, int)} - if not, it recreates the cells number
+     * it in the current cell and continues with {@link #nextCell(int, int, int[][])} - if not, it recreates the cells number
      * list (newly randomised) and tries the same process on the previous cell. During this, any time a number is
      * tested for the cell (valid or invalid) it is removed from that cells number list until triggering a
-     * {@link #backtrack(int, int)} when empty.
+     * {@link #backtrack(int, int, int[][])} when empty.
      *
      * @param row The row containing the cell to be tested
      * @param col The column containing the cell to be tested
      * @param firstTry Whether or not the cell to be tested is being tested for the first time (tru) or not (false)
      */
-    private void solveCell(int row, int col, boolean firstTry)
+    private void solveCell(int[][] board, int row, int col, boolean firstTry)
     {
         if (!firstTry)
         {
-            this.board[row][col] = 0;
+            board[row][col] = 0;
         }
-        if (this.board[row][col] == 0 && !finalCell(row, col) && !this.boardFinished)
+        if (board[row][col] == 0 && !finalCell(row, col) && !this.boardFinished)
         {
 
             List<Integer> cellNumbers = getCellValues(row, col);
@@ -290,14 +164,14 @@ public class Generator
             {
 
                 int cellValue = cellNumbers.get(cellNumbers.size() - 1);
-                boolean legal = cellValid(row, col, cellValue);
+                boolean legal = SudokuTools.cellValid(row, col, cellValue, board);
 
                 if (legal)
                 {
-                    this.board[row][col] = cellValue;
+                    board[row][col] = cellValue;
                     cellNumbers.remove(cellNumbers.size() - 1);
                     cellSet = true;
-                    nextCell(row, col);
+                    nextCell(row, col, board);
                     break;
                 }
                 else
@@ -310,8 +184,8 @@ public class Generator
             if (!cellSet)
             {
                 setCellValues(row, col, SudokuTools.shuffledNine());
-                this.board[row][col] = 0;
-                backtrack(row, col);
+                board[row][col] = 0;
+                backtrack(row, col, board);
             }
         }
         else
@@ -322,40 +196,76 @@ public class Generator
 
     /***
      * Method used to begin the sudoku board generation process at board position {@code row = 0} {@code column = 0}.
+     * @return The generated 2D array representing the board
      */
-    private void generate()
+    public int[][] generate()
     {
-        this.populateCellValues();
-        this.solveCell(0,0, true);
+        int[][] board = new int[9][9];
+        populateCellValues(this.cellValues);
+        solveCell(board, 0,0, true);
+        return board;
     }
 
-    /***
-     * Getter for the 2D array that represents the sudoku board
-     * @return int[r][c] representing the sudoku board where r = the row (y value) and c = column (x value) from
-     * top to bottom and left to right respectively
-     */
-    public int[][] getBoard()
-    {
-        return this.board;
+    private static int COUNTER;
+
+    public int[][] unSolver(int[][] board){
+        int[][] completeBoard = board.clone();
+        int chances = 40; // THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS changes with difficulty
+        COUNTER = 1;
+        Random rand = new Random();
+        while(chances > 0){
+            int row = rand.nextInt(9);
+            int col = rand.nextInt(9);
+            while(board[row][col] == 0){
+                row = rand.nextInt(9);
+                col = rand.nextInt(9);
+            }
+            int[][] boardBackup = board.clone();
+            int valBackup = board[row][col];
+            board[row][col] = 0;
+            solveBoard(boardBackup);
+            if(COUNTER != 1){
+                board[row][col] = valBackup;
+                chances--;
+            }
+        }
+        return board;
     }
 
-    /***
-     * Improved look to the standard toString method to work with a 2D array
-     * @return A multi-line string that displays the Sudoku board in 2d space, each row printed consecutively and
-     * formatted to look like so: [n1, n2, n3, ..., n9]
-     */
-    @Override
-    public String toString()
-    {
-        return "" +
-                Arrays.toString(this.board[0]) + System.lineSeparator() +
-                Arrays.toString(this.board[1]) + System.lineSeparator() +
-                Arrays.toString(this.board[2]) + System.lineSeparator() +
-                Arrays.toString(this.board[3]) + System.lineSeparator() +
-                Arrays.toString(this.board[4]) + System.lineSeparator() +
-                Arrays.toString(this.board[5]) + System.lineSeparator() +
-                Arrays.toString(this.board[6]) + System.lineSeparator() +
-                Arrays.toString(this.board[7]) + System.lineSeparator() +
-                Arrays.toString(this.board[8]);
+    private boolean solveBoard(int[][] board){
+        COUNTER = 0;
+        Random rand = new Random();
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; i<9; j++){
+                if(board[i][j] == 0){
+                    for(int value = 1; value < 10; value++){
+                        if(SudokuTools.cellValid(i, j, value, board)){
+                            board[i][j] = value;
+                            if(boardCheck(board)){
+                                COUNTER += 1;
+                                break;
+                            }
+                            else{
+                                if(solveBoard(board)){
+                                    return true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean boardCheck(int[][] board){
+        for(int row = 1; row<10; row++){
+            for(int col = 1; col<10; col++){
+                if(board[row][col]==0){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
