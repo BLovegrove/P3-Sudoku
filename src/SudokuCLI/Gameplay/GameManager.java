@@ -223,6 +223,9 @@ public class GameManager
                             int row = coordinate[0];
                             int col = coordinate[1];
 
+                            // GET CURRENT CELL VALUE BACKUP
+                            int cellValueBackup = gameData.getBoard()[row][col];
+
                             gameData.setCellValue(row, col, -1);
 
                             view.setPanels(gameBoard.draw(), gameInfo.draw());
@@ -232,6 +235,7 @@ public class GameManager
                                 view.render();
 
                                 String cellFillResponse = cellFillHandler(row, col, gameData, scanner);
+                                gameData.setCellValue(row, col, cellValueBackup);
 
                                 try
                                 {
@@ -249,6 +253,7 @@ public class GameManager
                                 {
                                     if (cellFillResponse.equals("cancel"))
                                     {
+                                        gameData.setCellValue(row, col, cellValueBackup);
                                         gameInfo.setStatus("Fill aborted");
 
                                         break;
@@ -344,15 +349,10 @@ public class GameManager
     private String cellFillHandler(int row, int col, SaveData save, Scanner scanner)
     {
 
-        // GET CURRENT CELL VALUE BACKUP
-        int cellValueBackup = save.getBoard()[row][col];
-
         String fillResponse = scanner.nextLine().toLowerCase();
 
         if (fillResponse.equals("c"))
         {
-            save.setCellValue(row, col, cellValueBackup);
-
             return "cancel";
         }
         else
@@ -375,7 +375,6 @@ public class GameManager
                     );
                     if (cellValid || save.getDifficulty() == DifficultyLevel.LUDICROUS)
                     {
-                        save.setCellValue(row, col, cellValueBackup);
                         return cellValue + "";
                     }
                     else

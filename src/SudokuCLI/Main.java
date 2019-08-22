@@ -11,6 +11,8 @@ import SudokuRenderer.Startup.ViewCalibrator;
 import SudokuRenderer.UtilityPanels.GameBoard;
 import SudokuRenderer.ViewRenderer;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -20,6 +22,13 @@ public class Main
     {
         // CALIBRATE WINDOW : HEIGHT 20 LINES (-2 for status message)
         ViewCalibrator.calibrate(18);
+
+        // CREATE SAVE DIRECTORY IF IT DOESN'T ALREADY EXIST
+        if (!Files.exists(Paths.get(IOTools.SAVE_DIR.getName())))
+        {
+            //noinspection ResultOfMethodCallIgnored
+            IOTools.SAVE_DIR.mkdirs();
+        }
 
         // CREATE MAIN MENU
         MenuManager mainMenu = new MenuManager();

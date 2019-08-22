@@ -28,21 +28,12 @@ public class IOTools
         ArrayList<String> files = new ArrayList<>();
 
         // ITERATE TO FILL LIST WITH FILE NAMES
-
-        if (!Files.exists(Paths.get(SAVE_DIR.getName())))
-        {
-            //noinspection ResultOfMethodCallIgnored
-            SAVE_DIR.mkdirs();
+        for (File file : Objects.requireNonNull(SAVE_DIR.listFiles())) {
+            String fileName = file.getName();
+            files.add(fileName.substring(0, fileName.length() - 4));
         }
-        else
-        {
-            for (File file : Objects.requireNonNull(SAVE_DIR.listFiles())) {
-                String fileName = file.getName();
-                files.add(fileName.substring(0, fileName.length() - 4));
-            }
 
-            Collections.sort(files);
-        }
+        Collections.sort(files);
 
         return files;
     }
