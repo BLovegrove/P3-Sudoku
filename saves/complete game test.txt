@@ -21,4 +21,4 @@
 @moves
 2
 @difficulty
-EASY
+LUDICROUS
