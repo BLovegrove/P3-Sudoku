@@ -10,8 +10,8 @@ public class MainMenu
      * The string defining the layout for the main menu
      */
     private String[] menu = (
-            "╔═══════════╦═════════════════════════════════════════════════════════╦═══════════╗," +
-            "╠═══╤═══╤═══╣        Sudoku-CLI: The Command Line Puzzle Game!        ╠═══╤═══╤═══╣," +
+            "            ╔═════════════════════════════════════════════════════════╗            ," +
+            "╔═══╤═══╤═══╣        Sudoku-CLI: The Command Line Puzzle Game!        ╠═══╤═══╤═══╗," +
             "║ 9 │   │   ╠═════════════════════════════════════════════════════════╣   │ 4 │   ║," +
             "║───┼───┼───║  ----------------  1) New Easy Game  -----------------  ║───┼───┼───║," +
             "║   │ 1 │ 5 ║                                                         ║ 9 │ 2 │   ║," +
@@ -34,7 +34,7 @@ public class MainMenu
 
     /***
      * Returns the sudoku game's main menu graphic
-     * @return String[] representing the main menu's pane for use in a {@link SudokuRenderer.ViewRenderer}
+     * @return String[] representing the main menu's panel for use in a {@link SudokuRenderer.ViewRenderer}
      */
     public String[] draw()
     {

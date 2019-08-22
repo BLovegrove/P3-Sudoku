@@ -8,6 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Objects;
 
 public class IOTools
@@ -27,11 +28,12 @@ public class IOTools
         ArrayList<String> files = new ArrayList<>();
 
         // ITERATE TO FILL LIST WITH FILE NAMES
-        // requireNonNull added by IDE to stave off warnings
         for (File file : Objects.requireNonNull(SAVE_DIR.listFiles())) {
             String fileName = file.getName();
             files.add(fileName.substring(0, fileName.length() - 4));
         }
+
+        Collections.sort(files);
 
         return files;
     }
@@ -51,24 +53,6 @@ public class IOTools
 
         return count;
     }
-
-//    @SuppressWarnings("ResultOfMethodCallIgnored")
-//    public static boolean isNameValid(String fileName)
-//    {
-//        File file = new File(fileName);
-//
-//        try
-//        {
-//            // CHECKS IF ACTUAL SAVED FILE NAME MATCHES ORIGINAL GIVEN ONE
-//            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
-//            file.delete();
-//            return isValid;
-//        }
-//        catch (IOException e)
-//        {
-//            return false;
-//        }
-//    }
 
     /***
      * Retrieves all the data from a given save file name and creates a saveData instance from it
@@ -238,6 +222,11 @@ public class IOTools
      */
     public static String renameFile(String oldFileName, String newFileName)
     {
+        if (newFileName.isEmpty())
+        {
+            return "abort";
+        }
+
         try
         {
             Path target = Paths.get(SAVE_DIR +"/"+ oldFileName +".txt");
@@ -246,12 +235,13 @@ public class IOTools
         }
         catch (FileAlreadyExistsException e)
         {
-            return "Sorry - That name is taken";
+            return "Sorry - Name taken. Try again";
         }
         catch (IOException e)
         {
-            return "Sorry - Name not valid";
+            return "Sorry - Name invalid. Try again";
         }
+
     }
 
     /***
@@ -295,9 +285,13 @@ public class IOTools
                 writer.write(line + System.lineSeparator());
             }
 
-            // WRITE moves FLAG AND CORRESPONDING VALUE IN NEXT 2 LINES
+            // WRITE moves FLAG AND CORRESPONDING VALUE IN NEXT LINE
             writer.write("@moves"+ System.lineSeparator());
-            writer.write(saveData.getMoves() +"");
+            writer.write(saveData.getMoves() +""+ System.lineSeparator());
+
+            //WRITE DIFFICULTY FLAG AND CORRESPONDING DIFFICULTY IN NEXT LINE
+            writer.write("@difficulty"+ System.lineSeparator());
+            writer.write(saveData.getDifficulty().toString());
 
             writer.close();
         }

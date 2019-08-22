@@ -1,12 +1,12 @@
 package SudokuRenderer;
 
 import SudokuGen.Generator;
-import SudokuRenderer.InfoPanes.GameInfo;
-import SudokuRenderer.InfoPanes.LoadInfo;
+import SudokuRenderer.InfoPanels.GameInfo;
+import SudokuRenderer.InfoPanels.LoadInfo;
 import SudokuRenderer.Startup.MainMenu;
 import SudokuRenderer.Startup.ViewCalibrator;
-import SudokuRenderer.UtilityPanes.GameBoard;
-import SudokuRenderer.UtilityPanes.LoadMenu;
+import SudokuRenderer.UtilityPanels.GameBoard;
+import SudokuRenderer.UtilityPanels.LoadMenu;
 
 import java.util.ArrayList;
 
@@ -28,8 +28,6 @@ public class RenderTest
         //new board numbers
         int[][] board = new Generator().generate();
 
-        int[][] board = Generator.generate();
-
         //new board graphic
         GameBoard BP = new GameBoard(board);
 
@@ -50,26 +48,26 @@ public class RenderTest
 
         //draw basic board
         IPP.setStatus("Test Status Message!");
-        view.setPanes(BP.draw(), IPP.draw());
+        view.setPanels(BP.draw(), IPP.draw());
         view.render();
 
         //draw 'load games' page 1
         IPL.setStatus("BOOP 1");
-        view.setPanes(LMP.draw(), IPL.draw());
+        view.setPanels(LMP.draw(), IPL.draw());
         view.render();
 
-        //draw board again! but keep new secondary pane
-        view.setPrimaryPane(BP.draw());
+        //draw board again! but keep new secondary panel
+        view.setPrimaryPanel(BP.draw());
         view.render();
 
         //draw 'load games' page 3
         LMP.setPage(3);
-        view.setPrimaryPane(LMP.draw());
+        view.setPrimaryPanel(LMP.draw());
         view.render();
 
         //draw 'load games' page 3 again w/ changed status
         IPL.setStatus("BOOP 1 changed!");
-        view.setSecondaryPane(IPL.draw());
+        view.setSecondaryPanel(IPL.draw());
         view.render();
     }
 }

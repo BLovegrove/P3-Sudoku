@@ -1,9 +1,9 @@
-package SudokuRenderer.InfoPanes;
+package SudokuRenderer.InfoPanels;
 
-public class InfoPane
+public class InfoPanel
 {
     /***
-     * Each individual line of the pane to be used in a {@link SudokuRenderer.ViewRenderer}
+     * Each individual line of the panel to be used in a {@link SudokuRenderer.ViewRenderer}
      */
     private String[] menuLines = new String[20];
     private String menuString;
@@ -11,7 +11,7 @@ public class InfoPane
     /***
      * Standard constructor to prepare the default (empty) menu before propagating it.
      */
-    public InfoPane(String menuString)
+    public InfoPanel(String menuString)
     {
         this.menuString = menuString;
         prepMenu();
@@ -19,7 +19,7 @@ public class InfoPane
 
     /***
      * Pieces together a default (empty) commands menu and status bar to be<br>
-     * used as a {@link SudokuRenderer.ViewRenderer} pane
+     * used as a {@link SudokuRenderer.ViewRenderer} panel
      */
     private void prepMenu()
     {
@@ -33,7 +33,7 @@ public class InfoPane
     }
 
     /***
-     * Alters only the status line of the menu's pane ({@link #menuLines}) for faster graphic update
+     * Alters only the status line of the menu's panel ({@link #menuLines}) for faster graphic update
      * @param statusMessage The string to be set as the status message when redrawn. Max 36 characters.
      */
     public void setStatus(String statusMessage)
@@ -76,8 +76,8 @@ public class InfoPane
     }
 
     /***
-     * Simply returns the menu pane
-     * @return String[] representing this menu's pane for a {@link SudokuRenderer.ViewRenderer}
+     * Simply returns the menu panel
+     * @return String[] representing this menu's panel for a {@link SudokuRenderer.ViewRenderer}
      */
     public String[] draw()
     {

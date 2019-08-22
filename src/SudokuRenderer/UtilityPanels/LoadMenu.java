@@ -1,4 +1,4 @@
-package SudokuRenderer.UtilityPanes;
+package SudokuRenderer.UtilityPanels;
 
 import SudokuRenderer.ViewRenderer;
 
@@ -22,7 +22,7 @@ public class LoadMenu
      */
     private int maxPages;
     /***
-     * Each individual line of the menu's pane stored as an array
+     * Each individual line of the menu's panel stored as an array
      */
     private String[] menuLines = new String[20];
 
@@ -76,6 +76,11 @@ public class LoadMenu
         this.maxPages = (int) Math.ceil((1.0 * this.fileNames.size()) / 9.0);
     }
 
+    public ArrayList<String> getFileNames()
+    {
+        return this.fileNames;
+    }
+
     /***
      * Updates an individual line of the graphical list based on its relative position in said list (0-8)
      * @param itemIndex The position of the graphical list item you want to change
@@ -84,7 +89,7 @@ public class LoadMenu
     private void updateListItem(int itemIndex, String fileName)
     {
         int absIndex = (itemIndex + 1) * 2;
-        if (fileName.equals(""))
+        if (fileName.isEmpty())
         {
             this.menuLines[absIndex] = String.format("  ║%-35s║", " ");
         }
@@ -125,7 +130,7 @@ public class LoadMenu
 
     /***
      * Draws / re-draws all the current list items and constructs it into a String[] array
-     * @return The String[] array representing the LoadMenu's pane for use in a {@link ViewRenderer}
+     * @return The String[] array representing the LoadMenu's panel for use in a {@link ViewRenderer}
      */
     public String[] draw()
     {

@@ -4,25 +4,21 @@ import FileIO.IOTools;
 import FileIO.SaveData;
 import SudokuCLI.SudokuTools;
 import SudokuGen.Generator;
-import SudokuRenderer.InfoPanes.GameInfo;
-import SudokuRenderer.UtilityPanes.GameBoard;
+import SudokuRenderer.InfoPanels.GameInfo;
+import SudokuRenderer.UtilityPanels.GameBoard;
 import SudokuRenderer.ViewRenderer;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class GameManager
 {
-    public boolean newGame(ViewRenderer view, DifficultyLevel difficulty)
+    public SaveData newGame(ViewRenderer view, DifficultyLevel difficulty)
     {
         // SETUP USER INPUT FOR GAME NAME
         Scanner scanner = new Scanner(System.in);
-
-        // INIT THE SAVE NAME THAT WILL BE LOADED AFTER ITS CREATED
-        String newSave = "";
 
         while (true)
         {
@@ -36,19 +32,18 @@ public class GameManager
                 try
                 {
                     // ATTEMPT TO CREATE NEW FILE
-                    File newSaveFile = new File(IOTools.SAVE_DIR, response +".txt");
+                    File newSaveFile = new File(IOTools.SAVE_DIR, response.toLowerCase() +".txt");
                     if (newSaveFile.createNewFile())
                     {
                         // GENERATE NEW BOARD
                         int[][] reference = new Generator().generate();
                         int[][] board = new int[9][9]; // RUN UNSOLVER HERE
 
-                        // SAVE BOARD DATA
-                        newSave = response;
+                        // SAVE GENERATED BOARD DATA
                         SaveData newSaveData = new SaveData(response, reference, board , 0, difficulty);
                         newSaveData.save();
 
-                        break;
+                        return loadGame(view, response.toLowerCase());
                     }
                     else // FILE EXISTS
                     {
@@ -65,11 +60,9 @@ public class GameManager
                 System.out.println("Sorry - file name too long"+ System.lineSeparator());
             }
         }
-
-        return loadGame(view, newSave);
     }
 
-    public boolean loadGame(ViewRenderer view, String saveName)
+    public SaveData loadGame(ViewRenderer view, String saveName)
     {
 
         // GET SAVE FILE FOR GAME
@@ -83,7 +76,7 @@ public class GameManager
         gameInfo.setStatus("Board loaded. Ready to play!");
 
         // INIT VIEW WINDOW
-        view.setPanes(gameBoard.draw(), gameInfo.draw());
+        view.setPanels(gameBoard.draw(), gameInfo.draw());
 
 
         // INIT USER INPUT
@@ -98,230 +91,237 @@ public class GameManager
             // CHECK IF THE GAME IS COMPLETE
             if (gameData.boardComplete())
             {
-                return true;
+                gameData.save();
+                return gameData;
             }
 
-            // WIPE SCREEN HERE
-
-            // RENDER VIEW WINDOW
+            // (RE)DRAW VIEW WINDOW
             view.render();
 
             // GET USER INPUT
-            String[] response = scanner.nextLine().split(" ");
+            String[] response = scanner.nextLine().toLowerCase().split(" ");
 
             // PROCESS USER INPUT
-            if (response.length == 1)
+            switch (response.length)
             {
-                switch (response[0].toLowerCase())
+                case 1:
                 {
-                    case "undo":
+                    switch (response[0])
                     {
-                        if (moveHistory.size() > 0)
+                        case "undo":
                         {
-                            int[] move = moveHistory.get(moveHistory.size() - 1);
-                            moveHistory.remove(moveHistory.size() - 1);
+                            if (moveHistory.size() > 0)
+                            {
+                                int[] move = moveHistory.get(moveHistory.size() - 1);
+                                moveHistory.remove(moveHistory.size() - 1);
 
-                            gameData.setCellValue(move[0], move[1], move[2]);
-                            gameInfo.setStatus("Move undone!");
-                            gameData.addMove();
+                                gameData.setCellValue(move[0], move[1], move[2]);
+                                gameInfo.setStatus("Move undone!");
+                                gameData.addMove();
+                            }
+                            else
+                            {
+                                gameInfo.setStatus("No moves left to undo!");
+                            }
+
+                            break;
                         }
-                        else
+                        case "restart":
                         {
-                            gameInfo.setStatus("No moves left to undo!");
+                            gameInfo.setStatus("Confirm? (Press Y to restart)");
+                            view.setSecondaryPanel(gameInfo.draw());
+
+                            view.render();
+
+                            String restartGame = scanner.nextLine().toLowerCase();
+
+                            if (restartGame.equals("y"))
+                            {
+                                gameData.setReference(new Generator().generate());
+                                gameData.setBoard(new int[9][9]); // RUN UNSOLVER ON NEWBOARD AND PUT IT IN HERE
+                                gameData.setMoves(0);
+                                gameBoard.update(gameData.getBoard());
+                                moveHistory.clear();
+                                gameInfo.setStatus("Game reset! Good luck");
+                            }
+                            else
+                            {
+                                gameInfo.setStatus("Restart aborted");
+                            }
+
+                            break;
                         }
-
-                        break;
-                    }
-                    case "restart":
-                    {
-                        gameInfo.setStatus("Confirm? (Press Y to restart)");
-                        view.setSecondaryPane(gameInfo.draw());
-
-                        // WIPE SCREEN HERE
-
-                        view.render();
-
-                        String restartGame = scanner.nextLine();
-
-                        if (restartGame.toLowerCase().equals("y"))
-                        {
-                            gameData.setReference(new Generator().generate());
-                            gameData.setBoard(new int[9][9]); // RUN UNSOLVER ON NEWBOARD AND PUT IT IN HERE
-                            gameData.setMoves(0);
-                            gameBoard.update(gameData.getBoard());
-                            moveHistory.clear();
-                            gameInfo.setStatus("Game reset! Good luck");
-                        }
-                        else
-                        {
-                            gameInfo.setStatus("Restart aborted");
-                        }
-
-                        break;
-                    }
-                    case "save":
-                    {
-                        gameData.save();
-                        gameInfo.setStatus("Game saved!");
-
-                        break;
-                    }
-                    case "exit":
-                    {
-                        gameInfo.setStatus("Any key to save, N to skip saving");
-                        view.setSecondaryPane(gameInfo.draw());
-
-                        // WIPE SCREEN HERE
-
-                        view.render();
-
-                        String saveGame = scanner.nextLine();
-
-                        if (saveGame.toLowerCase().equals("y"))
-                        {
-                            return gameData.boardComplete();
-                        }
-                        else
+                        case "save":
                         {
                             gameData.save();
-                            return gameData.boardComplete();
+                            gameInfo.setStatus("Game saved!");
+
+                            break;
                         }
-                    }
-                    default:
-                    {
-                        gameInfo.setStatus("Sorry - Unrecognised command");
-                    }
-                }
-            }
-            else if (response.length == 2)
-            {
-                if (response[0].toLowerCase().equals("fill") || response[0].toLowerCase().equals("clear"))
-                {
-                    if (response[1].length() == 2)
-                    {
-                        switch (response[0].toLowerCase())
+                        case "exit":
                         {
-                            case "fill":
+                            gameInfo.setStatus("Any key to save, N to skip saving");
+                            view.setSecondaryPanel(gameInfo.draw());
+
+                            view.render();
+
+                            String saveGame = scanner.nextLine().toLowerCase();
+
+                            if (!saveGame.startsWith("n"))
                             {
-                                int[] coordinate = AlphaNumToRowCol(response[1].toUpperCase(), gameInfo);
-
-                                if (coordinate[0] > 0 && coordinate[1] > 0)
-                                {
-                                    gameInfo.setStatus("Choose number to place at "+ response[1].toUpperCase() +" (1->9)");
-                                    view.setSecondaryPane(gameInfo.draw());
-
-                                    int row = coordinate[0] - 1;
-                                    int col = coordinate[1] - 1;
-
-                                    while (true)
-                                    {
-                                        // WIPE SCREEN HERE
-                                        view.render();
-
-                                        String fillResponse = scanner.nextLine();
-                                        try
-                                        {
-                                            int cellValue = Integer.parseInt(fillResponse);
-                                            if (cellValue > 0 && cellValue < 10)
-                                            {
-                                                boolean cellValid = SudokuTools.cellValid(
-                                                        row,
-                                                        col,
-                                                        cellValue,
-                                                        gameData.getBoard()
-                                                );
-                                                if (cellValid)
-                                                {
-                                                    moveHistory.add(
-                                                            new int[]{ row, col, gameData.getBoard()[row][col] }
-                                                    );
-                                                    gameData.setCellValue(row, col, cellValue);
-                                                    gameData.addMove();
-                                                    gameInfo.setStatus("Value "+ cellValue +" Added to cell "+ response[1].toUpperCase());
-
-                                                    break;
-                                                }
-                                                else
-                                                {
-                                                    if (gameData.getDifficulty() != DifficultyLevel.LUDICROUS)
-                                                    {
-                                                        gameInfo.setStatus("Value "+ cellValue +" can't go there! Try again");
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            else
-                                            {
-                                                gameInfo.setStatus("Sorry - Value must from 1 to 9");
-                                            }
-                                        }
-                                        catch (NumberFormatException e)
-                                        {
-                                            gameInfo.setStatus("Sorry - Cell value not a number");
-                                        }
-
-                                        view.setSecondaryPane(gameInfo.draw());
-                                    }
-                                }
-
-                                break;
+                                gameData.save();
                             }
-                            case "clear":
-                            {
-                                int[] coordinate = AlphaNumToRowCol(response[1].toUpperCase(), gameInfo);
-
-                                if (coordinate[0] > 0 && coordinate[1] > 0)
-                                {
-                                    int row = coordinate[0] - 1;
-                                    int col = coordinate[1] - 1;
-                                    gameData.setCellValue(row, col, 0);
-                                    gameInfo.setStatus("Cell "+ response[1].toUpperCase() +" cleared.");
-                                    gameData.addMove();
-                                }
-
-                                break;
-                            }
+                            return gameData;
                         }
+                        case "fill":
+                        {
+                            gameInfo.setStatus("Usage: Fill (A-I)(1-9)");
+
+                            break;
+                        }
+                        case "clear":
+                        {
+                            gameInfo.setStatus("Usage: Clear (A-I)(1-9)");
+
+                            break;
+                        }
+                        default:
+                        {
+                            gameInfo.setStatus("Sorry - Unrecognised command");
+
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+                case 2:
+                {
+                    if (response[1].length() != 2)
+                    {
+                        gameInfo.setStatus("No such cell. Format: (A-I)(1-9)");
+
+                        break;
                     }
                     else
                     {
-                        gameInfo.setStatus("No such cell. Format: (A-I)(1-9)");
+
+                        int[] coordinate = AlphaNumToRowCol(response[1], gameInfo);
+
+                        if (coordinate[0] == -1)
+                        {
+                            gameInfo.setStatus("Unknown row letter. Use A->I");
+                        }
+                        else if ( coordinate[1] == -1)
+                        {
+                            gameInfo.setStatus("Unknown column number. Use 1->9");
+                        }
+                        else if (response[0].equals("fill"))
+                        {
+                            gameInfo.setStatus("Choose number to place at "+ response[1].toUpperCase() +" (1->9)");
+
+                            int row = coordinate[0];
+                            int col = coordinate[1];
+
+                            // GET CURRENT CELL VALUE BACKUP
+                            int cellValueBackup = gameData.getBoard()[row][col];
+
+                            gameData.setCellValue(row, col, -1);
+
+                            view.setPanels(gameBoard.draw(), gameInfo.draw());
+
+                            while (true)
+                            {
+                                view.render();
+
+                                String cellFillResponse = cellFillHandler(row, col, gameData, scanner);
+                                gameData.setCellValue(row, col, cellValueBackup);
+
+                                try
+                                {
+                                    int cellValue = Integer.parseInt(cellFillResponse);
+                                    moveHistory.add(new int[]{row, col, gameData.getBoard()[row][col]});
+
+                                    gameData.setCellValue(row, col, cellValue);
+                                    gameData.addMove();
+
+                                    gameInfo.setStatus("Cell "+ response[1].toUpperCase() +" set to "+ cellValue);
+
+                                    break;
+                                }
+                                catch (NumberFormatException e)
+                                {
+                                    if (cellFillResponse.equals("cancel"))
+                                    {
+                                        gameData.setCellValue(row, col, cellValueBackup);
+                                        gameInfo.setStatus("Fill aborted");
+
+                                        break;
+                                    }
+                                    else if (cellFillResponse.startsWith("invalid"))
+                                    {
+                                        char failedCellValue = cellFillResponse.charAt(cellFillResponse.length() - 1);
+                                        gameInfo.setStatus("Value "+ failedCellValue  +" is invalid! Try again");
+                                    }
+                                    else
+                                    {
+                                        gameInfo.setStatus(cellFillResponse);
+                                    }
+
+                                    view.setSecondaryPanel(gameInfo.draw());
+                                }
+                            }
+                        }
+                        else if (response[0].equals("clear"))
+                        {
+                            int row = coordinate[0];
+                            int col = coordinate[1];
+
+                            moveHistory.add(new int[]{row, col, gameData.getBoard()[row][col]});
+
+                            gameData.setCellValue(row, col, 0);
+                            gameData.addMove();
+
+                            gameInfo.setStatus("Cell "+ response[1].toUpperCase() +" cleared");
+                        }
+                        else
+                        {
+                            gameInfo.setStatus("Sorry - Unrecognized command");
+                        }
                     }
+
+                    break;
                 }
-                else
+                default:
                 {
                     gameInfo.setStatus("Sorry - Unrecognized command");
                 }
             }
-            else
-            {
-                gameInfo.setStatus("Sorry - Unrecognized command");
-            }
 
-            view.setPanes(gameBoard.draw(), gameInfo.draw());
+            view.setPanels(gameBoard.draw(), gameInfo.draw());
         }
     }
 
-    private int[] AlphaNumToRowCol(String alphaNumCoordinate, GameInfo infoPane)
+    private int[] AlphaNumToRowCol(String alphaNumCoordinate, GameInfo infoPanel)
     {
-        int[] coordinate = new int[2];
+        int[] coordinate = new int[]{-1, -1};
 
-        String rowLabel = ""+ alphaNumCoordinate.charAt(0);
+        String rowLabel = ""+ alphaNumCoordinate.toUpperCase().charAt(0);
         try
         {
             int rowValue = RowIndicator.valueOf(rowLabel).getValue();
             if (rowValue > 0 && rowValue < 10)
             {
-                coordinate[0] = rowValue;
+                coordinate[0] = rowValue - 1;
             }
             else
             {
-                infoPane.setStatus("Sorry - Row number not 1->9");
+                infoPanel.setStatus("Sorry - Row number not 1 to 9");
             }
         }
         catch (IllegalArgumentException e)
         {
-            infoPane.setStatus("Sorry - Row "+ rowLabel +" not found");
+            infoPanel.setStatus("Sorry - Row "+ rowLabel +" not found");
         }
 
         String columnLabel = ""+ alphaNumCoordinate.charAt(1);
@@ -330,19 +330,63 @@ public class GameManager
             int colValue = Integer.parseInt(columnLabel);
             if (colValue > 0 && colValue < 10)
             {
-                coordinate[1] = colValue;
+                coordinate[1] = colValue - 1;
 
             }
             else
             {
-                infoPane.setStatus("Sorry - Column number not 1->9");
+                infoPanel.setStatus("Sorry - Column number not 1 to 9");
             }
         }
         catch (NumberFormatException e)
         {
-            infoPane.setStatus("Sorry - Column "+ columnLabel +" not found");
+            infoPanel.setStatus("Sorry - Column "+ columnLabel +" not found");
         }
 
         return coordinate;
+    }
+
+    private String cellFillHandler(int row, int col, SaveData save, Scanner scanner)
+    {
+
+        String fillResponse = scanner.nextLine().toLowerCase();
+
+        if (fillResponse.equals("c"))
+        {
+            return "cancel";
+        }
+        else
+        {
+            try
+            {
+                int cellValue = Integer.parseInt(fillResponse);
+
+                if (cellValue < 1 || cellValue > 9)
+                {
+                    return "Value must from 1 to 9 - Try again";
+                }
+                else
+                {
+                    boolean cellValid = SudokuTools.cellValid(
+                            row,
+                            col,
+                            cellValue,
+                            save.getBoard()
+                    );
+                    if (cellValid || save.getDifficulty() == DifficultyLevel.LUDICROUS)
+                    {
+                        return cellValue + "";
+                    }
+                    else
+                    {
+                        return "invalid"+ cellValue;
+                    }
+                }
+            }
+            catch (NumberFormatException e)
+            {
+                return "Cell value not a number - Try again";
+            }
+        }
     }
 }
