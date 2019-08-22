@@ -2,6 +2,8 @@ package FileIO;
 
 import SudokuCLI.Gameplay.DifficultyLevel;
 
+import java.util.Arrays;
+
 /***
  * An object based representation of all the data required to resume a saved game of SudokuCLI<br>
  * In this case (so far), Reference board @reference, Active board @board, And number of moves so far @moves
@@ -103,7 +105,14 @@ public class SaveData
 
     public void addMove()
     {
-        this.moves++;
+        if (this.moves == 2147483646)
+        {
+            this.board = this.reference;
+        }
+        else
+        {
+            this.moves++;
+        }
     }
 
     public void setDifficulty(DifficultyLevel difficulty)
@@ -149,6 +158,6 @@ public class SaveData
 
     public boolean boardComplete()
     {
-        return (this.reference == this.board);
+        return (Arrays.deepEquals(this.board, this.reference));
     }
 }
