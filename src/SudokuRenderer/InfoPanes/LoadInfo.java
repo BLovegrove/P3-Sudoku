@@ -15,13 +15,13 @@ public class LoadInfo extends InfoPane
             "  ╔════════════════════════════════════════╗," +
             "  ║       Commands Menu & Status Bar       ║," +
             "  ╠════════════════════════════════════════╣," +
-            "  ║ Page (1-9) : e.g. Page 9               ║," +
+            "  ║ Page (num) : e.g. Page 9               ║," +
             "  ║  ↳ Changes the current saves page      ║," +
             "  ║ Load (1-9) : e.g. Load 6               ║," +
             "  ║  ↳ Loads a selected save game          ║," +
             "  ║ Rename (1-9) : e.g. Rename 5           ║," +
-            "  ║  ↳ e.g. Rename 2 'test 5'              ║," +
             "  ║  ↳ Renames an existing save game       ║," +
+            "  ║  ↳ Leave input blank to abort          ║," +
             "  ║ Delete (1-9) : e.g. Delete 3           ║," +
             "  ║  ↳ Deletes a selected save game        ║," +
             "  ║ Sort                                   ║," +
