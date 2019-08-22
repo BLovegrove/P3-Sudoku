@@ -33,7 +33,7 @@ public class MenuManager
         view.render();
 
         // PRINT ERROR IF ONE EXISTS
-        if (!menuErrorMessage.equals(""))
+        if (!menuErrorMessage.isEmpty())
         {
             System.out.println(menuErrorMessage+ ". Try again ↴");
         }
