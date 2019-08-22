@@ -6,6 +6,7 @@ public class GeneratorTest
     {
         Generator generator = new Generator();
         System.out.println(generator);
+        generator.generate();
 
         System.out.println("finished");
     }

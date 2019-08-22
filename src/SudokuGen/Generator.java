@@ -203,6 +203,11 @@ public class Generator
         int[][] board = new int[9][9];
         populateCellValues(this.cellValues);
         solveCell(board, 0,0, true);
+        int[][] gameBoard = unSolver(board);
+        COUNTER = 0;
+        System.out.println(board);
+        System.out.println(gameBoard);
+
         return board;
     }
 
@@ -233,16 +238,15 @@ public class Generator
     }
 
     private boolean solveBoard(int[][] board){
-        COUNTER = 0;
         Random rand = new Random();
         for(int i = 0; i < 9; i++){
-            for(int j = 0; i<9; j++){
+            for(int j = 0; j < 9; j++){
                 if(board[i][j] == 0){
                     for(int value = 1; value < 10; value++){
                         if(SudokuTools.cellValid(i, j, value, board)){
                             board[i][j] = value;
                             if(boardCheck(board)){
-                                COUNTER += 1;
+                                COUNTER++;
                                 break;
                             }
                             else{
@@ -259,8 +263,8 @@ public class Generator
     }
 
     private boolean boardCheck(int[][] board){
-        for(int row = 1; row<10; row++){
-            for(int col = 1; col<10; col++){
+        for(int row = 0; row<9; row++){
+            for(int col = 0; col<9; col++){
                 if(board[row][col]==0){
                     return false;
                 }
