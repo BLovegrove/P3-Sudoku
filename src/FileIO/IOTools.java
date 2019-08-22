@@ -28,13 +28,21 @@ public class IOTools
         ArrayList<String> files = new ArrayList<>();
 
         // ITERATE TO FILL LIST WITH FILE NAMES
-        // requireNonNull added by IDE to stave off warnings
-        for (File file : Objects.requireNonNull(SAVE_DIR.listFiles())) {
-            String fileName = file.getName();
-            files.add(fileName.substring(0, fileName.length() - 4));
-        }
 
-        Collections.sort(files);
+        if (!Files.exists(Paths.get(SAVE_DIR.getName())))
+        {
+            //noinspection ResultOfMethodCallIgnored
+            SAVE_DIR.mkdirs();
+        }
+        else
+        {
+            for (File file : Objects.requireNonNull(SAVE_DIR.listFiles())) {
+                String fileName = file.getName();
+                files.add(fileName.substring(0, fileName.length() - 4));
+            }
+
+            Collections.sort(files);
+        }
 
         return files;
     }
@@ -54,24 +62,6 @@ public class IOTools
 
         return count;
     }
-
-//    @SuppressWarnings("ResultOfMethodCallIgnored")
-//    public static boolean isNameValid(String fileName)
-//    {
-//        File file = new File(fileName);
-//
-//        try
-//        {
-//            // CHECKS IF ACTUAL SAVED FILE NAME MATCHES ORIGINAL GIVEN ONE
-//            boolean isValid = file.getCanonicalFile().getName().equals(fileName);
-//            file.delete();
-//            return isValid;
-//        }
-//        catch (IOException e)
-//        {
-//            return false;
-//        }
-//    }
 
     /***
      * Retrieves all the data from a given save file name and creates a saveData instance from it

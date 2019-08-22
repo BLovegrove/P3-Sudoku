@@ -277,7 +277,7 @@ public class GameManager
                             gameData.setCellValue(row, col, 0);
                             gameData.addMove();
 
-                            gameInfo.setStatus("Cell "+ response[1].toUpperCase() +" cleared.");
+                            gameInfo.setStatus("Cell "+ response[1].toUpperCase() +" cleared");
                         }
                         else
                         {
