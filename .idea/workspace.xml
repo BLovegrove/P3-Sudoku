@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="7344a5b5-56d3-44f2-b337-22b757eabd66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuGen/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/Generator.java" afterDir="false" />
+=======
+    <list default="true" id="dd39cb6b-66c1-4832-955f-502ce0cb4071" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/RenderTest.java" afterDir="false" />
+>>>>>>> UnSolver-CLI
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,8 +113,14 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.GeneratorTest" />
+<<<<<<< HEAD
         <item itemvalue="Application.sudoku" />
         <item itemvalue="Application.Main" />
+=======
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.IOTest" />
+        <item itemvalue="Application.RenderTest" />
+>>>>>>> UnSolver-CLI
         <item itemvalue="Application.RenderTest" />
       </list>
     </recent_temporary>
@@ -121,11 +134,19 @@
       <created>1566374478524</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
+<<<<<<< HEAD
       <updated>1566374478524</updated>
       <workItem from="1566382372726" duration="122000" />
       <workItem from="1566382563339" duration="11000" />
       <workItem from="1566463804575" duration="3355000" />
       <workItem from="1566516709629" duration="4012000" />
+=======
+      <updated>1566171867909</updated>
+      <workItem from="1566280954714" duration="2354000" />
+      <workItem from="1566284336639" duration="612000" />
+      <workItem from="1566286450369" duration="472000" />
+      <workItem from="1566286953828" duration="533000" />
+>>>>>>> UnSolver-CLI
     </task>
     <servers />
   </component>

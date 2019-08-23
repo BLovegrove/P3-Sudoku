@@ -26,7 +26,12 @@ public class RenderTest
         ViewCalibrator.calibrate(20);
 
         //new board numbers
+<<<<<<< HEAD
         int[][] board = new Generator().generate();
+=======
+
+        int[][] board = Generator.generate();
+>>>>>>> UnSolver-CLI
 
         //new board graphic
         GameBoard BP = new GameBoard(board);

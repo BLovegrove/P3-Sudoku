@@ -59,7 +59,12 @@ public class IOTest
         System.out.println("File count after deleting test file: ");
         System.out.println(IOTools.fileCount());
 
+<<<<<<< HEAD
         int[][] newBoard = new Generator().generate();
+=======
+
+        int[][] newBoard = Generator.generate();
+>>>>>>> UnSolver-CLI
 
         saveData.setBoard(newBoard);
         saveData.setReference(newBoard);
