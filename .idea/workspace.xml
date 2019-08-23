@@ -7,14 +7,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7344a5b5-56d3-44f2-b337-22b757eabd66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/saves/his is a test.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/P3_Sudoku_jar/saves/complete game.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/P3_Sudoku_jar/saves/this ios a game.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FileIO/IOTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FileIO/IOTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/DifficultyLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/DifficultyLevel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/SuccessPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/SuccessPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/ViewCalibrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/Startup/ViewCalibrator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -106,6 +103,7 @@
       <updated>1566374478524</updated>
       <workItem from="1566382372726" duration="122000" />
       <workItem from="1566382563339" duration="11000" />
+      <workItem from="1566523551748" duration="1656000" />
     </task>
     <servers />
   </component>

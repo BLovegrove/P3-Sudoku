@@ -4,14 +4,15 @@ import FileIO.SaveData;
 import SudokuCLI.Gameplay.DifficultyLevel;
 
 /***
- * The image shown when the user completes a sudoku board - uses data form their completed {@link SaveData} object
- * to fill in the gaps and let them know how they did
+ * Simple class that produces a success window when a sudoku game is complete. Uses data from their {@link SaveData}
+ * to show the difficulty level of the game in the success panel.
  */
+
 public class SuccessPanel extends InfoPanel
 {
     /***
-     * Standard constructor to load the panel data and get
-     * @param save
+     * Method that produces a success window for a completed Sudoku game
+     * @param save - the save file for the completed game
      */
     public SuccessPanel(SaveData save)
     {
