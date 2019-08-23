@@ -4,7 +4,6 @@
     <list default="true" id="7344a5b5-56d3-44f2-b337-22b757eabd66" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuGen/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/Generator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuGen/GeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/GeneratorTest.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -91,9 +90,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="sudoku" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="SudokuGen.sudoku" />
+      <module name="P3-Sudoku" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="SudokuGen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.GeneratorTest" />
+        <item itemvalue="Application.sudoku" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.RenderTest" />
       </list>
@@ -112,6 +125,7 @@
       <workItem from="1566382372726" duration="122000" />
       <workItem from="1566382563339" duration="11000" />
       <workItem from="1566463804575" duration="3355000" />
+      <workItem from="1566516709629" duration="4012000" />
     </task>
     <servers />
   </component>
@@ -133,26 +147,5 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/SudokuGen/Generator.java</url>
-          <line>233</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/SudokuGen/Generator.java</url>
-          <line>248</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/SudokuGen/Generator.java</url>
-          <line>220</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

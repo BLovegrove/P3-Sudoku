@@ -3,6 +3,7 @@ package SudokuGen;
 import SudokuCLI.SudokuTools;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -204,53 +205,53 @@ public class Generator
         populateCellValues(this.cellValues);
         solveCell(board, 0,0, true);
         int[][] gameBoard = unSolver(board);
-        COUNTER = 0;
-        System.out.println(board);
-        System.out.println(gameBoard);
+        System.out.println(Arrays.deepToString(board));
+        System.out.println(Arrays.deepToString(gameBoard));
 
         return board;
     }
 
     private static int COUNTER;
 
-    public int[][] unSolver(int[][] board){
-        int[][] completeBoard = board.clone();
-        int chances = 40; // THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS changes with difficulty
-        COUNTER = 1;
-        Random rand = new Random();
+    public int[][] unSolver(int[][] reference){
+        int[][] gameBoard = reference.clone();
+        int chances = 81; // THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS changes with difficulty
         while(chances > 0){
-            int row = rand.nextInt(9);
-            int col = rand.nextInt(9);
-            while(board[row][col] == 0){
-                row = rand.nextInt(9);
-                col = rand.nextInt(9);
+            int i = SudokuTools.randRange(9);
+            int j = SudokuTools.randRange(9);
+            while(gameBoard[i][j] == 0){
+                i = SudokuTools.randRange(9);
+                j = SudokuTools.randRange(9);
             }
-            int[][] boardBackup = board.clone();
-            int valBackup = board[row][col];
-            board[row][col] = 0;
-            solveBoard(boardBackup);
+            int valBackup = gameBoard[i][j];
+            gameBoard[i][j] = 0;
+            if(!solveBoard(gameBoard)){
+                gameBoard[i][j] = 0;
+            }
+
+            System.out.println(COUNTER);
             if(COUNTER != 1){
-                board[row][col] = valBackup;
+                gameBoard[i][j] = valBackup;
                 chances--;
             }
         }
-        return board;
+        return gameBoard;
     }
 
-    private boolean solveBoard(int[][] board){
-        Random rand = new Random();
+    private boolean solveBoard(int[][] gameBoard){
+        COUNTER = 0;
         for(int i = 0; i < 9; i++){
             for(int j = 0; j < 9; j++){
-                if(board[i][j] == 0){
+                if(gameBoard[i][j] == 0){
                     for(int value = 1; value < 10; value++){
-                        if(SudokuTools.cellValid(i, j, value, board)){
-                            board[i][j] = value;
-                            if(boardCheck(board)){
+                        if(SudokuTools.cellValid(i, j, value, gameBoard)){
+                            gameBoard[i][j] = value;
+                            if(boardCheck(gameBoard)){
                                 COUNTER++;
                                 break;
                             }
                             else{
-                                if(solveBoard(board)){
+                                if(solveBoard(gameBoard)){
                                     return true;
                                 }
                             }
@@ -263,9 +264,9 @@ public class Generator
     }
 
     private boolean boardCheck(int[][] board){
-        for(int row = 0; row<9; row++){
-            for(int col = 0; col<9; col++){
-                if(board[row][col]==0){
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                if(board[i][j]==0){
                     return false;
                 }
             }
