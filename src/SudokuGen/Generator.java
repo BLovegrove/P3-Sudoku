@@ -1,5 +1,6 @@
 package SudokuGen;
 
+import SudokuCLI.Gameplay.DifficultyLevel;
 import SudokuCLI.SudokuTools;
 
 import java.util.ArrayList;
@@ -127,17 +128,6 @@ public class Generator
     }
 
     /***
-     * A simple check to indicate if the cell currently being altered is the last cell on the board or not
-     * @param row The current row that that cell is part of
-     * @param col The current column that the cell is part of
-     * @return true / false depending on whether the cell being altered is at position 81 (final cell)
-     */
-    private boolean finalCell(int row, int col)
-    {
-        return ((row * 9) + col) == 81;
-    }
-
-    /***
      * The primary method of the SudokuGen class. This method recursively checks all numbers 1-9 inclusive
      * (stored in a LinkedList and randomised with {@link java.util.Collections#shuffle(List, Random)} until it
      * finds a valid number based on sudoku's row/column/3x3 subsection rules. If a valid number is found, it places
@@ -156,7 +146,7 @@ public class Generator
         {
             board[row][col] = 0;
         }
-        if (board[row][col] == 0 && !finalCell(row, col) && !this.boardFinished)
+        if (board[row][col] == 0 && !zeroCheck(board) && !this.boardFinished)
         {
 
             List<Integer> cellNumbers = getCellValues(row, col);
@@ -209,74 +199,63 @@ public class Generator
     }
 
 
-    public int[][] unSolver(int[][] reference)
+    public int[][] unSolver(int[][] reference, DifficultyLevel difficulty)
     {
         int[][] board = SudokuTools.cloneArray(reference);
 
-        int chances = 30;
+        int cellsToClear;
 
-        ArrayList<Integer> rowValues = new ArrayList<>();
-        ArrayList<Integer> colValues = new ArrayList<>();
+        ArrayList<int[]> triedCells = new ArrayList<>();
 
-        Random rand = new Random();
-        while (chances > 0)
+        int row;
+        int col;
+
+        switch (difficulty)
+        {
+            case EASY:
+            {
+                cellsToClear = 5;
+
+                break;
+            }
+            case MEDIUM:
+            {
+                cellsToClear = 30;
+
+                break;
+            }
+            case HARD:
+            {
+                cellsToClear = 55;
+
+                break;
+            }
+            case LUDICROUS:
+            {
+                cellsToClear = 63;
+
+                break;
+            }
+            default:
+            {
+                cellsToClear = 40;
+
+                break;
+            }
+        }
+
+        while (cellsToClear > 0)
         {
             solutionCount = 0;
 
-            boolean rowAlreadyTried = false;
-            boolean colAlreadyTried = false;
-
-            int row = rand.nextInt(9);
-            int col = rand.nextInt(9);
-
-            for (int rowValue : rowValues)
+            do
             {
-                if (rowValue == row)
-                {
-                    rowAlreadyTried = true;
-                    break;
-                }
+                row = SudokuTools.randRange(9);
+                col = SudokuTools.randRange(9);
             }
+            while (board[row][col] == 0 && triedCells.contains(new int[]{row,col}));
 
-            for (int colValue : colValues)
-            {
-                if (colValue == col)
-                {
-                    colAlreadyTried = true;
-                    break;
-                }
-            }
-
-
-            while(board[row][col] == 0 && colAlreadyTried && rowAlreadyTried){
-
-                colAlreadyTried = false;
-                rowAlreadyTried = false;
-
-                row = rand.nextInt(9);
-                col = rand.nextInt(9);
-
-                for (int rowValue : rowValues)
-                {
-                    if (rowValue == row)
-                    {
-                        rowAlreadyTried = true;
-                        break;
-                    }
-                }
-
-                for (int colValue : colValues)
-                {
-                    if (colValue == col)
-                    {
-                        colAlreadyTried = true;
-                        break;
-                    }
-                }
-            }
-
-            rowValues.add(row);
-            colValues.add(col);
+            triedCells.add(new int[]{row, col});
 
             int valueBackup = board[row][col];
             board[row][col] = 0;
@@ -285,7 +264,7 @@ public class Generator
 
             if (oneSolution(tempBoard))
             {
-                chances --;
+                cellsToClear --;
             }
             else
             {
@@ -307,23 +286,24 @@ public class Generator
             {
                 if (board[i][j] == 0)
                 {
-                    int tempCount = 0;
-                    int oneValue = 0;
+                    int numSolutions = 0;
+                    int solution = 0;
+
                     for (int value = 1; value < 10; value++)
                     {
                         if (SudokuTools.cellValid(i, j, value, board))
                         {
-                            oneValue = value;
-                            tempCount ++;
+                            solution = value;
+                            numSolutions ++;
                         }
                     }
-                    if (tempCount != 1)
+                    if (numSolutions != 1)
                     {
                         return false;
                     }
                     else
                     {
-                        board[i][j] = oneValue;
+                        board[i][j] = solution;
 
                         if (!zeroCheck(board))
                         {
@@ -341,10 +321,14 @@ public class Generator
         return (solutionCount == 1);
     }
 
-    private boolean zeroCheck(int[][] board){
-        for(int row = 0; row<9; row++){
-            for(int col = 0; col<9; col++){
-                if(board[row][col]==0){
+    private boolean zeroCheck(int[][] board)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (board[i][j] == 0)
+                {
                     return false;
                 }
             }

@@ -6,7 +6,7 @@ import SudokuCLI.Gameplay.DifficultyLevel;
 import SudokuCLI.Gameplay.GameManager;
 import SudokuCLI.MenuHandlers.LoadManager;
 import SudokuCLI.MenuHandlers.MenuManager;
-import SudokuRenderer.InfoPanels.SuccessPanel;
+import SudokuRenderer.InfoPanels.SuccessInfo;
 import SudokuRenderer.Startup.ViewCalibrator;
 import SudokuRenderer.UtilityPanels.GameBoard;
 import SudokuRenderer.ViewRenderer;
@@ -52,12 +52,12 @@ public class Main
             // CHECK IF GAME IS COMPLETE
             if (gameComplete)
             {
-                SuccessPanel successPanel = new SuccessPanel(save);
-                successPanel.setStatus("Press any key to go back to the menu");
+                SuccessInfo successInfo = new SuccessInfo(save);
+                successInfo.setStatus("Press any key to go back to the menu");
 
                 GameBoard gameBoard = new GameBoard(save.getBoard());
 
-                view.setPanels(gameBoard.draw(), successPanel.draw());
+                view.setPanels(gameBoard.draw(), successInfo.draw());
                 view.render();
                 String successResponse = new Scanner(System.in).nextLine();
                 gameComplete = false;

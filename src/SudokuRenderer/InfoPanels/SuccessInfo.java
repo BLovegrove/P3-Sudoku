@@ -8,13 +8,13 @@ import SudokuCLI.Gameplay.DifficultyLevel;
  * to show the difficulty level of the game in the success panel.
  */
 
-public class SuccessPanel extends InfoPanel
+public class SuccessInfo extends InfoPanel
 {
     /***
      * Method that produces a success window for a completed Sudoku game
      * @param save - the save file for the completed game
      */
-    public SuccessPanel(SaveData save)
+    public SuccessInfo(SaveData save)
     {
         super(
                 String.format("  Save : %-35s,", save.boardName) +

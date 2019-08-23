@@ -44,7 +44,7 @@ public class GameManager
                         // GENERATE NEW BOARD
                         Generator generator = new Generator();
                         int[][] reference = generator.generate();
-                        int[][] board = generator.unSolver(reference);
+                        int[][] board = generator.unSolver(reference, difficulty);
 
                         // SAVE GENERATED BOARD DATA
                         SaveData newSaveData = new SaveData(response, reference, board , 0, difficulty);
@@ -146,7 +146,7 @@ public class GameManager
                             {
                                 Generator generator = new Generator();
                                 gameData.setReference(generator.generate());
-                                gameData.setBoard(generator.unSolver(gameData.getReference()));
+                                gameData.setBoard(generator.unSolver(gameData.getReference(), gameData.getDifficulty()));
                                 gameData.setMoves(0);
                                 gameBoard.update(gameData.getBoard());
                                 moveHistory.clear();

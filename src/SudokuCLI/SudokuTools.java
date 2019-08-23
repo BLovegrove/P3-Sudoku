@@ -56,8 +56,6 @@ public class SudokuTools
         return numbers;
     }
 
-
-
     /***
      * Part of the Sudoku solving algorithm to generate a complete board before reducing it to a game-ready board.<br>
      * This part handles scanning a row in the board for a given row to determine if there is any duplicity.
@@ -131,8 +129,9 @@ public class SudokuTools
     }
 
     /***
-     * Part of the Sudoku solving algorithm to generate a complete board before reducing it to a game-ready board.<br>
-     * This part handles scanning a 3 x 3 sub-section in the board for a given value to determine if there is any duplicity.
+     * Part of the Sudoku solving algorithm to generate a complete board before reducing it to a game-ready board.
+     * This part handles scanning a 3 x 3 sub-section in the board for a given value to determine if there is
+     * any duplicity.
      * @param row The row in the Sudoku board that contains the cell in question
      * @param col The column in the Sudoku board that contains the cell in question
      * @param value The integer value (from 1 to 9 inclusive) of the cell in question
@@ -159,7 +158,8 @@ public class SudokuTools
 
     /***
      * Method to combine the boolean outputs of the three validation methods ({@link #rowValid(int, int, int[][])},
-     * {@link #columnValid(int, int, int[][])}, {@link #subsectionValid(int, int, int, int[][])}) that define the rules of a Sudoku board.
+     * {@link #columnValid(int, int, int[][])}, {@link #subsectionValid(int, int, int, int[][])}) that define
+     * the rules of a Sudoku board.
      * @param row The row in the Sudoku board that contains the cell in question
      * @param col The column in the Sudoku board that contains the cell in question
      * @param value The integer value (from 1 to 9 inclusive) of the cell in question
