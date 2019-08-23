@@ -8,19 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="58dd8ce6-f410-493f-8a6a-878419db1889" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/P3_Sudoku_jar/saves/this is an easy game.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuGen/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/Generator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/FailedInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/FailureInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/ViewCalibrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/ViewCalibrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/LoadMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/LoadMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/GameInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/GameInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/LoadInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/LoadInfo.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -105,7 +96,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="7344a5b5-56d3-44f2-b337-22b757eabd66" name="Default Changelist" comment="" />
+      <changelist id="58dd8ce6-f410-493f-8a6a-878419db1889" name="Default Changelist" comment="" />
       <created>1566374478524</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

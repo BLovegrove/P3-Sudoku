@@ -48,7 +48,7 @@ public class GameBoard
                 }
                 else if (this.board[i][j] == -1)
                 {
-                    this.boardValues[(i * 9) + j] = "X";
+                    this.boardValues[(i * 9) + j] = "╳";
                 }
                 else
                 {

@@ -185,6 +185,7 @@ public class SudokuTools
         return true;
     }
 
+
     public static int[][] cloneArray(int[][] sourceArray) {
         int length = sourceArray.length;
         int[][] targetArray = new int[length][sourceArray[0].length];

@@ -17,18 +17,18 @@ public class GameInfo extends InfoPanel
             "  ║       Commands Menu & Status Bar       ║," +
             "  ╠════════════════════════════════════════╣," +
             "  ║ Fill (A-I)(1-9) : e.g. Fill A1         ║," +
-            "  ║  ↳ Fills a cell. 'C' to cancel fill    ║," +
+            "  ║  > Fills a cell. 'C' to cancel fill    ║," +
             "  ║ Clear (A-I)(1-9) : e.g. Clear D8       ║," +
-            "  ║  ↳ Clears the value of a cell          ║," +
+            "  ║  > Clears the value of a cell          ║," +
             "  ║ Undo                                   ║," +
-            "  ║  ↳ Undoes your last board move         ║," +
+            "  ║  > Undoes your last board move         ║," +
             "  ║ Restart                                ║," +
-            "  ║  ↳ Restarts the game with a new board  ║," +
+            "  ║  > Restarts the game with a new board  ║," +
             "  ║ Save                                   ║," +
-            "  ║  ↳ Saves your board to play later      ║," +
+            "  ║  > Saves your board to play later      ║," +
             "  ║                                        ║," +
             "  ║ Exit                                   ║," +
-            "  ║  ↳ Exits the game to the main menu     ║," +
+            "  ║  > Exits the game to the main menu     ║," +
             "  ╠════════════════════════════════════════╣,"
         );
     }
