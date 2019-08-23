@@ -19,7 +19,7 @@ public class GameManager
      * Creates a new game and passes it to the {@link GameManager#loadGame(ViewRenderer, String)} method
      * @param view variable that represents the curernt view window of the game.
      * @param difficulty - enum that represents the difficulty level of the puzzle
-     * @return
+     * @return a saveData instance
      */
     public SaveData newGame(ViewRenderer view, DifficultyLevel difficulty)
     {
