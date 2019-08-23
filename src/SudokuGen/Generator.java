@@ -209,7 +209,7 @@ public class Generator
     }
 
 
-    public int[][] desolve (int[][] reference)
+    public int[][] unSolver(int[][] reference)
     {
         int[][] board = SudokuTools.cloneArray(reference);
 

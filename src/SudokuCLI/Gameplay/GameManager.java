@@ -42,8 +42,9 @@ public class GameManager
                     if (newSaveFile.createNewFile())
                     {
                         // GENERATE NEW BOARD
-                        int[][] reference = new Generator().generate();
-                        int[][] board = new int[9][9]; // RUN UNSOLVER HERE
+                        Generator generator = new Generator();
+                        int[][] reference = generator.generate();
+                        int[][] board = generator.unSolver(reference);
 
                         // SAVE GENERATED BOARD DATA
                         SaveData newSaveData = new SaveData(response, reference, board , 0, difficulty);
@@ -143,8 +144,9 @@ public class GameManager
 
                             if (restartGame.equals("y"))
                             {
-                                gameData.setReference(new Generator().generate());
-                                gameData.setBoard(new int[9][9]); // RUN UNSOLVER ON NEWBOARD AND PUT IT IN HERE
+                                Generator generator = new Generator();
+                                gameData.setReference(generator.generate());
+                                gameData.setBoard(generator.unSolver(gameData.getReference()));
                                 gameData.setMoves(0);
                                 gameBoard.update(gameData.getBoard());
                                 moveHistory.clear();
