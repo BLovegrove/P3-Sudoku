@@ -8,19 +8,10 @@
   <component name="ChangeListManager">
     <list default="true" id="58dd8ce6-f410-493f-8a6a-878419db1889" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/P3_Sudoku_jar/saves/this is an easy game.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/P3_Sudoku_jar/saves/this is a ludicrous game.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/P3-Sudoku/META-INF/P3-Sudoku.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuGen/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/Generator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/FailedInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/FailureInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/MainMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/ViewCalibrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/ViewCalibrator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/GameBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/LoadMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/LoadMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,6 +39,12 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
