@@ -90,6 +90,8 @@ public class Generator
         }
     }
 
+
+
     /***
      * Triggered when a legal value is found for a cell on the board. Calls the {@link #solveCell(int[][], int, int, boolean)}
      * method on the next cell and passes the firstTry boolean as true to indicate the cell is being altered for the
@@ -206,61 +208,142 @@ public class Generator
         return board;
     }
 
-    private static int COUNTER;
 
-    public int[][] unSolver(int[][] board){
-        int[][] completeBoard = board.clone();
-        int chances = 40; // THISSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS changes with difficulty
-        COUNTER = 1;
+    public int[][] desolve (int[][] reference)
+    {
+        int[][] board = SudokuTools.cloneArray(reference);
+
+        int chances = 30;
+
+        ArrayList<Integer> rowValues = new ArrayList<>();
+        ArrayList<Integer> colValues = new ArrayList<>();
+
         Random rand = new Random();
-        while(chances > 0){
+        while (chances > 0)
+        {
+            solutionCount = 0;
+
+            boolean rowAlreadyTried = false;
+            boolean colAlreadyTried = false;
+
             int row = rand.nextInt(9);
             int col = rand.nextInt(9);
-            while(board[row][col] == 0){
+
+            for (int rowValue : rowValues)
+            {
+                if (rowValue == row)
+                {
+                    rowAlreadyTried = true;
+                    break;
+                }
+            }
+
+            for (int colValue : colValues)
+            {
+                if (colValue == col)
+                {
+                    colAlreadyTried = true;
+                    break;
+                }
+            }
+
+
+            while(board[row][col] == 0 && colAlreadyTried && rowAlreadyTried){
+
+                colAlreadyTried = false;
+                rowAlreadyTried = false;
+
                 row = rand.nextInt(9);
                 col = rand.nextInt(9);
+
+                for (int rowValue : rowValues)
+                {
+                    if (rowValue == row)
+                    {
+                        rowAlreadyTried = true;
+                        break;
+                    }
+                }
+
+                for (int colValue : colValues)
+                {
+                    if (colValue == col)
+                    {
+                        colAlreadyTried = true;
+                        break;
+                    }
+                }
             }
-            int[][] boardBackup = board.clone();
-            int valBackup = board[row][col];
+
+            rowValues.add(row);
+            colValues.add(col);
+
+            int valueBackup = board[row][col];
             board[row][col] = 0;
-            solveBoard(boardBackup);
-            if(COUNTER != 1){
-                board[row][col] = valBackup;
-                chances--;
+
+            int[][] tempBoard = SudokuTools.cloneArray(board);
+
+            if (oneSolution(tempBoard))
+            {
+                chances --;
+            }
+            else
+            {
+                board[row][col] = valueBackup;
             }
         }
+
         return board;
+
     }
 
-    private boolean solveBoard(int[][] board){
-        COUNTER = 0;
-        Random rand = new Random();
-        for(int i = 0; i < 9; i++){
-            for(int j = 0; i<9; j++){
-                if(board[i][j] == 0){
-                    for(int value = 1; value < 10; value++){
-                        if(SudokuTools.cellValid(i, j, value, board)){
-                            board[i][j] = value;
-                            if(boardCheck(board)){
-                                COUNTER += 1;
-                                break;
-                            }
-                            else{
-                                if(solveBoard(board)){
-                                    return true;
-                                }
-                            }
+    private int solutionCount;
+
+    private boolean oneSolution(int[][] board)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (board[i][j] == 0)
+                {
+                    int tempCount = 0;
+                    int oneValue = 0;
+                    for (int value = 1; value < 10; value++)
+                    {
+                        if (SudokuTools.cellValid(i, j, value, board))
+                        {
+                            oneValue = value;
+                            tempCount ++;
+                        }
+                    }
+                    if (tempCount != 1)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        board[i][j] = oneValue;
+
+                        if (!zeroCheck(board))
+                        {
+                            return oneSolution(board);
+                        }
+                        else
+                        {
+                            return true;
                         }
                     }
                 }
             }
         }
-        return false;
+
+        return (solutionCount == 1);
     }
 
-    private boolean boardCheck(int[][] board){
-        for(int row = 1; row<10; row++){
-            for(int col = 1; col<10; col++){
+    private boolean zeroCheck(int[][] board){
+        for(int row = 0; row<9; row++){
+            for(int col = 0; col<9; col++){
                 if(board[row][col]==0){
                     return false;
                 }

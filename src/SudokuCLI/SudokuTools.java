@@ -170,15 +170,12 @@ public class SudokuTools
         return rowValid(row, value, board) && columnValid(col, value, board) && subsectionValid(row, col, value, board);
     }
 
-    public static boolean gameComplete(SaveData save)
-    {
-        if (save.getBoard() == save.getReference())
-        {
-            return true;
+    public static int[][] cloneArray(int[][] sourceArray) {
+        int length = sourceArray.length;
+        int[][] targetArray = new int[length][sourceArray[0].length];
+        for (int i = 0; i < length; i++) {
+            System.arraycopy(sourceArray[i], 0, targetArray[i], 0, sourceArray[i].length);
         }
-        else
-        {
-            return false;
-        }
+        return targetArray;
     }
 }

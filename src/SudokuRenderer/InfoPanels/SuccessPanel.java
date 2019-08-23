@@ -3,8 +3,16 @@ package SudokuRenderer.InfoPanels;
 import FileIO.SaveData;
 import SudokuCLI.Gameplay.DifficultyLevel;
 
+/***
+ * The image shown when the user completes a sudoku board - uses data form their completed {@link SaveData} object
+ * to fill in the gaps and let them know how they did
+ */
 public class SuccessPanel extends InfoPanel
 {
+    /***
+     * Standard constructor to load the panel data and get
+     * @param save
+     */
     public SuccessPanel(SaveData save)
     {
         super(
@@ -22,7 +30,11 @@ public class SuccessPanel extends InfoPanel
                 ) + " ║," +
                 "  ║                                        ║," +
                 "  ║ You completed the board in :           ║," +
-                        "  ║  > "+ String.format("%-35s", save.getMoves() + " moves! Nice work.") +" ║," +
+                "  ║  > "+
+                String.format(
+                        "%-35s", save.getMoves() +
+                                " moves! Nice work."
+                ) +" ║," +
                 "  ║                                        ║," +
                 "  ║                                        ║," +
                 "  ║                                        ║," +
