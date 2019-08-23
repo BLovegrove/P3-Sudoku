@@ -103,8 +103,12 @@ public class SaveData
         this.moves = moves;
     }
 
+    /**
+     * guard to stop the game from running past the point where a user makes too many moves for an integer to store
+     */
     public void addMove()
     {
+        // A GUARD IN CASE THE USER MAKES MORE THAN THE MAXIMUM NUMBER OF MOVES
         if (this.moves == 2147483646)
         {
             this.board = this.reference;
@@ -115,11 +119,19 @@ public class SaveData
         }
     }
 
+    /**
+     * sets the difficulty enumerator
+     * @param difficulty difficulty level
+     */
     public void setDifficulty(DifficultyLevel difficulty)
     {
         this.difficulty = difficulty;
     }
 
+    /**
+     * Standard getter for {@link #difficulty}
+     * @return {@link #difficulty}
+     */
     public DifficultyLevel getDifficulty()
     {
         return difficulty;
@@ -143,6 +155,12 @@ public class SaveData
         this.errorMessage = errorMessage;
     }
 
+    /**
+     * Standard setter for cell values within the puzzle board
+     * @param row the cell's row
+     * @param col the cell's column
+     * @param value the value to be put in the cell
+     */
     public void setCellValue(int row, int col, int value)
     {
         this.board[row][col] = value;
@@ -156,6 +174,10 @@ public class SaveData
         IOTools.saveFile(this);
     }
 
+    /**
+     * Confirms whether the puzzle board matches the reference board
+     * @return true if the puzzle board matches the reference, false otherwise
+     */
     public boolean boardComplete()
     {
         return (Arrays.deepEquals(this.board, this.reference));

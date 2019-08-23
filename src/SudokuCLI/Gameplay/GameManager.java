@@ -17,9 +17,9 @@ public class GameManager
 {
     /***
      * Creates a new game and passes it to the {@link GameManager#loadGame(ViewRenderer, String)} method
-     * @param view
+     * @param view variable that represents the curernt view window of the game.
      * @param difficulty - enum that represents the difficulty level of the puzzle
-     * @return
+     * @return a saveData instance
      */
     public SaveData newGame(ViewRenderer view, DifficultyLevel difficulty)
     {
@@ -37,6 +37,11 @@ public class GameManager
             {
                 try
                 {
+                    // F**K ARROW KEYS ╭∩╮(`д´)╭∩╮
+                    if (response.contains("^"))
+                    {
+                        throw new IOException();
+                    }
                     // ATTEMPT TO CREATE NEW FILE
                     File newSaveFile = new File(IOTools.SAVE_DIR, response.toLowerCase() +".txt");
                     if (newSaveFile.createNewFile())
@@ -69,6 +74,12 @@ public class GameManager
         }
     }
 
+    /**
+     * Method that loads a previously saved game
+     * @param view represents the view window of the game to be loaded
+     * @param saveName represents the name associated with the save game
+     * @return the game data associated with the given save file
+     */
     public SaveData loadGame(ViewRenderer view, String saveName)
     {
 
@@ -310,6 +321,12 @@ public class GameManager
         }
     }
 
+    /**
+     * Takes the str-int input from the gameplay input and converts it to the int[row][col] format used within the code
+     * @param alphaNumCoordinate the string input from the game
+     * @param infoPanel the status box, where status messages are placed
+     * @return the int values that correspond with the int[row][col] system used throughout the code
+     */
     private int[] AlphaNumToRowCol(String alphaNumCoordinate, GameInfo infoPanel)
     {
         int[] coordinate = new int[]{-1, -1};
@@ -354,6 +371,17 @@ public class GameManager
         return coordinate;
     }
 
+    /**
+     * Deals with the validity of the input when "filling" a cell
+     * @param row the row of the cell
+     * @param col the column of the cell
+     * @param save the game in question
+     * @param scanner the input value from the user
+     * @return if successful:
+     *                          return cell coordinates in [row][col] form
+*              if invalid:
+     *                          return an error message
+     */
     private String cellFillHandler(int row, int col, SaveData save, Scanner scanner)
     {
 

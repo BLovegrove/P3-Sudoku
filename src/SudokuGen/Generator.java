@@ -198,70 +198,67 @@ public class Generator
         return board;
     }
 
+    /**
+     * This variable counts the number of solutions present in a puzzle board
+     */
+    private int solutionCount;
 
+    /**
+     * This function takes a complete Sudoku board as input and outputs a "puzzle" board - an incomplete board that has
+     * only one solution. The complexity of the board varies based on the difficulty level enumerator set earlier in
+     * the program. Uses the {@link #oneSolution(int[][])} class to ensure there is one solution to the puzzle board.
+     * @param reference The complete board that the function takes as input
+     * @param difficulty The enum difficulty level enumerator
+     * @return the complete puzzle board with one possible solution.
+     */
     public int[][] unSolver(int[][] reference, DifficultyLevel difficulty)
     {
         int[][] board = SudokuTools.cloneArray(reference);
-
         int cellsToClear;
-
         ArrayList<int[]> triedCells = new ArrayList<>();
-
         int row;
         int col;
-
         switch (difficulty)
         {
             case EASY:
             {
                 cellsToClear = 5;
-
                 break;
             }
             case MEDIUM:
             {
                 cellsToClear = 30;
-
                 break;
             }
             case HARD:
             {
                 cellsToClear = 55;
-
                 break;
             }
             case LUDICROUS:
             {
                 cellsToClear = 63;
-
                 break;
             }
             default:
             {
                 cellsToClear = 40;
-
                 break;
             }
         }
-
         while (cellsToClear > 0)
         {
             solutionCount = 0;
-
             do
             {
                 row = SudokuTools.randRange(9);
                 col = SudokuTools.randRange(9);
             }
             while (board[row][col] == 0 && triedCells.contains(new int[]{row,col}));
-
             triedCells.add(new int[]{row, col});
-
             int valueBackup = board[row][col];
             board[row][col] = 0;
-
             int[][] tempBoard = SudokuTools.cloneArray(board);
-
             if (oneSolution(tempBoard))
             {
                 cellsToClear --;
@@ -271,13 +268,15 @@ public class Generator
                 board[row][col] = valueBackup;
             }
         }
-
         return board;
-
     }
 
-    private int solutionCount;
-
+    /**
+     * This function checks to see whether an input puzzle board has multiple solutions. It returns true if there
+     * is one solution to the board and outputs false if there are more.
+     * @param board The input puzzle board
+     * @return true if the input board has one possible solution, false if there are more
+     */
     private boolean oneSolution(int[][] board)
     {
         for (int i = 0; i < 9; i++)
@@ -317,7 +316,6 @@ public class Generator
                 }
             }
         }
-
         return (solutionCount == 1);
     }
 }

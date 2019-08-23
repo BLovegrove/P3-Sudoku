@@ -81,8 +81,11 @@ public class ViewRenderer
         }
     }
 
+    /**
+     * Attempts to clear the console - were unable to get the escape sequence to work
+     */
     private static void clearScreen() {
-        for (int i = 0; i < 22; i++)
+        for (int i = 0; i < 40; i++)
         {
             System.out.println("");
         }

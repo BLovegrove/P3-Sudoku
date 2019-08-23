@@ -2,8 +2,16 @@ package SudokuRenderer.InfoPanels;
 
 import FileIO.SaveData;
 
+/**
+ * Class that prints the failure message observed if a ludicrous mode board is finished without a valid solution
+ */
 public class FailureInfo extends InfoPanel
 {
+
+    /**
+     * Prints the failure message to console when a ludicrous mode board is failed
+     * @param save the save containing the ludicrous game in question
+     */
     public FailureInfo(SaveData save)
     {
         super(
