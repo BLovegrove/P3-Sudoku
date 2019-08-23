@@ -169,16 +169,4 @@ public class SudokuTools
     {
         return rowValid(row, value, board) && columnValid(col, value, board) && subsectionValid(row, col, value, board);
     }
-
-    public static boolean gameComplete(SaveData save)
-    {
-        if (save.getBoard() == save.getReference())
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
 }

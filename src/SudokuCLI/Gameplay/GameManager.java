@@ -15,6 +15,12 @@ import java.util.Scanner;
 
 public class GameManager
 {
+    /***
+     * Creates a new game and passes it to the {@link GameManager#loadGame(ViewRenderer, String)} method
+     * @param view
+     * @param difficulty - enum that represents the difficulty level of the puzzle
+     * @return
+     */
     public SaveData newGame(ViewRenderer view, DifficultyLevel difficulty)
     {
         // SETUP USER INPUT FOR GAME NAME

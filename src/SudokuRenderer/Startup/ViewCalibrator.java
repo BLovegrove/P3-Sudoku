@@ -3,12 +3,12 @@ package SudokuRenderer.Startup;
 import java.util.Scanner;
 
 /***
- * Simple dialogue box to mark out how big the game area is for rendering purposes
+ * Simple dialogue box to mark out the size of the game area for rendering purposes
  */
 public class ViewCalibrator
 {
     /***
-     * Draws the 87 x 20 character box showing the user where to resize their console window to.
+     * Draws the 87 x 20 character box showing the user how to size their console.
      * Prints straight to console.
      */
     private static void renderGuide(int viewHeight)
