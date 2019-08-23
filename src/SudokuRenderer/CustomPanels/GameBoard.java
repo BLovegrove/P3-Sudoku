@@ -1,4 +1,4 @@
-package SudokuRenderer.UtilityPanels;
+package SudokuRenderer.CustomPanels;
 
 import SudokuRenderer.ViewRenderer;
 
@@ -48,7 +48,7 @@ public class GameBoard
                 }
                 else if (this.board[i][j] == -1)
                 {
-                    this.boardValues[(i * 9) + j] = "╳";
+                    this.boardValues[(i * 9) + j] = "X";
                 }
                 else
                 {

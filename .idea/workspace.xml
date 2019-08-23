@@ -8,7 +8,19 @@
   <component name="ChangeListManager">
     <list default="true" id="58dd8ce6-f410-493f-8a6a-878419db1889" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/P3_Sudoku_jar/saves/this is an easy game.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Gameplay/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/LoadManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/SudokuTools.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuGen/Generator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuGen/Generator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/FailedInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/InfoPanels/FailureInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/MainMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/MainMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/Startup/ViewCalibrator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/ViewCalibrator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/GameBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/GameBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/UtilityPanels/LoadMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/CustomPanels/LoadMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuRenderer/ViewRenderer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -73,7 +85,7 @@
       <module name="P3-Sudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="SudokuRenderer.*" />
+          <option name="PATTERN" value="SudokuRenderer.CustomPanels.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>

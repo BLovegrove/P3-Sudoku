@@ -1,4 +1,4 @@
-package SudokuRenderer.UtilityPanels;
+package SudokuRenderer.CustomPanels;
 
 import SudokuRenderer.ViewRenderer;
 

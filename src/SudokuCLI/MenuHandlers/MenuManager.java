@@ -1,6 +1,6 @@
 package SudokuCLI.MenuHandlers;
 
-import SudokuRenderer.Startup.MainMenu;
+import SudokuRenderer.CustomPanels.MainMenu;
 import SudokuRenderer.ViewRenderer;
 
 import java.util.Scanner;

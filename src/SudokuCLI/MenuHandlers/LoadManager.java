@@ -2,7 +2,7 @@ package SudokuCLI.MenuHandlers;
 import FileIO.*;
 
 import SudokuRenderer.InfoPanels.LoadInfo;
-import SudokuRenderer.UtilityPanels.LoadMenu;
+import SudokuRenderer.CustomPanels.LoadMenu;
 import SudokuRenderer.ViewRenderer;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class LoadManager
      * Process commands given based on definitions in the {@link LoadInfo} class
      * @param view The {@link ViewRenderer} being used to draw all the screen graphics
      * @param fileNames An ArrayList of all the file names in the saves folder at the time of instantiation
-     * @return The file name that was selected by the method to load from the {@link SudokuRenderer.Startup.MainMenu}
+     * @return The file name that was selected by the method to load from the {@link SudokuRenderer.CustomPanels.MainMenu}
      */
     public String loadGame(ViewRenderer view, ArrayList<String> fileNames)
     {

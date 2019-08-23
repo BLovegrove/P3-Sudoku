@@ -2,9 +2,9 @@ package SudokuRenderer.InfoPanels;
 
 import FileIO.SaveData;
 
-public class FailedInfo extends InfoPanel
+public class FailureInfo extends InfoPanel
 {
-    public FailedInfo(SaveData save)
+    public FailureInfo(SaveData save)
     {
         super(
                 String.format("  Save : %-35s,", save.boardName) +
@@ -12,16 +12,12 @@ public class FailedInfo extends InfoPanel
                 "  ║ FAILURE! Your Sudoku board isn't valid ║," +
                 "  ╠════════════════════════════════════════╣," +
                 "  ║                                        ║," +
-                "  ║ "+
-                String.format(
-                        "%-38s",
-                        "Your game was a ludicrous level board."
-                ) + " ║," +
+                "  ║ Your game was a ludicrous level board. ║," +
                 "  ║                                        ║," +
                 "  ║ You filled the board in :              ║," +
                 "  ║  > "+
                 String.format(
-                        "%-36s",
+                        "%-35s",
                         save.getMoves() +
                         " moves! Good try."
                 ) +" ║," +
@@ -30,7 +26,7 @@ public class FailedInfo extends InfoPanel
                 "  ║ your board was ludicrously difficult   ║," +
                 "  ║ and you failed.                        ║," +
                 "  ║                                        ║," +
-                "  ║ Thus, it has been deleted. Good luck   ║," +
+                "  ║ Thus it has been deleted. Good luck    ║," +
                 "  ║ on your next run!                      ║," +
                 "  ║                                        ║," +
                 "  ╠════════════════════════════════════════╣,"

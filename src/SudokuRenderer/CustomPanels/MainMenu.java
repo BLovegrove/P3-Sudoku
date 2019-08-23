@@ -1,4 +1,4 @@
-package SudokuRenderer.Startup;
+package SudokuRenderer.CustomPanels;
 
 /***
  * Draws the static main menu element for users to use to start a game. The menu is 73 characters long, with 5 <br>

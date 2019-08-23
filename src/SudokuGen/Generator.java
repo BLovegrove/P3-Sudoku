@@ -146,7 +146,7 @@ public class Generator
         {
             board[row][col] = 0;
         }
-        if (board[row][col] == 0 && !zeroCheck(board) && !this.boardFinished)
+        if (board[row][col] == 0 && !SudokuTools.boardFull(board) && !this.boardFinished)
         {
 
             List<Integer> cellNumbers = getCellValues(row, col);
@@ -305,7 +305,7 @@ public class Generator
                     {
                         board[i][j] = solution;
 
-                        if (!zeroCheck(board))
+                        if (!SudokuTools.boardFull(board))
                         {
                             return oneSolution(board);
                         }
@@ -319,20 +319,5 @@ public class Generator
         }
 
         return (solutionCount == 1);
-    }
-
-    private boolean zeroCheck(int[][] board)
-    {
-        for (int i = 0; i < 9; i++)
-        {
-            for (int j = 0; j < 9; j++)
-            {
-                if (board[i][j] == 0)
-                {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 }

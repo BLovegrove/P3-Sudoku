@@ -170,6 +170,21 @@ public class SudokuTools
         return rowValid(row, value, board) && columnValid(col, value, board) && subsectionValid(row, col, value, board);
     }
 
+    public static boolean boardFull(int[][] board)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (board[i][j] == 0)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public static int[][] cloneArray(int[][] sourceArray) {
         int length = sourceArray.length;
         int[][] targetArray = new int[length][sourceArray[0].length];

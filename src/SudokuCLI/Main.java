@@ -6,9 +6,11 @@ import SudokuCLI.Gameplay.DifficultyLevel;
 import SudokuCLI.Gameplay.GameManager;
 import SudokuCLI.MenuHandlers.LoadManager;
 import SudokuCLI.MenuHandlers.MenuManager;
+import SudokuRenderer.InfoPanels.FailureInfo;
+import SudokuRenderer.InfoPanels.InfoPanel;
 import SudokuRenderer.InfoPanels.SuccessInfo;
-import SudokuRenderer.Startup.ViewCalibrator;
-import SudokuRenderer.UtilityPanels.GameBoard;
+import SudokuRenderer.CustomPanels.ViewCalibrator;
+import SudokuRenderer.CustomPanels.GameBoard;
 import SudokuRenderer.ViewRenderer;
 
 import java.nio.file.Files;
@@ -42,27 +44,9 @@ public class Main
         // SET DEFAULT MENU ERROR TO 'NONE'
         String menuError = "";
 
-        // SET GAME COMPLETE FLAG TO FALSE;
-        SaveData save = null;
-        boolean gameComplete = false;
-
         boolean running = true;
         while (running)
         {
-            // CHECK IF GAME IS COMPLETE
-            if (gameComplete)
-            {
-                SuccessInfo successInfo = new SuccessInfo(save);
-                successInfo.setStatus("Press any key to go back to the menu");
-
-                GameBoard gameBoard = new GameBoard(save.getBoard());
-
-                view.setPanels(gameBoard.draw(), successInfo.draw());
-                view.render();
-                String successResponse = new Scanner(System.in).nextLine();
-                gameComplete = false;
-            }
-
             // ASK FOR RESPONSE
             String menuResponse = mainMenu.pickMenuItem(view, menuError);
 
@@ -92,29 +76,29 @@ public class Main
                     }
                     case 1:
                     {
-                        save = game.newGame(view, DifficultyLevel.EASY);
-                        gameComplete = save.boardComplete();
+                        SaveData save = game.newGame(view, DifficultyLevel.EASY);
+                        gameComplete(view, save);
 
                         break;
                     }
                     case 2:
                     {
-                        save = game.newGame(view, DifficultyLevel.MEDIUM);
-                        gameComplete = save.boardComplete();
+                        SaveData save = game.newGame(view, DifficultyLevel.MEDIUM);
+                        gameComplete(view, save);
 
                         break;
                     }
                     case 3:
                     {
-                        save = game.newGame(view, DifficultyLevel.HARD);
-                        gameComplete = save.boardComplete();
+                        SaveData save = game.newGame(view, DifficultyLevel.HARD);
+                        gameComplete(view, save);
 
                         break;
                     }
                     case 4:
                     {
-                        save = game.newGame(view, DifficultyLevel.LUDICROUS);
-                        gameComplete = save.boardComplete();
+                        SaveData save = game.newGame(view, DifficultyLevel.LUDICROUS);
+                        gameComplete(view, save);
 
                         break;
                     }
@@ -126,8 +110,8 @@ public class Main
 
                         if (!gameID.isEmpty())
                         {
-                            save = game.loadGame(view, gameID);
-                            gameComplete = save.boardComplete();
+                            SaveData save = game.loadGame(view, gameID);
+                            gameComplete(view, save);
                         }
 
                         break;
@@ -137,6 +121,36 @@ public class Main
                         break;
                     }
                 }
+            }
+        }
+    }
+
+    private static void gameComplete(ViewRenderer view, SaveData save)
+    {
+        if (SudokuTools.boardFull(save.getBoard()))
+        {
+
+            GameBoard gameBoard = new GameBoard(save.getBoard());
+            InfoPanel resultPanel = null;
+
+            if (save.boardComplete())
+            {
+                resultPanel= new SuccessInfo(save);
+                resultPanel.setStatus("Press any key to go back to the menu");
+            }
+            else if (save.getDifficulty() == DifficultyLevel.LUDICROUS)
+            {
+                resultPanel = new FailureInfo(save);
+                resultPanel.setStatus("Press any key to go back to the menu");
+                IOTools.deleteFile(save.boardName);
+            }
+
+            if (resultPanel != null)
+            {
+                view.setPanels(gameBoard.draw(), resultPanel.draw());
+                view.render();
+
+                String resultResponse = new Scanner(System.in).nextLine();
             }
         }
     }

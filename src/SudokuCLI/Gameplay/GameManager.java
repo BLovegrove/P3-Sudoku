@@ -5,7 +5,7 @@ import FileIO.SaveData;
 import SudokuCLI.SudokuTools;
 import SudokuGen.Generator;
 import SudokuRenderer.InfoPanels.GameInfo;
-import SudokuRenderer.UtilityPanels.GameBoard;
+import SudokuRenderer.CustomPanels.GameBoard;
 import SudokuRenderer.ViewRenderer;
 
 import java.io.File;
@@ -96,7 +96,7 @@ public class GameManager
         while (true)
         {
             // CHECK IF THE GAME IS COMPLETE
-            if (gameData.boardComplete())
+            if (gameData.boardComplete() || SudokuTools.boardFull(gameData.getBoard()))
             {
                 gameData.save();
                 return gameData;
