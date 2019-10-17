@@ -15,6 +15,7 @@ public class DBConnection
     private static final String username = "sudoku";
     private static final String password = "pdc";
     Connection conn;
+    Statement statement = null;
 
     public void connectDB(){
         try{
