@@ -20,6 +20,12 @@ public class DBConnection
         try{
             this.conn = DriverManager.getConnection(this.JDBC_URL, this.username, this.password);
             System.out.println("Connected.");
+            this.statement = conn.createStatement();
+            this.existingTableCheck("HIGHSCORE");
+            this.statement.addBatch("CREATE TABLE HIGHSCORE (PLAYERNAME VARCHAR(20), SCORE INT(5)))");
+            this.statement.addBatch("INSERT INTO BOOK VALUES ('test', 0001)\n"
+                    + "('unbeatable', 9999)");
+            this.statement.executeBatch();
 
         } catch (SQLException ex){
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -31,25 +37,40 @@ public class DBConnection
 
     }
 
-    public void existingTableCheck(String name) {
-    try {
-        DatabaseMetaData dbmd = this.conn.getMetaData();
-        String[] types = {"TABLE"};
-        ResultSet rs = dbmd.getTables(null, null, null, types);
-        Statement statement = this.conn.createStatement();
-        while (rs.next()) {
-            String table_name = rs.getString("TABLE_NAME");
-            System.out.println(table_name);
-            if (table_name.equalsIgnoreCase(name)) {
-                statement.executeUpdate("Drop table " + name);
-                System.out.println("Table " + name + " has been deleted.");
-                break;
+    public void existingTableCheck(String name)
+    {
+        try
+        {
+            DatabaseMetaData dbmd = this.conn.getMetaData();
+            String[] types = {"TABLE"};
+            ResultSet rs = dbmd.getTables(null, null, null, types);
+            Statement statement = this.conn.createStatement();
+            while (rs.next())
+            {
+                String table_name = rs.getString("TABLE_NAME");
+                System.out.println(table_name);
+                if (table_name.equalsIgnoreCase(name))
+                {
+                    statement.executeUpdate("Drop table " + name);
+                    System.out.println("Table " + name + " has been deleted.");
+                    break;
+                }
             }
+            rs.close();
+            statement.close();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
-        rs.close();
-        statement.close();
-    } catch (SQLException ex) {
-        Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    public ResultSet getHighScore() {
+        ResultSet rs = null;
+        try{
+            rs = this.statement.executeQuery("SELECT ASDFasdfasdfasdfasdfasdfasdf");
+        } catch (SQLException ex){
+            Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
 
