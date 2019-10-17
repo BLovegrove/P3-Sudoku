@@ -71,23 +71,6 @@ public class DBConnection
         } catch (SQLException ex){
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return rs;
     }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
