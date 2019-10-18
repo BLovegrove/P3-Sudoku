@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 
 public class DBConnection
 {
-    private static final String JDBC_URL = "jdbc:derby:P3-Sudoku;create=true";
-    private static final String username = "sudoku";
-    private static final String password = "pdc";
-    Connection conn;
+    private static final String JDBC_URL = "jdbc:derby:P3-Sudoku; create=true"; // Database URL
+    private static final String username = "sudoku"; // DB username
+    private static final String password = "pdc"; // DB password
+    Connection conn = null;
     Statement statement = null;
 
     public void connectDB(){
@@ -33,10 +33,6 @@ public class DBConnection
         }
     }
 
-    public void createHighScoreTable(){
-        this.existingTableCheck("HIGHSCORE");
-
-    }
 
     public void existingTableCheck(String name)
     {
