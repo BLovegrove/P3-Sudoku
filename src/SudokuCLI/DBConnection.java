@@ -9,6 +9,10 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/***
+ * Manages the database connection elements for the game
+ */
+
 public class DBConnection
 {
     private static final String JDBC_URL = "jdbc:derby:P3-Sudoku; create=true"; // Database URL
@@ -16,6 +20,11 @@ public class DBConnection
     private static final String password = "pdc"; // DB password
     Connection conn = null;
     Statement statement = null;
+
+    /***
+     * Connects to the database for the project. Uses elements set up in the final
+     * static variables above to establish the URL, username and password of the database.
+     */
 
     public void connectDB(){
         try{
@@ -32,6 +41,12 @@ public class DBConnection
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /***
+     * Checks to make sure the table does not already exist in the database. If it does
+     * it deletes it to make room for the new one.
+     * @param name The name of the table to be checked by the function
+     */
 
 
     public void existingTableCheck(String name)
@@ -60,6 +75,11 @@ public class DBConnection
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    /***
+     * This method returns a high score obtained from the table
+     * @return The high score from the DB table
+     */
 
     public ResultSet getHighScore() {
         ResultSet rs = null;

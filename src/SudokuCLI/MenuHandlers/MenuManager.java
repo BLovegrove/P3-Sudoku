@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class MenuManager
 {
     /***
-     * Select an item from the games {@link MainMenu} to execute in the {@link SudokuCLI.Main} handler
+     * Select an item from the game's {@link MainMenu} to execute in the {@link SudokuCLI.Main} handler
      * @param view The {@link ViewRenderer} being used to draw all the screen graphics
      * @param menuErrorMessage The error message (if any) set during the last execution of this method
      * @return Any error encountered during the execution of this method. Otherwise blank string

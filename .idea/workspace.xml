@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/DBConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SudokuCLI/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SudokuCLI/MenuHandlers/MenuManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,7 +149,8 @@
       <workItem from="1566382563339" duration="11000" />
       <workItem from="1566523551748" duration="1656000" />
       <workItem from="1571350483623" duration="725000" />
-      <workItem from="1571351541617" duration="3699000" />
+      <workItem from="1571351541617" duration="5303000" />
+      <workItem from="1571379522958" duration="4972000" />
     </task>
     <servers />
   </component>
